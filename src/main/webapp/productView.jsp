@@ -1,3 +1,4 @@
+<%@page import="catshap.butler.bean.Users"%>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="catshap.butler.interfaces.ProductViewInterface"%>
 <%@page import="catshap.butler.interfaces.ReviewViewInterface"%>
@@ -34,6 +35,7 @@
     <link rel="stylesheet" href="./css/B-02.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./js/ProductView.js"></script>
+    <script src="./js/orders.js"></script>
 </head>
 
 <body>
@@ -515,11 +517,11 @@
                     </div>
                     <div class="purchase-buttons">
                         <div class="item12" id="itemContainer">
-                            <a href="buy.jsp?prodNo=${productView.prodNo}">
-                                <div class="link30">
-                                    <b class="strong-b1">B U Y</b>
-                                </div>
-                            </a>
+                            <div class="link30">
+                               <button id="buyBtn" class="strong-b1" data-prodno="${productView.prodNo}">
+								    B U Y
+								</button>
+                            </div>
                         </div>
                         <div class="item13">
                             <div class="link31">
