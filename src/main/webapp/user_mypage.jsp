@@ -1,5 +1,5 @@
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="catshap.butler.bean.Users"%>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -35,21 +35,22 @@
                             <img src="./image/mypage_icon.png" alt="Profile Image">
                         </div>
                         <div class="profile-info">
-                            <% HttpSession session2=request.getSession(); Users user=(Users)
-                                session2.getAttribute("user"); // 세션에서 사용자 정보 가져오기 if (user !=null) { String
-                                userNick=user.getUnick(); out.print("<h2><span style='color:#FF5733'>" +
-                                    userNick + "</span>님</h2>
-                                <p>환영합니다</p>");
-                                } else {
-                                out.print("<h2>사용자 정보를 불러올 수 없습니다.</h2>");
-                                }
-                                %>
-                                <nav class='profile-nav'>
-                                    <a href='#'>주문내역</a>
-                                    <a href='/catshap/user_modify.jsp'>회원정보 수정</a>
-                                    <a href='#'>내 리뷰 보기</a>
-                                    <a href='#'>내 게시글 보기</a>
-                                </nav>
+                        	<%
+                        		HttpSession session2=request.getSession(); Users user=(Users)
+                            	session2.getAttribute("user"); // 세션에서 사용자 정보 가져오기 if (user !=null) { String
+                            	if (user != null) {
+                            		String userNick = user.getUnick();
+                            		out.print("<h2><span style='color:#FF5733'>" + userNick + "</span>님</h2><p>환영합니다</p>");
+                            	} else {
+                            		out.print("<h2>사용자 정보를 불러올 수 없습니다.</h2>");
+                            	}
+                            %>
+                            <nav class='profile-nav'>
+                                <a href='#'>주문내역</a>
+                                <a href='/catshap/user_modify.jsp'>회원정보 수정</a>
+                                <a href='#'>내 리뷰 보기</a>
+                                <a href='#'>내 게시글 보기</a>
+                            </nav>
                         </div>
                     </div>
                 </form>
