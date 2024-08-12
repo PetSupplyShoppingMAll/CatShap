@@ -12,6 +12,7 @@
 		<typeAlias type="catshap.butler.bean.ReviewView" alias="ReviewView" />
 		<typeAlias type="catshap.butler.bean.Image" alias="Image" />
 		<typeAlias type="catshap.butler.bean.ProductPrice" alias="ProductPrice" />
+		<typeAlias type="catshap.butler.bean.Orders" alias="Orders" />
 	</typeAliases>	
 	<environments default="development">
 		<environment id="development">
@@ -32,5 +33,6 @@
 		<mapper resource="catshap/butler/conf/ReviewView.xml" />
 		<mapper resource="catshap/butler/conf/Image.xml" />
 		<mapper resource="catshap/butler/conf/ProductPrice.xml" />
+		<mapper resource="catshap/butler/conf/Orders.xml" />
 	</mappers>
 </configuration>
