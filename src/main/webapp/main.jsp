@@ -174,7 +174,6 @@
             </div>
         </section>
     </div>
-    <jsp:include page="productList.jsp"></jsp:include>
     <jsp:include page="footer.jsp"></jsp:include>
     <c:forEach var="Image" items="${listMain}">
         <div>12312312312312</div>

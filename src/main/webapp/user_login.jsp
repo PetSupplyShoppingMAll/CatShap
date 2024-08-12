@@ -12,7 +12,8 @@
   <script src="./js/user.js"></script>
 </head>
 <body class="user_login">
-  <div class="login-desktop">
+	<jsp:include page="header.jsp"></jsp:include>
+  	<div class="login-desktop">
     <section class="login">
       <div class="login-form">
         <div class="login-header">
@@ -62,5 +63,6 @@
       </div>
     </section>
   </div>
+  <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

@@ -18,7 +18,7 @@
 		List<ReviewView> listReview = ri.selectReviewList(prodNo);
 		
 		pageContext.setAttribute("productView", productView);
-		 pageContext.setAttribute("listReview", listReview);
+		pageContext.setAttribute("listReview", listReview);
 		
 		pi.addCount(prodNo);
 

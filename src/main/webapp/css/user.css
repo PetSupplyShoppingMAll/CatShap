@@ -459,10 +459,11 @@
     overflow: hidden;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 0 0 var(--padding-141xl);
     gap: 90.4px;
     line-height: normal;
     letter-spacing: normal;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 /* 마이페이지 css */

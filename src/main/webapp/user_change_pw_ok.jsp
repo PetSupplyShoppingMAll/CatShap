@@ -3,7 +3,6 @@
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -12,8 +11,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="./js/user.js"></script>
 </head>
-
 <body>
+    <jsp:include page="header.jsp"></jsp:include>
     <div class="login-desktop">
         <section class="login">
             <div class="login-form">
@@ -40,6 +39,6 @@
             </div>
         </section>
     </div>
+    <jsp:include page="footer.jsp"></jsp:include>
 </body>
-
 </html>

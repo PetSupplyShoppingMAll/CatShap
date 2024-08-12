@@ -18,6 +18,7 @@
 </head>
 
 <body>
+    <jsp:include page="header.jsp"></jsp:include>
     <div class="login-desktop">
         <section class="login">
             <div class="login-form">
@@ -62,6 +63,6 @@
             </div>
         </section>
     </div>
+    <jsp:include page="footer.jsp"></jsp:include>
 </body>
-
 </html>

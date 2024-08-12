@@ -2,7 +2,6 @@
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -11,9 +10,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="js/orders.js"></script>
 </head>
-
 <body>
     <div class="screen-desktop">
+    	<jsp:include page="header.jsp"></jsp:include>
         <section class="section-class">
             <div class="form-container">
                 <div class="header-container">
@@ -111,6 +110,6 @@
             </div>
         </section>
     </div>
+    <jsp:include page="footer.jsp"></jsp:include>
 </body>
-
 </html>

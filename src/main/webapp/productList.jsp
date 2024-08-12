@@ -114,7 +114,7 @@
                                 </div>
                             </div>
                         </div>
-                        <img class="item-icon59" alt="" src="/catshopmall/image/item-12.svg" />
+                        <img class="item-icon59" alt="" src="./image/item-12.svg" />
                     </div>
                 </div>
                 <div class="horizontalborder26">
