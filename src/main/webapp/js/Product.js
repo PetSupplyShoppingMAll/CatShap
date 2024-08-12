@@ -118,7 +118,7 @@ const displayProducts = function(productList) {
         const productHtml = `
             <div class="product ${product.prodNo}">
                 <a href="productView.jsp?prodNo=${product.prodNo}">
-                    <img src="/catshap/imgage/${product.prodImgPath}" alt="${product.prodDescript}" />
+                    <img src="${product.prodImgPath}" alt="${product.prodDescript}" />
                     <h3>${product.prodDescript}</h3>
                     <p>${product.prodPrice}원</p>
                 </a>

@@ -1,13 +1,14 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="catshap.butler.bean.ReviewView"%>
-<%@page import="catshap.butler.dao.ReviewViewDao"%>
+<%@page import="catshap.butler.interfaces.ProductViewInterface"%>
 <%@page import="catshap.butler.interfaces.ReviewViewInterface"%>
 <%@page import="catshap.butler.bean.ProductView"%>
+<%@page import="catshap.butler.bean.ReviewView"%>
 <%@page import="catshap.butler.dao.ProductViewDao"%>
-<%@page import="catshap.butler.interfaces.ProductViewInterface"%>
+<%@page import="catshap.butler.dao.ReviewViewDao"%>
 <%@page import="java.util.List"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
     
 <%
 		int prodNo = Integer.parseInt(request.getParameter("prodNo"));
@@ -21,11 +22,11 @@
 		pageContext.setAttribute("listReview", listReview);
 		
 		pi.addCount(prodNo);
-
 %>
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -34,6 +35,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./js/ProductView.js"></script>
 </head>
+
 <body>
     <jsp:include page="header.jsp"></jsp:include>
     <div class="div63">
@@ -45,7 +47,7 @@
                 <div class="hygiene-icon1">
                     <img class="link-icon9" alt="" src="./image/icon-13.svg" />
                 </div>
-                <a class="a11">  위생용품</a>
+                <a class="a11">위생용품</a>
             </div>
             <div class="list-item"></div>
             <div class="product-details"></div>
@@ -62,7 +64,7 @@
                             </div>
                             <div class="item7">
                                 <div class="link18">
-                                    <div class="c-a-r">  C A R T</div>
+                                    <div class="c-a-r">C A R T</div>
                                     <div class="cart-icon">
                                         <img class="icon48" alt="" src="./image/icon-72.svg" />
                                     </div>
@@ -216,7 +218,7 @@
     </div>
     <img class="separator-icon7" loading="lazy" alt="" src="./image/separator2.svg" />
     <img class="separator-icon8" loading="lazy" alt="" src="./image/separator-11.svg" />
-    <img id="a" class="km1907-77jpg-icon" loading="lazy" alt="" src="./image/${productView.prodDetailImgPath}" />
+    <img id="a" class="km1907-77jpg-icon" loading="lazy" alt="" src="./image/product/${productView.prodDetailImgPath}" />
     <img class="separator-icon9" loading="lazy" alt="" src="./image/separator-21.svg" />
     <h2 class="strong-review" id="b">REVIEW</h2>
     <div class="div88">
@@ -309,7 +311,7 @@
     <section class="price-summary-container-parent">
         <div class="price-summary-container">
             <div class="price-summary-inner-container">
-                <img class="container-icon2" loading="lazy" alt="" src="./image/container1@2x.png" />
+                <img class="container-icon2" alt="" src=`./${productView.prodImgPath}` />
                 <div class="separator7"></div>
             </div>
         </div>
@@ -533,7 +535,7 @@
     </main>
     <div id="c"></div>
     </div>
-    <img class="prodImgPath" alt="" src="./image/${productView.prodImgPath}" />
+    <img class="prodImgPath" alt="" src="./${productView.prodImgPath}" />
     <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
