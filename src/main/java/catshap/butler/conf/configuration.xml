@@ -4,6 +4,7 @@
 	<properties resource="catshap/butler/conf/db.properties" />
 	<typeAliases>
 		<typeAlias type="catshap.butler.bean.Grade" alias="Grade" />
+		<typeAlias type="catshap.butler.bean.Image" alias="Image" />
 		<typeAlias type="catshap.butler.bean.Users" alias="Users" />
 		<typeAlias type="catshap.butler.bean.UserAuthcode" alias="UserAuthcode" />
 		<typeAlias type="catshap.butler.bean.Product" alias="Product" />

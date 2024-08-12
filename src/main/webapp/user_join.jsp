@@ -23,6 +23,9 @@
 <script src="./js/user_regex.js"></script>
 </head>
 <body class="user_join">
+   <header>
+      <jsp:include page="header.jsp"></jsp:include>
+   </header>
    <div class="div318">
       <div class="auth-container-wrapper">
          <div class="auth-container">
@@ -339,5 +342,6 @@
    </div>
    </section>
    </div>
+   <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

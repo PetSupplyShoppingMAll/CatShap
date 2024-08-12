@@ -1,36 +1,44 @@
 $(function () {
+   
+   // Enter 키 입력 방지
+    $('input').on('keypress', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Enter 키 기본 동작 방지
+        }
+    });
+   
     // 로그인 버튼 클릭한 경우
     $("#userLoginBtn").on('click', (e) => {
-		e.preventDefault();
-		
-		const isUsidValid = validate('usid', regex.usid, '아이디를 입력해주세요.', '아이디 형식이 올바르지 않습니다.');
-		const isUpassValid = validatePassword();
-		if (isUsidValid && isUpassValid) {
-			const usid = $('#usid').val().trim();
-			const upass = $('#upass').val().trim();
-			
-			$.ajax({
-				type: 'POST',
-				url: '/catshap/login',
-				data: {
-					usid: usid,
-					upass: upass
-				},
-				success: function(response) {
-					if (response.success) {
-						alert(response.uname + '님 환영합니다.');
-						window.location.href = 'user_mypage.jsp';
-					} else {
-						alert("로그인 실패... 정보를 확인해주세요.");
-					}
-				},
-				error: function() {
-					alert('서버 오류가 발생했습니다.');
-				}
-			});
-		}
-		
-	});
+      e.preventDefault();
+      
+      const isUsidValid = validate('usid', regex.usid, '아이디를 입력해주세요.', '아이디 형식이 올바르지 않습니다.');
+      const isUpassValid = validatePassword();
+      if (isUsidValid && isUpassValid) {
+         const usid = $('#usid').val().trim();
+         const upass = $('#upass').val().trim();
+         
+         $.ajax({
+            type: 'POST',
+            url: '/catshap/login',
+            data: {
+               usid: usid,
+               upass: upass
+            },
+            success: function(response) {
+               if (response.success) {
+                  alert(response.uname + '님 환영합니다.');
+                  window.location.href = 'user_mypage.jsp';
+               } else {
+                  alert("로그인 실패... 정보를 확인해주세요.");
+               }
+            },
+            error: function() {
+               alert('서버 오류가 발생했습니다.');
+            }
+         });
+      }
+      
+   });
 
     // 로그인의 아이디 찾기 버튼 클릭한 경우
     $('#userLoginFindIdBtn').on('click', () => {
@@ -52,7 +60,7 @@ $(function () {
         e.preventDefault();
         
         const isUnameValid = validate('uname', regex.uname, '이름을 입력해주세요.', '이름 형식이 올바르지 않습니다.');
-		const isEmailValid = validate('email', regex.email, '이메일을 입력해주세요.', '이메일 형식이 올바르지 않습니다.');
+      const isEmailValid = validate('email', regex.email, '이메일을 입력해주세요.', '이메일 형식이 올바르지 않습니다.');
         if (isUnameValid && isEmailValid) {
             const uname = $('#uname').val().trim();
             const email = $('#email').val().trim();
@@ -83,8 +91,8 @@ $(function () {
         e.preventDefault();
         
         const isUnameValid = validate('uname', regex.uname, '이름을 입력해주세요.', '이름 형식이 올바르지 않습니다.');
-		const isUsidValid = validate('usid', regex.usid, '아이디를 입력해주세요.', '아이디 형식이 올바르지 않습니다.');
-		const isEmailValid = validate('email', regex.email, '이메일을 입력해주세요.', '이메일 형식이 올바르지 않습니다.');
+      const isUsidValid = validate('usid', regex.usid, '아이디를 입력해주세요.', '아이디 형식이 올바르지 않습니다.');
+      const isEmailValid = validate('email', regex.email, '이메일을 입력해주세요.', '이메일 형식이 올바르지 않습니다.');
         if (isUnameValid && isUsidValid && isEmailValid) {
             const uname = $('#uname').val().trim();
             const usid = $('#usid').val().trim();
@@ -201,7 +209,7 @@ $(function () {
         validateInput();
     }
 
-	// 회원가입의 회원가입 버튼을 클릭한 경우
+   // 회원가입의 회원가입 버튼을 클릭한 경우
    $('#joinBtn').click((event) => {
        event.preventDefault(); // 기본 폼 제출 동작 방지
    
@@ -298,9 +306,9 @@ $(function () {
 
     // 모달 설정
     const modals = [
-        { modalId: '#termsModal', buttonId: '#showTerms', fileUrl: './common/termsOfUseAgree.txt' },
-        { modalId: '#privacyModal', buttonId: '#showPrivacy', fileUrl: './common/privacyAgree.txt' },
-        { modalId: '#mktModal', buttonId: '#showMktAgree', fileUrl: './common/mktAgree.txt' }
+        { modalId: '#termsModal', buttonId: '#showTerms', fileUrl: './image/termsOfUseAgree.txt' },
+        { modalId: '#privacyModal', buttonId: '#showPrivacy', fileUrl: './image/privacyAgree.txt' },
+        { modalId: '#mktModal', buttonId: '#showMktAgree', fileUrl: './image/mktAgree.txt' }
     ];
 
     modals.forEach(modal => setupModal(modal.modalId, modal.buttonId, modal.fileUrl));
@@ -551,3 +559,4 @@ const validateInput = () => {
     $('#privacyAgree').on('change', () => validateAgreement('#privacyAgree', '#privacyAgree_error', '개인정보 수집 및 이용에 동의해야 합니다.'));
     $('#mktAgree').on('change', () => validateAgreement('#mktAgree', '', ''));
 }
+
