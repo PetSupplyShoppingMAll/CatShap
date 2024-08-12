@@ -29,7 +29,7 @@
                     <div class="product-container-parent">
                         <div class="product-container">
                             <div class="wrapper-container">
-                                <img class="container-icon" loading="lazy" alt="" src="./public/container@2x.png" />
+                                <img class="container-icon" loading="lazy" alt="" src="./image/container@2x.png" />
                             </div>
                             <div class="product-details">
                                 <b class="m-1p-container">
@@ -53,7 +53,7 @@
                             <div class="product-container1">
                                 <div class="wrapper-container1">
                                     <img class="container-icon1" loading="lazy" alt=""
-                                        src="./public/container-1@2x.png" />
+                                        src="./image/container-1@2x.png" />
                                 </div>
                                 <div class="product-details1">
                                     <b class="link">베스트에버 러브펫 강아지장난감 노즈워크장난감</b>
@@ -69,7 +69,7 @@
                             <div class="wrapper-container-parent">
                                 <div class="wrapper-container2">
                                     <img class="container-icon2" loading="lazy" alt=""
-                                        src="./public/container-2@2x.png" />
+                                        src="./image/container-2@2x.png" />
                                 </div>
                                 <div class="product-details2">
                                     <b class="b2">
@@ -92,7 +92,7 @@
                         </div>
                         <div class="wrapper-container-group">
                             <div class="wrapper-container3">
-                                <img class="container-icon3" loading="lazy" alt="" src="./public/container-3@2x.png" />
+                                <img class="container-icon3" loading="lazy" alt="" src="./image/container-3@2x.png" />
                             </div>
                             <div class="product-details3">
                                 <b class="link1">고양이타워 후아다 마이홈 캣타워 L-4</b>
@@ -111,7 +111,7 @@
                     <div class="product-pair">
                         <div class="images">
                             <div class="wrapper-container4">
-                                <img class="container-icon4" loading="lazy" alt="" src="./public/container-4@2x.png" />
+                                <img class="container-icon4" loading="lazy" alt="" src="./image/container-4@2x.png" />
                             </div>
                             <div class="product-link">
                                 <b class="link2">푸르바 고양이 냥이 화장실 배변통 네이비블루 캣</b>
@@ -126,7 +126,7 @@
                         </div>
                         <div class="images1">
                             <div class="wrapper-container5">
-                                <img class="container-icon5" loading="lazy" alt="" src="./public/container-5@2x.png" />
+                                <img class="container-icon5" loading="lazy" alt="" src="./image/container-5@2x.png" />
                             </div>
                             <div class="link-parent">
                                 <b class="link3">펫모닝 핑크돼지 하우스</b>
@@ -142,7 +142,7 @@
                     </div>
                     <div class="product-pair1">
                         <div class="wrapper-container6">
-                            <img class="container-icon6" loading="lazy" alt="" src="./public/container-6@2x.png" />
+                            <img class="container-icon6" loading="lazy" alt="" src="./image/container-6@2x.png" />
                         </div>
                         <div class="details">
                             <b class="link4">플라워 소녀와 강아지</b>
@@ -157,7 +157,7 @@
                     </div>
                     <div class="product-pair2">
                         <div class="wrapper-container7">
-                            <img class="container-icon7" loading="lazy" alt="" src="./public/container-7@2x.png" />
+                            <img class="container-icon7" loading="lazy" alt="" src="./image/container-7@2x.png" />
                         </div>
                         <div class="link-4kg-parent">
                             <b class="link5">로얄캐닌 브리티쉬숏헤어 4kg 반려묘 고양이 사료</b>
@@ -174,10 +174,11 @@
             </div>
         </section>
     </div>
+    <jsp:include page="productList.jsp"></jsp:include>
     <jsp:include page="footer.jsp"></jsp:include>
     <c:forEach var="Image" items="${listMain}">
         <div>12312312312312</div>
-        <img alt="" src="../img/${main.prodimgpath}">
+        <img alt="" src="./image/${main.prodimgpath}">
         <div>${main.proddescript}</div>
     </c:forEach>
 </body>

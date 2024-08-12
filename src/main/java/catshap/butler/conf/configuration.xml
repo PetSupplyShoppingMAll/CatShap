@@ -9,6 +9,7 @@
 		<typeAlias type="catshap.butler.bean.Product" alias="Product" />
 		<typeAlias type="catshap.butler.bean.ProductView" alias="ProductView" />
 		<typeAlias type="catshap.butler.bean.ReviewView" alias="ReviewView" />
+		<typeAlias type="catshap.butler.bean.Image" alias="Image" />
 	</typeAliases>	
 	<environments default="development">
 		<environment id="development">
