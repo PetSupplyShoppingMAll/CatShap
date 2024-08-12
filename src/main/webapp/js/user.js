@@ -84,8 +84,8 @@ $(function () {
         e.preventDefault();
         
         const isUnameValid = validate('uname', regex.uname, '이름을 입력해주세요.', '이름 형식이 올바르지 않습니다.');
-      const isUsidValid = validate('usid', regex.usid, '아이디를 입력해주세요.', '아이디 형식이 올바르지 않습니다.');
-      const isEmailValid = validate('email', regex.email, '이메일을 입력해주세요.', '이메일 형식이 올바르지 않습니다.');
+      	const isUsidValid = validate('usid', regex.usid, '아이디를 입력해주세요.', '아이디 형식이 올바르지 않습니다.');
+      	const isEmailValid = validate('email', regex.email, '이메일을 입력해주세요.', '이메일 형식이 올바르지 않습니다.');
         if (isUnameValid && isUsidValid && isEmailValid) {
             const uname = $('#uname').val().trim();
             const usid = $('#usid').val().trim();

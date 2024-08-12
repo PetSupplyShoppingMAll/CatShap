@@ -12,8 +12,8 @@
     <script src="./js/check_login.js"></script>
 </head>
 <body>
+    <jsp:include page="header.jsp"></jsp:include>
     <div class="login-desktop">
-        <jsp:include page="header.jsp"></jsp:include>
         <section class="login">
             <div class="login-form">
                 <div class="login-header">
