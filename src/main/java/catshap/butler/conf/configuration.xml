@@ -13,6 +13,7 @@
 		<typeAlias type="catshap.butler.bean.Image" alias="Image" />
 		<typeAlias type="catshap.butler.bean.ProductPrice" alias="ProductPrice" />
 		<typeAlias type="catshap.butler.bean.Orders" alias="Orders" />
+		<typeAlias type="catshap.butler.bean.OrderProduct" alias="OrderProduct" />
 	</typeAliases>	
 	<environments default="development">
 		<environment id="development">

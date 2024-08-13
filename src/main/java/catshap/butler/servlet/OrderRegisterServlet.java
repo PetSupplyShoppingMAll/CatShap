@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
 
+import catshap.butler.bean.OrderProduct;
 import catshap.butler.bean.Orders;
 import catshap.butler.bean.ProductPrice;
 import catshap.butler.bean.Users;
@@ -41,17 +42,26 @@ public class OrderRegisterServlet extends HttpServlet {
 		try {
 			int prodNo = Integer.parseInt(request.getParameter("prodNo"));
 			int prodCnt = Integer.parseInt(request.getParameter("prodCnt"));
+		
 			ProductPrice pp = ppi.getProductPrice(prodNo);
-
+			
 			HttpSession session = request.getSession(false);
 			Users user = (session != null) ? (Users) session.getAttribute("user") : null;
+			
 			if (user != null) {
 				Orders orders = new Orders();
 				orders.setUserNo(user.getUserNo());
 				orders.setOrdStatus("주문중");
 				orders.setOrdTotalPrice(pp.getProdPrice() * prodCnt);
+				int ordNo = oi.insertOrdersAndGetOrdNo(orders);
 				
-				int result = oi.insertOrders(orders);
+				OrderProduct orderProduct = new OrderProduct();
+				orderProduct.setProdNo(prodNo);
+				orderProduct.setOrdNo(ordNo);
+				orderProduct.setOrdProdAmt(prodCnt);
+				orderProduct.setOrdProdPrice(pp.getProdPrice());
+
+				int result = oi.insertOrderProduct(orderProduct);
 				if (result > 0) {
 					jsonResponse.addProperty("success", true);
 				} else {

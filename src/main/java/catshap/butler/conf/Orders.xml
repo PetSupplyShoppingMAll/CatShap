@@ -8,9 +8,17 @@
 		where prodNo=#{prodNo}
 	</select>
 
-	<insert id="insertOrders" parameterType="Orders">
+	<insert id="insertOrders" parameterType="Orders" useGeneratedKeys="true" keyProperty="ordNo">
+		<selectKey keyProperty="ordNo" resultType="int" order="AFTER">
+            SELECT seq_ordNo.currval FROM dual
+        </selectKey>
 		insert into orders
 		values (seq_ordNo.nextval, #{userNo}, sysdate, #{ordTotalPrice}, #{ordStatus})
+	</insert>
+	
+	<insert id="insertOrderProduct" parameterType="OrderProduct">
+		insert into orderProduct
+		values (seq_ordProdNo.nextval, #{prodNo}, #{ordNo}, #{ordProdAmt}, #{ordProdPrice})
 	</insert>
 	
 </mapper>

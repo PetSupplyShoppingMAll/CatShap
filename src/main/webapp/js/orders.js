@@ -14,13 +14,12 @@ $(function() {
             	},
                 success: (response) => {
                     if (response.success) {
-                       	alert('주문 추가 성공~!!!');
-                        //window.location.href = `buy.jsp?prodNo=${prodNo}`;
+                        window.location.href = `buy.jsp?prodNo=${prodNo}`;
                     } else {
                         alert('주문 실패...');
                     }
                 },
-                error: (jqXHR, textStatus, errorThrown) => {
+                error: (textStatus, errorThrown) => {
                     console.error('Error:', textStatus, errorThrown);
                 }
             });
