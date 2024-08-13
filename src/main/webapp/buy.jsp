@@ -1,5 +1,7 @@
-<%@page import="catshap.butler.bean.Product"%>
+<%@page import="catshap.butler.interfaces.ProductInterface"%>
+<%@page import="catshap.butler.dao.ProductDao"%>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="catshap.butler.bean.Product"%>
 <%@page import="catshap.butler.bean.OrderProduct"%>
 <%@page import="java.util.List"%>
 <%@page import="catshap.butler.dao.OrdersDao"%>
@@ -13,8 +15,11 @@
 	Users user = (Users)session.getAttribute("user");
 	int userNo = user.getUserNo();
 	OrdersInterface oi = new OrdersDao();
+	ProductInterface pi = new ProductDao();
+	
 	List<OrderProduct> orderProductList = oi.getOrderProductList(userNo);
 	Product product = new Product();
+	
 	request.setAttribute("orderProductList", orderProductList);
 	request.setAttribute("product", product);
 %>
