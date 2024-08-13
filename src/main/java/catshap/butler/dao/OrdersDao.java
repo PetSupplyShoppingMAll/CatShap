@@ -33,6 +33,7 @@ public class OrdersDao implements OrdersInterface {
 		try (SqlSession ss = ssf.openSession()) {
             ss.insert("orders.insertOrders", orders);
             ss.commit();
+            ss.close();
             return orders.getOrdNo();
         }
 	}
@@ -42,7 +43,17 @@ public class OrdersDao implements OrdersInterface {
 		try (SqlSession ss = ssf.openSession()) {
             int result = ss.insert("orders.insertOrderProduct", orderProduct);
             ss.commit();
+            ss.close();
             return result;
+        }
+	}
+	
+	@Override
+	public List<OrderProduct> getOrderProductList(int userNo) throws SQLException {
+		try (SqlSession ss = ssf.openSession()) {
+            List<OrderProduct> orderProductList = ss.selectList("orders.getOrderProductList", userNo);
+            ss.close();
+            return orderProductList;
         }
 	}
 

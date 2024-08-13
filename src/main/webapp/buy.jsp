@@ -1,4 +1,23 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="catshap.butler.bean.Product"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="catshap.butler.bean.OrderProduct"%>
+<%@page import="java.util.List"%>
+<%@page import="catshap.butler.dao.OrdersDao"%>
+<%@page import="catshap.butler.interfaces.OrdersInterface"%>
+<%@page import="catshap.butler.bean.Users"%>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+<%
+	Users user = (Users)session.getAttribute("user");
+	int userNo = user.getUserNo();
+	OrdersInterface oi = new OrdersDao();
+	List<OrderProduct> orderProductList = oi.getOrderProductList(userNo);
+	Product product = new Product();
+	request.setAttribute("orderProductList", orderProductList);
+	request.setAttribute("product", product);
+%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -7,12 +26,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BUY</title>
     <link rel="stylesheet" href="./css/buy.css">
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./js/buy.js"></script>
+    <script src="./js/user.js"></script>
 </head>
 <body>
     <%@include file="header.jsp" %>
-    <!--<jsp:include page="header.jsp"></jsp:include>-->
     <main id="main">
         <div>
         </div>
@@ -24,39 +44,90 @@
                     <a href="#"><img class="slidebtn" src="../img/slidebtn.png" /></a>
                 </div>
                 <div id="content1" class="content">
-                    <div class="main1_2">
-                        <p>받는사람</p>
-                        <input type="text" />
-                    </div>
-                    <div class="main1_2 main1_3">
-                        <p>주소</p>
-                        <input type="text" placeholder="우편번호" />
-                        <input type="text" placeholder="기본주소" />
-                        <input type="text" placeholder="나머지 주소(선택 입력 가능)" />
-                    </div>
-                    <div class="main1_4">
-                        <p class="call">휴대전화</p>
-                        <div class="main1_4input">
-                            <input type="text" placeholder=" 010" />
-                            <input type="text" />
-                            <input type="text" />
+                    <div class="row36">
+                     <div class="input-label-container">
+                        <div class="div331">받는사람</div>
+                        <div class="input-icon-container">
+                           <img class="join_icon2" alt="" src="./image/join_icon2.svg" />
                         </div>
-                        <span class="main1_4Span1">-</span>
-                        <span class="main1_4Span2">-</span>
-                    </div>
-                    <div class="main1_5">
-                        <p>이메일</p>
-                        <div class="main1_5_1">
-                            <input type="text" />
-                            <span>@</span>
-                            <select aria-placeholder="직접입력">
-                                <option>naver.com</option>
-                                <option>gmail.com</option>
-                                <option>daum.com</option>
-                            </select>
+                     </div>
+                  <div class="input19">
+                     <input class="container51" id="message" name="uaddress" value=<%=user.getUname()%> readOnly />
+                  </div>
+               </div>     
+                       <div class="main1_3">
+                  <div class="row-inner11">
+                     <div class="parent17">
+                        <div class="div331">우편번호</div>
+                        <div class="input-icon-container">
+                           <img class="join_icon2" alt="" src="./image/join_icon2.svg" />
                         </div>
-                    </div>
-                    <input class="message" type="text" placeholder="- 메세지 입력 (문 앞에 놓아주세요)" />
+                     </div>
+                  </div>
+                  <div class="input12">
+                     <input class="container44" id="umailAddress" name="umailAddress" placeholder="우편번호" type="text" />
+                  </div>
+                  <button class="input14" id="addressSearchButton">
+                     <div class="container47">
+                        <div class="search-check">address search</div>
+                     </div>
+                  </button>
+               </div>
+               <div class="row36">
+                     <div class="input-label-container">
+                        <div class="div331">주소</div>
+                        <div class="input-icon-container">
+                           <img class="join_icon2" alt="" src="./image/join_icon2.svg" />
+                        </div>
+                     </div>
+                  <div class="input19">
+                     <input class="container51" id="uaddress" name="uaddress" placeholder="주소" type="text" />
+                  </div>
+               </div>
+               <div class="row36">
+                     <div class="input-label-container">
+                        <div class="div331">상세주소</div>
+                        <div class="input-icon-container">
+                           <img class="join_icon2" alt="" src="./image/join_icon2.svg" />
+                        </div>
+                     </div>
+                  <div class="input19">
+                     <input class="container51" id="udetailAddress" name="udetailAddress" placeholder="상세주소" type="text" />
+                  </div>
+               </div>
+                        <div class="row31">
+                  <div class="row-inner11">
+                     <div class="parent17">
+                        <div class="div331">휴대전화</div>
+                        <div class="input-icon-container">
+                           <img class="join_icon2" alt="" src="./image/join_icon2.svg" />
+                        </div>
+                     </div>
+                  </div>
+                  <div class="input13">
+                     <select id="utelecom" name="utelecom" class="container45">
+                        <option value="">선택</option>
+                        <option value="LG">LG</option>
+                        <option value="SK">SK</option>
+                        <option value="KT">KT</option>
+                     </select>
+                  </div>
+                  <div class="input12">
+                     <input class="container44" id="uphone" name="uphone" placeholder="01000000000" type="text" />
+                  </div>
+                  <span id="uphone-error" class="error-message"></span>
+                  </div>
+               <div class="row36">
+                     <div class="input-label-container">
+                        <div class="div331">배송메세지</div>
+                        <div class="input-icon-container">
+                           <img class="join_icon2" alt="" src="./image/join_icon2.svg" />
+                        </div>
+                     </div>
+                  <div class="input19">
+                     <input class="container51" id="message" name="uaddress" placeholder="- 메세지 입력 (문 앞에 놓아주세요)" type="text" />
+                  </div>
+               </div>               
                 </div>
             </div>
         </section>
@@ -68,12 +139,13 @@
             <div id="content2" class="content">
                 <div class="main2_2">
                     <img class="stockimg" src="../img/cat.png" />
-
                     <div class="main2_2text">
                         <a href="#" class="delete"><img src="../img/close.png" /></a>
-                        <p>정수기 화이트</p>
-                        <p>수량:1개</p>
-                        <p>29,000원</p>
+		           		<c:forEach var="orderProduct" items="${orderProductList}">
+	                        <p>${orderProduct.ordProdNo}</p>
+	                        <p>수량:${orderProduct.ordProdAmt}개</p>
+	                        <p>${orderProduct.ordProdPrice}원</p>
+                    	</c:forEach>
                     </div>
                 </div>
             </div>
