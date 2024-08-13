@@ -49,11 +49,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catshap Orders</title>
-    <link rel="stylesheet" href="./css/buy.css">
+    <link rel="stylesheet" href="./css/productOrders.css">
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="./js/productOrders.js"></script>
+    <script src="./js/user_regex.js"></script>
     <script src="./js/user.js"></script>
+    <script src="./js/productOrders.js"></script>
 </head>
 <body>
     <%@include file="header.jsp" %>
@@ -90,10 +91,11 @@
                                 </div>
                             </div>
                             <div class="input12">
-                                <input class="container44" id="delMailAddress" name="umailAddress" placeholder="우편번호"
+                                <input class="container44" id="delMailAddress" name="delMailAddress" placeholder="우편번호"
                                     type="text" />
+                                    <p id="delMailAddress-error" class="error-message" style="display: none;"></p>
                             </div>
-                            <button class="input14" id="addressSearchButton">
+                            <button class="input14" id="addressSearchButton" type="button">
                                 <div class="container47">
                                     <div class="search-check">address search</div>
                                 </div>
@@ -109,6 +111,7 @@
                             <div class="input19">
                                 <input class="container51" id="delAddress" name="uaddress" placeholder="주소"
                                     type="text" />
+                                    <p id="delAddress-error" class="error-message" style="display: none;"></p>
                             </div>
                         </div>
                         <div class="row36">
@@ -121,6 +124,7 @@
                             <div class="input19">
                                 <input class="container51" id="delDetailAddress" name="udetailAddress"
                                     placeholder="상세주소" type="text" />
+                                    <p id="delDetailAddress-error" class="error-message" style="display: none;"></p>
                             </div>
                         </div>
                         <div class="row31">
@@ -144,7 +148,7 @@
                                 <input class="container44" id="delRecPhone" name="delRecPhone" placeholder="01000000000"
                                     type="text" />
                             </div>
-                            <span id="uphone-error" class="error-message"></span>
+                            <span id="delRecPhone-error" class="error-message"></span>
                         </div>
                         <div class="row36">
                             <div class="input-label-container">
@@ -156,6 +160,7 @@
                             <div class="input19">
                                 <input class="container51" id="delRequest" name="delRequest"
                                     placeholder="- 메세지 입력 (문 앞에 놓아주세요)" type="text" />
+                                    <p id="delRequest-error" class="error-message" style="display: none;"></p>
                             </div>
                         </div>
                     </div>
@@ -270,7 +275,7 @@
                     </div>
                 </div>
             </section>
-            <button id="payBtn" class="main5a">${orderProductPrice + 3000}원 결제하기</button>
+            <button id="payBtn" type="submit" class="main5a">${orderProductPrice + 3000}원 결제하기</button>
             <section id="main6">
                 <p>- 무이자할부가 적용되지 않은 상품과 무이자할부가 가능한 상품을 동시에 구매할 경우 전체 주문 상품 금액에 대해 무이자할부가 적용되지 않습니다. 무이자할부를 원하시는 경우
                     장바구니에서 무이자 할부 상품만 선택하여 주문하여 주시기 바랍니다.</p>
