@@ -37,4 +37,11 @@ $(document).ready(function () {
     const isChecked = $(this).is(':checked');
     $('#main5check1, #main5check2, #main5check3').prop('checked', isChecked);
   });
+  
+  // 결제하기 버튼 클릭한 경우
+  $('#payBtn').on('click', (e) => {
+	  e.preventDefault();
+	  alert('결제 진행!!'); 
+  });
+  
 });

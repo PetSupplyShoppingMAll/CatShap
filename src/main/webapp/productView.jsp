@@ -34,8 +34,7 @@
     <link rel="stylesheet" href="./css/global.css" />
     <link rel="stylesheet" href="./css/B-02.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="./js/ProductView.js"></script>
-    <script src="./js/orders.js"></script>
+    <script src="./js/productView.js"></script>
 </head>
 
 <body>
@@ -101,8 +100,7 @@
                                             <img class="icon52" alt="" src="./image/icon-112@2x.png" />
                                             <div class="option-placeholder">
                                                 <div class="horizontalborder6">
-                                                    <a class="a15">선택된
-                                                        옵션</a>
+                                                    <a class="a15">선택된 옵션</a>
                                                 </div>
                                                 <div class="quantity">
                                                     <div class="div72">

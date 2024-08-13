@@ -541,3 +541,8 @@ select{
   display: none;
 }
 
+.product-title-img {
+	width: 10px;
+	height: 10px;
+}
+
