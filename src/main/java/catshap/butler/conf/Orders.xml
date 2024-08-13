@@ -21,6 +21,20 @@
 		values (seq_ordProdNo.nextval, #{prodNo}, #{ordNo}, #{ordProdAmt}, #{ordProdPrice})
 	</insert>
 	
+	<select id="getOrderProductPrice" parameterType="int" resultType="int">
+		SELECT
+		    SUM(op.ordProdAmt * op.ordProdPrice) AS totalOrderPrice
+		FROM
+		    ORDERS o
+		JOIN
+		    ORDERPRODUCT op ON o.ORDNO = op.ORDNO
+		JOIN
+		    PRODUCT p ON op.PRODNO = p.PRODNO
+		WHERE
+		    o.USERNO = #{userNo}
+		    AND o.ORDSTATUS = '주문중'
+	</select>
+	
 	<select id="getOrderProductList" parameterType="int" resultMap="OrderProductMap">
 		SELECT
 		     op.ordProdNo, op.prodNo, op.ordNo, op.ordProdAmt, op.ordProdPrice

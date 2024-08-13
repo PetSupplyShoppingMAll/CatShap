@@ -14,4 +14,6 @@ public interface OrdersInterface {
 
 	public abstract List<OrderProduct> getOrderProductList(int userNo) throws SQLException;	// 회원의 주문 상품 리스트 출력
 	
+	public abstract int getOrderProductPrice(int userNo) throws SQLException; // 회원의 주문 상품 총 가격 출력
+	
 }

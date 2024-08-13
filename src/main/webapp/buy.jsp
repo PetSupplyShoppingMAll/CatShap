@@ -1,6 +1,11 @@
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="catshap.butler.bean.ProductView"%>
+<%@page import="catshap.butler.dao.ProductViewDao"%>
+<%@page import="catshap.butler.interfaces.ProductViewInterface"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@page import="catshap.butler.interfaces.ProductInterface"%>
 <%@page import="catshap.butler.dao.ProductDao"%>
-<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="catshap.butler.bean.Product"%>
 <%@page import="catshap.butler.bean.OrderProduct"%>
 <%@page import="java.util.List"%>
@@ -14,14 +19,28 @@
 <%
 	Users user = (Users)session.getAttribute("user");
 	int userNo = user.getUserNo();
+	
 	OrdersInterface oi = new OrdersDao();
 	ProductInterface pi = new ProductDao();
+	ProductViewInterface pvi = new ProductViewDao();
 	
 	List<OrderProduct> orderProductList = oi.getOrderProductList(userNo);
-	Product product = new Product();
+	int orderProductPrice = oi.getOrderProductPrice(userNo);
 	
+	Map<Integer, Product> productMap = new HashMap<>();
+	Map<Integer, ProductView> productViewMap = new HashMap<>();
+	
+    for (OrderProduct orderProduct : orderProductList) {
+        int prodNo = orderProduct.getProdNo();
+        Product product = pi.selectProduct(prodNo);
+        productMap.put(prodNo, product);
+        ProductView productView = pvi.getProduct(prodNo);
+        productViewMap.put(prodNo, productView);
+    }
 	request.setAttribute("orderProductList", orderProductList);
-	request.setAttribute("product", product);
+	request.setAttribute("productMap", productMap);
+	request.setAttribute("productViewMap", productViewMap);
+	request.setAttribute("orderProductPrice", orderProductPrice);
 %>
 
 <!DOCTYPE html>
@@ -145,9 +164,13 @@
                 <div class="main2_2">
                     <img class="stockimg" src="../img/cat.png" />
                     <div class="main2_2text">
-                        <a href="#" class="delete"><img src="../img/close.png" /></a>
 		           		<c:forEach var="orderProduct" items="${orderProductList}">
-	                        <p>${orderProduct.ordProdNo}</p>
+                        	<a href="#" class="product-title-img">
+                        		<c:set var="productView" value="${productViewMap[orderProduct.prodNo]}" />
+                        		<img src="${productView.prodImgPath}" alt="${productView.prodDescript} 이미지" />
+                        	</a>
+                       		<c:set var="product" value="${productMap[orderProduct.prodNo]}" />
+                            <p>상품명: ${product.prodDescript}</p>
 	                        <p>수량:${orderProduct.ordProdAmt}개</p>
 	                        <p>${orderProduct.ordProdPrice}원</p>
                     	</c:forEach>
@@ -168,7 +191,7 @@
             <div id="content3" class="content">
                 <div class="middletext">
                     <p>주문상품</p>
-                    <b>29,200원</b>
+                    <b>${orderProductPrice}원</b>
                 </div>
                 <div class="middletext">
                     <p>배송비</p>
@@ -182,7 +205,7 @@
         </section>
         <div class="main3_2 endtitle">
             <b>최종 결제 금액</b>
-            <b>32,300원</b>
+            <b>${orderProductPrice + 3000}원</b>
         </div>
         <section id="main4">
             <div class="main4_1 title" id="title4" data-target="content4">

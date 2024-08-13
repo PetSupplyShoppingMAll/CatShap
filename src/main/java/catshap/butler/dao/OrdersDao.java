@@ -18,43 +18,52 @@ public class OrdersDao implements OrdersInterface {
 
 	private static Reader reader = null;
 	private static SqlSessionFactory ssf = null;
-	
+
 	static {
-        try {
-            reader = Resources.getResourceAsReader("catshap/butler/conf/configuration.xml");
-            ssf = new SqlSessionFactoryBuilder().build(reader);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-	
+		try {
+			reader = Resources.getResourceAsReader("catshap/butler/conf/configuration.xml");
+			ssf = new SqlSessionFactoryBuilder().build(reader);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public int insertOrdersAndGetOrdNo(Orders orders) {
 		try (SqlSession ss = ssf.openSession()) {
-            ss.insert("orders.insertOrders", orders);
-            ss.commit();
-            ss.close();
-            return orders.getOrdNo();
-        }
+			ss.insert("orders.insertOrders", orders);
+			ss.commit();
+			ss.close();
+			return orders.getOrdNo();
+		}
 	}
-	
+
 	@Override
 	public int insertOrderProduct(OrderProduct orderProduct) throws SQLException {
 		try (SqlSession ss = ssf.openSession()) {
-            int result = ss.insert("orders.insertOrderProduct", orderProduct);
-            ss.commit();
-            ss.close();
-            return result;
-        }
+			int result = ss.insert("orders.insertOrderProduct", orderProduct);
+			ss.commit();
+			ss.close();
+			return result;
+		}
 	}
-	
+
 	@Override
 	public List<OrderProduct> getOrderProductList(int userNo) throws SQLException {
 		try (SqlSession ss = ssf.openSession()) {
-            List<OrderProduct> orderProductList = ss.selectList("orders.getOrderProductList", userNo);
-            ss.close();
-            return orderProductList;
-        }
+			List<OrderProduct> orderProductList = ss.selectList("orders.getOrderProductList", userNo);
+			ss.close();
+			return orderProductList;
+		}
+	}
+
+	@Override
+	public int getOrderProductPrice(int userNo) throws SQLException {
+		try (SqlSession ss = ssf.openSession()) {
+			int orderProductPrice = ss.selectOne("orders.getOrderProductPrice", userNo);
+			ss.close();
+			return orderProductPrice;
+		}
 	}
 
 }

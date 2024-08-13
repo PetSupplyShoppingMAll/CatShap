@@ -1,10 +1,7 @@
 package catshap.butler.dao;
 
-import java.io.InputStream;
 import java.io.Reader;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Properties;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -18,7 +15,7 @@ public class ProductViewDao implements ProductViewInterface {
 
 	private static Reader reader = null;
 	private static SqlSessionFactory ssf = null;
-	
+
 	static {
 		try {
 			reader = Resources.getResourceAsReader("catshap/butler/conf/configuration.xml");
@@ -27,21 +24,19 @@ public class ProductViewDao implements ProductViewInterface {
 			ex.printStackTrace();
 		}
 	}
-	
-	
+
 	@Override
 	public ProductView getProduct(int prodNo) throws Exception {
 		return ssf.openSession().selectOne("productview.getProduct", prodNo);
 	}
-	
+
 	@Override
 	public int addCount(int prodNo) throws SQLException {
 		SqlSession ss = ssf.openSession();
 		int result = ss.insert("productview.addCount", prodNo);
 		ss.commit();
 		ss.close();
-		return result;	
+		return result;
 	}
-	
 
 }

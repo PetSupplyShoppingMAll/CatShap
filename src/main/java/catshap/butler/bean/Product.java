@@ -1,16 +1,16 @@
 package catshap.butler.bean;
 
 public class Product {
-	
-    private int prodNo;   
-    private String prodDescript;      // 상품명
-    private int prodCount;        // 조회수
-    private int revCount;         // 리뷰개수
-    private int prodPrice; 	  // 상품가격
-    private String prdCatName;    // 카테고리이름
-    private String prodImgPath;
-    
-    public Product() {
+
+	private int prodNo;
+	private String prodDescript; // 상품명
+	private int prodCount; // 조회수
+	private int revCount; // 리뷰개수
+	private int prodPrice; // 상품가격
+	private String prdCatName; // 카테고리이름
+	private String prodImgPath;
+
+	public Product() {
 	}
 
 	public Product(int prodNo, String prodDescript, int prodCount, int revCount, int prodPrice, String prdCatName,
@@ -81,9 +81,4 @@ public class Product {
 		this.prodImgPath = prodImgPath;
 	}
 
-	
-
-	
-    
-    
 }
