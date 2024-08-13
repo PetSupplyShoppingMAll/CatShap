@@ -50,8 +50,11 @@ $(document).ready(function () {
             delRequest: $('#delRequest').val()
         };
 
+        // 결제 진행
+        requestPay();
+
         // AJAX 요청을 보내서 서버로 데이터를 전송
-        $.ajax({
+        /*$.ajax({
             type: 'POST',
             url: '/catshap/pay',
             data: $.param(formData), // 데이터 URL 인코딩
@@ -63,5 +66,34 @@ $(document).ready(function () {
                 alert('등록 중 오류가 발생했습니다. 다시 시도해 주세요.');
             }
         });
+        */
     });
 });
+
+// 결제 메소드
+const requestPay = () => {
+    IMP.init('가맹점 식별코드'); // 가맹점 식별코드
+    IMP.request_pay({
+        pg: "kakaopay",
+        pay_method: "card",
+        merchant_uid: "1",   // 주문번호
+        name: "고양이용 참치츄르",
+        amount: 1004,                         // 숫자 타입
+        buyer_email: "gildong@example.com",
+        buyer_name: "홍길동",
+        buyer_tel: "010-1234-5678",
+        buyer_addr: "서울특별시 강남구 신사동",
+        buyer_postcode: "01181"
+    }, function (rsp) { // callback
+        //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+        console.log(rsp);
+        if (rsp.success) {
+            var msg = '결제가 완료되었습니다.';
+            alert(msg);
+        } else {
+            var msg = '결제에 실패하였습니다.';
+            msg += '에러내용 : ' + rsp.error_msg;
+            alert(msg);
+        }
+    });
+}

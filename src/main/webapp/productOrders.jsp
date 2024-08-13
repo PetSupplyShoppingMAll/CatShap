@@ -52,6 +52,7 @@
     <link rel="stylesheet" href="./css/productOrders.css">
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
     <script src="./js/user_regex.js"></script>
     <script src="./js/user.js"></script>
     <script src="./js/productOrders.js"></script>
