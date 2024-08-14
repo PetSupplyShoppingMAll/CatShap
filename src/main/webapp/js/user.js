@@ -306,11 +306,6 @@ $(function () {
 
     modals.forEach(modal => setupModal(modal.modalId, modal.buttonId, modal.fileUrl));
 
-    // 주소 검색 버튼 클릭 이벤트 핸들러
-    $('#addressSearchButton').on('click', function (event) {
-        sample6_execDaumPostcode(event);
-    });
-
     // 취소 버튼을 클릭한 경우
     $('#userCancelBtn').on('click', (e) => {
         e.preventDefault();
@@ -519,19 +514,6 @@ const checkDuplicate = (type, value) => {
         .fail(function (error) {
             console.error('Error:', error);
         });
-}
-
-// 주소 검색 함수
-function sample6_execDaumPostcode(event) {
-    // 이벤트 기본 동작 방지
-    event.preventDefault();
-
-    new daum.Postcode({
-        oncomplete: function (data) {
-            document.getElementById('umailAddress').value = data.zonecode;
-            document.getElementById('uaddress').value = data.address;
-        }
-    }).open();
 }
 
 // 실시간 회원가입 입력 유효성 검사 이벤트 추가

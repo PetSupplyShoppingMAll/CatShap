@@ -54,7 +54,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
     <script src="./js/user_regex.js"></script>
-    <script src="./js/user.js"></script>
+    <script src="./js/daumAddress.js"></script>
     <script src="./js/productOrders.js"></script>
 </head>
 <body>
@@ -92,9 +92,8 @@
                                 </div>
                             </div>
                             <div class="input12">
-                                <input class="container44" id="delMailAddress" name="delMailAddress" placeholder="우편번호"
+                                <input class="container44" id="umailAddress" name="umailAddress" placeholder="우편번호"
                                     type="text" />
-                                    <p id="delMailAddress-error" class="error-message" style="display: none;"></p>
                             </div>
                             <button class="input14" id="addressSearchButton" type="button">
                                 <div class="container47">
@@ -102,6 +101,7 @@
                                 </div>
                             </button>
                         </div>
+                        <p id="umailAddress-error" class="error-message" style="display: none;"></p>
                         <div class="row36">
                             <div class="input-label-container">
                                 <div class="div331">주소</div>
@@ -110,22 +110,18 @@
                                 </div>
                             </div>
                             <div class="input19">
-                                <input class="container51" id="delAddress" name="uaddress" placeholder="주소"
-                                    type="text" />
-                                    <p id="delAddress-error" class="error-message" style="display: none;"></p>
+                                <input class="container51" id="uaddress" name="uaddress" 
+                                	placeholder="주소" type="text" />
                             </div>
                         </div>
+                        <p id="uaddress-error" class="error-message" style="display: none;"></p>
                         <div class="row36">
                             <div class="input-label-container">
                                 <div class="div331">상세주소</div>
-                                <div class="input-icon-container">
-                                    <img class="join_icon2" alt="" src="./image/join_icon2.svg" />
-                                </div>
                             </div>
                             <div class="input19">
                                 <input class="container51" id="delDetailAddress" name="udetailAddress"
                                     placeholder="상세주소" type="text" />
-                                    <p id="delDetailAddress-error" class="error-message" style="display: none;"></p>
                             </div>
                         </div>
                         <div class="row31">
@@ -147,21 +143,24 @@
                             </div>
                             <div class="input12">
                                 <input class="container44" id="delRecPhone" name="delRecPhone" placeholder="01000000000"
-                                    type="text" />
+                                    type="text" maxLength=11 />
                             </div>
-                            <span id="delRecPhone-error" class="error-message"></span>
                         </div>
+                        <span id="delRecPhone-error" class="error-message"></span>
                         <div class="row36">
                             <div class="input-label-container">
                                 <div class="div331">배송메세지</div>
-                                <div class="input-icon-container">
-                                    <img class="join_icon2" alt="" src="./image/join_icon2.svg" />
-                                </div>
                             </div>
                             <div class="input19">
-                                <input class="container51" id="delRequest" name="delRequest"
-                                    placeholder="- 메세지 입력 (문 앞에 놓아주세요)" type="text" />
-                                    <p id="delRequest-error" class="error-message" style="display: none;"></p>
+                            	<select id="delRequest" name="delRequest" class="container51">
+                                    <option value="drq1">--메시지 선택 (선택사항) --</option>
+                                    <option value="drq2">배송 전에 미리 연락바랍니다.</option>
+                                    <option value="drq3">부재시 경비실에 맡겨주세요.</option>
+                                    <option value="drq4">부재시 문 앞에 놓아주세요.</option>
+                                    <option value="drq5">빠른 배송 부탁드립니다.</option>
+                                    <option value="drq6">택배함에 보관해 주세요.</option>
+                                    <option value="drq7">직접 입력</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -226,16 +225,14 @@
                     <div class="main4div">
                         <div class="middletext">
                             <p>카드선택</p>
-                            <select>
-                                <option>신용카드</option>
-                                <option>체크카드</option>
+                            <select>         
                                 <option>간편결제</option>
                             </select>
                         </div>
                         <div id="payment" class="middletext">
                             <p>할부기간</p>
                             <select>
-                                <option>무이자 3개월</option>
+                                <option>일시불</option>
                             </select>
                         </div>
                         <p class="main4text">법인카드는 무이자 할부 적용이 되지 않습니다.</p>
@@ -260,19 +257,19 @@
                         <input id="agreePayCheck" type="checkbox" />
                         <span>[필수]</span>
                         <p>결제대행서비스 약관 동의</p>
-                        <input type="button" value=">" />
+                        <input id="agreePayCheckBtn" type="button" value=">" />
                     </div>
                     <div class="middletext2">
                         <input id="agreeShopCheck" type="checkbox" />
                         <span>[필수]</span>
                         <p>쇼핑몰 이용약관 동의</p>
-                        <input type="button" value=">" />
+                        <input id="agreeShopCheckBtn" type="button" value=">" />
                     </div>
                     <div class="middletext2">
                         <input id="agreeUserCheck" type="checkbox" />
                         <span>[필수]</span>
                         <p>개인정보 수집 및 이용 동의</p>
-                        <input type="button" value=">" />
+                        <input id="agreeUserCheckBtn" type="button" value=">" />
                     </div>
                 </div>
             </section>

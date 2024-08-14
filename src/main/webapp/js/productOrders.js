@@ -1,30 +1,12 @@
 $(document).ready(function () {
     // 안내 팝업창
-    $(".btn").click(() => {
+    $("#agreeUserCheckBtn").click(() => {
         $("#event").show();
     });
 
     $("#event span").click(() => {
         $("#event").hide();
     });
-
-    // 주소 검색 버튼 클릭 이벤트 핸들러
-    $('#addressSearchButton').click((event) => {
-        event.preventDefault();
-        sample6_execDaumPostcode(event);
-    });
-
-    // 주소 검색 함수
-    const sample6_execDaumPostcode = (e) => {
-        e.preventDefault();
-
-        new daum.Postcode({
-            oncomplete: (data) => {
-                $('#zipcode').val(data.zonecode);
-                $('#address1').val(data.address);
-            }
-        }).open();
-    };
 
     // 타이틀 클릭 시 위로 올라가게 하기
     $('.title').click(function () {
@@ -35,24 +17,30 @@ $(document).ready(function () {
     // 체크 박스 클릭 시 모두 클릭하기
     $('#allcheckbox').change(function () {
         const isChecked = $(this).is(':checked');
-        $('#main5check1, #main5check2, #main5check3').prop('checked', isChecked);
+        $('#agreePayCheck, #agreeShopCheck, #agreeUserCheck').prop('checked', isChecked);
     });
 
     // 결제하기 버튼 클릭한 경우
     $('#payBtn').on('click', (e) => {
         e.preventDefault();
-        const formData = {
-            delReciPient: $('#delReciPient').val(),
-            delMailAddress: $('#delMailAddress').val(),
-            delAddress: $('#delAddress').val(),
-            delDetailAddress: $('#delDetailAddress').val(),
-            delRecPhone: $('#delRecPhone').val(),
-            delRequest: $('#delRequest').val()
-        };
 
-        // 결제 진행
-        requestPay();
-
+        const isDeliveryValid = validateDelivery();
+        const isAgreeCheckValid = validateAgreeCheck();
+        if (isDeliveryValid && isAgreeCheckValid) {
+			// 결제 진행
+        	requestPay();
+        	
+	        const formData = {
+	            delReciPient: $('#delReciPient').val(),
+	            delMailAddress: $('#umailAddress').val(),
+	            delAddress: $('#uaddress').val(),
+	            delDetailAddress: $('#delDetailAddress').val(),
+	            delRecPhone: $('#delRecPhone').val(),
+	            delRequest: $('#delRequest').val()
+	        };   
+	        console.log(formData);	
+		}
+		
         // AJAX 요청을 보내서 서버로 데이터를 전송
         /*$.ajax({
             type: 'POST',
@@ -70,15 +58,39 @@ $(document).ready(function () {
     });
 });
 
+// 배송지 유효성 검사 메소드
+const validateDelivery = () => {
+    const isMailAddressValid = validateField('#umailAddress', '#umailAddress-error', '우편 주소를 입력해주세요.');
+    const isDetailAddressValid = validateField('#uaddress', '#uaddress-error', '주소를 입력해주세요.');
+    const isRecPhoneValid = validateField('#delRecPhone', '#delRecPhone-error', '전화번호를 입력해주세요.');
+
+    return isMailAddressValid && isDetailAddressValid && isRecPhoneValid;
+}
+
+// 체크 유효성 검사 메소드
+const validateAgreeCheck = () => {
+	// 체크박스가 모두 체크되었는지 확인
+    const isAgreePayCheck = $('#agreePayCheck').is(':checked');
+    const isAgreeShopCheck = $('#agreeShopCheck').is(':checked');
+    const isAgreeUserCheck = $('#agreeUserCheck').is(':checked');
+
+    // 모든 체크박스가 체크되었는지 확인
+    if (!isAgreePayCheck || !isAgreeShopCheck || !isAgreeUserCheck) {
+        alert('모든 약관에 동의해야 결제할 수 있습니다.');
+        return false;
+    }
+    return true;
+}
+
 // 결제 메소드
 const requestPay = () => {
     IMP.init('가맹점 식별코드'); // 가맹점 식별코드
     IMP.request_pay({
         pg: "kakaopay",
         pay_method: "card",
-        merchant_uid: "1",   // 주문번호
-        name: "고양이용 참치츄르",
-        amount: 1004,                         // 숫자 타입
+        merchant_uid: "200",   // 주문번호
+        name: "냥샵 결제",
+        amount: 20000,                         // 숫자 타입
         buyer_email: "gildong@example.com",
         buyer_name: "홍길동",
         buyer_tel: "010-1234-5678",

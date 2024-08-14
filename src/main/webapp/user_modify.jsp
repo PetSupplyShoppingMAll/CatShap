@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400&display=swap" />
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="./js/daumAddress.js"></script>
 <script src="./js/check_login.js"></script>
 <script src="./js/user_info.js"></script>
 <script src="./js/user_regex.js"></script>
