@@ -35,10 +35,19 @@ $(document).ready(function () {
 	            delRecPhone: $('#delRecPhone').val(),
 	            delRequest: $('#delRequest').val()
 	        };
-	       	console.log($('#orderProductList').val()); 
-	        
-	        // 결제 진행
-        	// requestPay(formData, user);
+	       	
+	        $.ajax({
+	            type: 'GET',
+	            url: '/catshap/user-info',
+	            success: function (response) {
+	                const user = response;
+	                // 결제 진행
+	                requestPay(formData, user);
+	            },
+	            error: function (xhr, status, error) {
+	                alert('등록 중 오류가 발생했습니다. 다시 시도해 주세요.');
+	            }
+	        });
 	        
 	        // 결제 성공 후 배달, 결제 테이블에 데이터 저장
 	        /*$.ajax({

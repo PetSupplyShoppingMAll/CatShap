@@ -15,7 +15,7 @@
 	OrdersInterface oi = new OrdersDao();
 	List<OrderProductList> orderProductList = oi.getOrderProductList(userNo);
 	int orderProductPrice = oi.getOrderProductPrice(userNo);
-	System.out.println(orderProductList);
+	
 	request.setAttribute("orderProductList", orderProductList);
 	request.setAttribute("orderProductPrice", orderProductPrice);
 %>
@@ -38,7 +38,6 @@
     <%@include file="header.jsp" %>
     <main id="main">
         <form id="paymentForm" action="/pay" method="post">
-         	<input type="hidden" name="orderProductList" id="orderProductList" value=""/>
             <p class="pay">주문/결제</p>
             <section id="main1">
                 <div id="main1Wrapper">
