@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -28,6 +29,15 @@ public class OrdersDao implements OrdersInterface {
 		}
 	}
 
+	@Override
+	public int getBeforeOrders(Map<String, Object> userParams) throws SQLException {
+		try (SqlSession ss = ssf.openSession()) {
+			int result = ss.selectOne("orders.getBeforeOrders", userParams);
+			ss.close();
+			return result;
+		}
+	}
+	
 	@Override
 	public int insertOrdersAndGetOrdNo(Orders orders) {
 		try (SqlSession ss = ssf.openSession()) {

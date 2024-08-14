@@ -1,5 +1,5 @@
-<%@page import="catshap.butler.bean.Users"%>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="catshap.butler.bean.Users"%>
 <%@page import="catshap.butler.interfaces.ProductViewInterface"%>
 <%@page import="catshap.butler.interfaces.ReviewViewInterface"%>
 <%@page import="catshap.butler.bean.ProductView"%>

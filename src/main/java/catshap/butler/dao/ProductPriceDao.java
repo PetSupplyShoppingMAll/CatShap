@@ -3,12 +3,12 @@ package catshap.butler.dao;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.SQLException;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import catshap.butler.bean.ProductPrice;
 import catshap.butler.interfaces.ProductPriceInterface;
 
 public class ProductPriceDao implements ProductPriceInterface {
@@ -26,8 +26,8 @@ public class ProductPriceDao implements ProductPriceInterface {
     }
 	
 	@Override
-	public ProductPrice getProductPrice(int prodNo) throws SQLException {
-		return ssf.openSession().selectOne("productprice.selectProductPrice", prodNo);
+	public int getProdPrice(Map<String, Object> productParams) throws SQLException {
+		return ssf.openSession().selectOne("productprice.getProdPrice", productParams);
 	}
 
 }

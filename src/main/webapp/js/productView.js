@@ -49,7 +49,8 @@ $(function () {
                     if (response.success) {
                         window.location.href = `productOrders.jsp?prodNo=${prodNo}`;
                     } else {
-                        alert('주문 실패...');
+						alert(response.falseMessage);
+                        window.location.href = 'user_orders_page.jsp';
                     }
                 },
                 error: (textStatus, errorThrown) => {

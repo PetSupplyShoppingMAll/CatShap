@@ -1,11 +1,10 @@
 package catshap.butler.interfaces;
 
 import java.sql.SQLException;
-
-import catshap.butler.bean.ProductPrice;
+import java.util.Map;
 
 public interface ProductPriceInterface {
 
-	public abstract ProductPrice getProductPrice(int prodNo) throws SQLException;
-	
+	public abstract int getProdPrice(Map<String, Object> productParams) throws SQLException; // 주문 총가격 반환
+
 }
