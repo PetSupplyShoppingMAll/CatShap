@@ -131,16 +131,14 @@ section{
   
 }
 
-p{
-  font-size:40px;
+p {
+  font-size:20px;
 }
 select{
   font-size:30px;
   height:50px;
   border:2px solid rgba(0,0,0,0.3);
 }
-
-
 
 .row31 {
   position: relative;
@@ -178,12 +176,6 @@ select{
   background-color: #444;
   color:#fff;
 }
-
-
-
-
-
-
 
 /* main1 */
 
@@ -381,13 +373,7 @@ select{
   padding-left: 10px;
 }
 
-
-
 /* main2 */
-#main2{
-  /* background-color: pink; */
-}
-
 #main2 .stockimg{
   width:200px;
   border: 1px solid #333;
@@ -395,11 +381,13 @@ select{
 .main2_2{
   margin-bottom: 40px;
 }
+
+.main2_2 img {
+	width: 100px;
+}
 #main2 .main2_2text{
   display: block;
   width:83%;
-  height: 200px;
-  /* background-color: yellow; */
   float:right;
   display: flex;
   flex-direction: column;

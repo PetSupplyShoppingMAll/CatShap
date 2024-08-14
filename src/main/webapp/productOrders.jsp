@@ -174,19 +174,18 @@
                 </div>
                 <div id="content2" class="content">
                     <div class="main2_2">
-                        <img class="stockimg" src="../img/cat.png" />
+                       <c:forEach var="orderProduct" items="${orderProductList}">
+                           <a href="#" class="product-title-img">
+                               <c:set var="productView" value="${productViewMap[orderProduct.prodNo]}" />
+                               <img src="${productView.prodImgPath}" alt="${productView.prodDescript} 이미지" />
+                           </a>
                         <div class="main2_2text">
-                            <c:forEach var="orderProduct" items="${orderProductList}">
-                                <a href="#" class="product-title-img">
-                                    <c:set var="productView" value="${productViewMap[orderProduct.prodNo]}" />
-                                    <img src="${productView.prodImgPath}" alt="${productView.prodDescript} 이미지" />
-                                </a>
-                                <c:set var="product" value="${productMap[orderProduct.prodNo]}" />
-                                <p>상품명: ${product.prodDescript}</p>
-                                <p>수량:${orderProduct.ordProdAmt}개</p>
-                                <p>${orderProduct.ordProdPrice}원</p>
-                            </c:forEach>
+                           <c:set var="product" value="${productMap[orderProduct.prodNo]}" />
+                           <p>상품명: ${product.prodDescript}</p>
+                           <p>수량:${orderProduct.ordProdAmt}개</p>
+                           <p>${orderProduct.ordProdPrice}원</p>
                         </div>
+                        </c:forEach>
                     </div>
                 </div>
             </section>
@@ -230,6 +229,7 @@
                             <select>
                                 <option>신용카드</option>
                                 <option>체크카드</option>
+                                <option>간편결제</option>
                             </select>
                         </div>
                         <div id="payment" class="middletext">
