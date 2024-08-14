@@ -1,17 +1,9 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="catshap.butler.bean.ProductView"%>
-<%@page import="catshap.butler.dao.ProductViewDao"%>
-<%@page import="catshap.butler.interfaces.ProductViewInterface"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="java.util.Map"%>
-<%@page import="catshap.butler.interfaces.ProductInterface"%>
-<%@page import="catshap.butler.dao.ProductDao"%>
-<%@page import="catshap.butler.bean.Product"%>
-<%@page import="catshap.butler.bean.OrderProduct"%>
 <%@page import="java.util.List"%>
-<%@page import="catshap.butler.dao.OrdersDao"%>
-<%@page import="catshap.butler.interfaces.OrdersInterface"%>
 <%@page import="catshap.butler.bean.Users"%>
+<%@page import="catshap.butler.bean.OrderProductList"%>
+<%@page import="catshap.butler.interfaces.OrdersInterface"%>
+<%@page import="catshap.butler.dao.OrdersDao"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -21,25 +13,10 @@
 	int userNo = user.getUserNo();
 	
 	OrdersInterface oi = new OrdersDao();
-	ProductInterface pi = new ProductDao();
-	ProductViewInterface pvi = new ProductViewDao();
-	
-	List<OrderProduct> orderProductList = oi.getOrderProductList(userNo);
+	List<OrderProductList> orderProductList = oi.getOrderProductList(userNo);
 	int orderProductPrice = oi.getOrderProductPrice(userNo);
-	
-	Map<Integer, Product> productMap = new HashMap<>();
-	Map<Integer, ProductView> productViewMap = new HashMap<>();
-	
-    for (OrderProduct orderProduct : orderProductList) {
-        int prodNo = orderProduct.getProdNo();
-        Product product = pi.selectProduct(prodNo);
-        productMap.put(prodNo, product);
-        ProductView productView = pvi.getProduct(prodNo);
-        productViewMap.put(prodNo, productView);
-    }
+	System.out.println(orderProductList);
 	request.setAttribute("orderProductList", orderProductList);
-	request.setAttribute("productMap", productMap);
-	request.setAttribute("productViewMap", productViewMap);
 	request.setAttribute("orderProductPrice", orderProductPrice);
 %>
 
@@ -61,6 +38,7 @@
     <%@include file="header.jsp" %>
     <main id="main">
         <form id="paymentForm" action="/pay" method="post">
+         	<input type="hidden" name="orderProductList" id="orderProductList" value=""/>
             <p class="pay">주문/결제</p>
             <section id="main1">
                 <div id="main1Wrapper">
@@ -172,20 +150,18 @@
                     <a href="#"><img class="slidebtn" src="../img/slidebtn.png" /></a>
                 </div>
                 <div id="content2" class="content">
+                 <c:forEach var="orderProduct" items="${orderProductList}">
                     <div class="main2_2">
-                       <c:forEach var="orderProduct" items="${orderProductList}">
-                           <a href="#" class="product-title-img">
-                               <c:set var="productView" value="${productViewMap[orderProduct.prodNo]}" />
-                               <img src="${productView.prodImgPath}" alt="${productView.prodDescript} 이미지" />
-                           </a>
+                            <a href="#" class="product-title-img">
+                                <img src="${orderProduct.prodImgPath}" alt="${orderProduct.prodTitleName} 이미지" />
+                            </a>
                         <div class="main2_2text">
-                           <c:set var="product" value="${productMap[orderProduct.prodNo]}" />
-                           <p>상품명: ${product.prodDescript}</p>
-                           <p>수량:${orderProduct.ordProdAmt}개</p>
+                           <p>상품명: ${orderProduct.prodTitleName}</p>
+                           <p>수량: ${orderProduct.ordProdAmt}개</p>
                            <p>${orderProduct.ordProdPrice}원</p>
                         </div>
-                        </c:forEach>
                     </div>
+                  </c:forEach>
                 </div>
             </section>
             <div class="main2_3 endtitle">
@@ -273,12 +249,13 @@
                     </div>
                 </div>
             </section>
-            <button id="payBtn" type="submit" class="main5a">${orderProductPrice + 3000}원 결제하기</button>
+           
+            <button id="payBtn" type="submit" class="main5a">${orderProductPrice}원 결제하기</button>
             <section id="main6">
                 <p>- 무이자할부가 적용되지 않은 상품과 무이자할부가 가능한 상품을 동시에 구매할 경우 전체 주문 상품 금액에 대해 무이자할부가 적용되지 않습니다. 무이자할부를 원하시는 경우
                     장바구니에서 무이자 할부 상품만 선택하여 주문하여 주시기 바랍니다.</p>
                 <p>- 최소 결제 가능 금액은 결제금액에서 배송비를 제외한 금액입니다.</p>
-            </section>
+            </section>            
         </form>
     </main>
     <jsp:include page="footer.jsp"></jsp:include>

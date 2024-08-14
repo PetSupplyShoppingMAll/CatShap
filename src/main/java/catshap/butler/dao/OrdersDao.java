@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import catshap.butler.bean.OrderProduct;
+import catshap.butler.bean.OrderProductList;
 import catshap.butler.bean.Orders;
 import catshap.butler.interfaces.OrdersInterface;
 
@@ -37,7 +38,7 @@ public class OrdersDao implements OrdersInterface {
 			return result;
 		}
 	}
-	
+
 	@Override
 	public int insertOrdersAndGetOrdNo(Orders orders) {
 		try (SqlSession ss = ssf.openSession()) {
@@ -59,9 +60,9 @@ public class OrdersDao implements OrdersInterface {
 	}
 
 	@Override
-	public List<OrderProduct> getOrderProductList(int userNo) throws SQLException {
+	public List<OrderProductList> getOrderProductList(int userNo) throws SQLException {
 		try (SqlSession ss = ssf.openSession()) {
-			List<OrderProduct> orderProductList = ss.selectList("orders.getOrderProductList", userNo);
+			List<OrderProductList> orderProductList = ss.selectList("orders.getOrderProductList", userNo);
 			ss.close();
 			return orderProductList;
 		}

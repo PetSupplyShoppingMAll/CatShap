@@ -27,9 +27,6 @@ $(document).ready(function () {
         const isDeliveryValid = validateDelivery();
         const isAgreeCheckValid = validateAgreeCheck();
         if (isDeliveryValid && isAgreeCheckValid) {
-			// 결제 진행
-        	requestPay();
-        	
 	        const formData = {
 	            delReciPient: $('#delReciPient').val(),
 	            delMailAddress: $('#umailAddress').val(),
@@ -37,24 +34,27 @@ $(document).ready(function () {
 	            delDetailAddress: $('#delDetailAddress').val(),
 	            delRecPhone: $('#delRecPhone').val(),
 	            delRequest: $('#delRequest').val()
-	        };   
-	        console.log(formData);	
+	        };
+	       	console.log($('#orderProductList').val()); 
+	        
+	        // 결제 진행
+        	// requestPay(formData, user);
+	        
+	        // 결제 성공 후 배달, 결제 테이블에 데이터 저장
+	        /*$.ajax({
+	            type: 'POST',
+	            url: '/catshap/pay',
+	            data: $.param(formData), // 데이터 URL 인코딩
+	            contentType: 'application/x-www-form-urlencoded; charset=utf-8', // 요청 데이터 형식 설정
+	            success: function (response) {
+	                alert('등록이 완료되었습니다!');
+	            },
+	            error: function (xhr, status, error) {
+	                alert('등록 중 오류가 발생했습니다. 다시 시도해 주세요.');
+	            }
+	        });
+	        */
 		}
-		
-        // AJAX 요청을 보내서 서버로 데이터를 전송
-        /*$.ajax({
-            type: 'POST',
-            url: '/catshap/pay',
-            data: $.param(formData), // 데이터 URL 인코딩
-            contentType: 'application/x-www-form-urlencoded; charset=utf-8', // 요청 데이터 형식 설정
-            success: function (response) {
-                alert('등록이 완료되었습니다!');
-            },
-            error: function (xhr, status, error) {
-                alert('등록 중 오류가 발생했습니다. 다시 시도해 주세요.');
-            }
-        });
-        */
     });
 });
 
@@ -83,22 +83,21 @@ const validateAgreeCheck = () => {
 }
 
 // 결제 메소드
-const requestPay = () => {
+const requestPay = (formData, user) => {
     IMP.init('가맹점 식별코드'); // 가맹점 식별코드
     IMP.request_pay({
         pg: "kakaopay",
         pay_method: "card",
         merchant_uid: "200",   // 주문번호
         name: "냥샵 결제",
-        amount: 20000,                         // 숫자 타입
-        buyer_email: "gildong@example.com",
-        buyer_name: "홍길동",
-        buyer_tel: "010-1234-5678",
-        buyer_addr: "서울특별시 강남구 신사동",
-        buyer_postcode: "01181"
+        amount: 20000,         // 결제가격
+        buyer_email: user.email,
+        buyer_name: formData.delReciPient,
+        buyer_tel: formData.delRecPhone,
+        buyer_addr: formData.delAddress + delDetailAddress,
+        buyer_postcode: formData.delMailAddress
     }, function (rsp) { // callback
         //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
-        console.log(rsp);
         if (rsp.success) {
             var msg = '결제가 완료되었습니다.';
             alert(msg);
