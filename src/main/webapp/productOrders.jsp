@@ -41,7 +41,7 @@
 <body>
     <%@include file="header.jsp" %>
     <main id="main">
-        <form id="paymentForm" action="/regist/orders" method="post">
+        <form id="paymentForm" action="/orders/register" method="post">
         <input type="hidden" name="prodDescript" value="${product.prodDescript}" />
         <input type="hidden" name="prodTotalPrice" value="${prodTotalPrice}" />
             <p class="pay">주문/결제</p>

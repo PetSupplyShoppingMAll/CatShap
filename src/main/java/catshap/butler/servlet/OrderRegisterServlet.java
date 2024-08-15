@@ -14,12 +14,11 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.JsonObject;
 
 import catshap.butler.bean.Orders;
-import catshap.butler.bean.Product;
 import catshap.butler.bean.Users;
 import catshap.butler.dao.OrdersDao;
 import catshap.butler.interfaces.OrdersInterface;
 
-@WebServlet("/regist/orders")
+@WebServlet("/orders/register")
 public class OrderRegisterServlet extends HttpServlet {
 
 	private OrdersInterface orderDao;
@@ -35,13 +34,22 @@ public class OrderRegisterServlet extends HttpServlet {
 		try {
 			HttpSession session = request.getSession(false);
 			JsonObject jsonResponse = new JsonObject();
-			Users user = (Users)session.getAttribute("user");
-			int userNo = user.getUserNo();
-			
-			if (user != null && validateOrder(userNo)) {
+			Users user = (Users) session.getAttribute("user");
+
+			if (user != null) {
+				// 사용자가 존재하면 주문 여부 확인
+				int userNo = user.getUserNo();
 				int prodTotalPrice = Integer.parseInt(request.getParameter("prodTotalPrice"));
-				int ordNo = insertOrdersAndGetOrdNo(userNo, prodTotalPrice);
-				if (ordNo > 0) {			
+				int ordNo;
+				if (validateOrder(userNo)) { // 신규 주문인 경우
+					ordNo = insertOrdersAndGetOrdNo(userNo, prodTotalPrice);
+				} else { // 이미 주문 내역이 존재하는 경우
+					Orders order = orderDao.getOrder(userNo);
+					order.setOrdTotalPrice(prodTotalPrice);
+					orderDao.updateOrder(order);
+					ordNo = order.getOrdNo();
+				}
+				if (ordNo > 0) {
 					jsonResponse.addProperty("success", true);
 					jsonResponse.addProperty("ordNo", ordNo);
 					jsonResponse.addProperty("email", user.getEmail());
@@ -57,17 +65,16 @@ public class OrderRegisterServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	
+
 	// 이전 주문 내역이 있는지 확인하는 메소드
 	private boolean validateOrder(int userNo) throws SQLException {
 		Orders order = orderDao.getOrder(userNo);
-		System.out.println(order);
 		if (order == null) {
 			return true;
-		} 
+		}
 		return false;
 	}
-	
+
 	// 주문 내역 저장하는 메소드
 	private int insertOrdersAndGetOrdNo(int userNo, int prodTotalPrice) throws SQLException {
 		Orders order = new Orders();

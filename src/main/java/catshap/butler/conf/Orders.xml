@@ -19,7 +19,19 @@
 		SELECT *
 		FROM ORDERS
 		WHERE USERNO = #{userNo}
-		AND ORDSTATUS = '주문중'
+		AND ORDSTATUS IN ('주문중', '주문실패')
 	</select>
+	
+	<update id="updateOrder" parameterType="Orders">
+		UPDATE ORDERS
+		SET ORDTOTALPRICE = #{ordTotalPrice}, ORDSTATUS = '주문중'
+		WHERE ORDNO = #{ordNo}
+	</update>
+	
+	<update id="updateOrderStatus" parameterType="map">
+		UPDATE ORDERS
+		SET ORDSTATUS = #{status}
+		WHERE ORDNO = #{ordNo}
+	</update>
 	
 </mapper>

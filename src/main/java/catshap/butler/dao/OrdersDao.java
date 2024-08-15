@@ -57,4 +57,24 @@ public class OrdersDao implements OrdersInterface {
 		}
 	}
 
+	@Override
+	public int updateOrder(Orders order) throws SQLException {
+		try (SqlSession ss = ssf.openSession()) {
+			int result = ss.update("orders.updateOrder", order);
+			ss.commit();
+			ss.close();
+			return result;
+		}
+	}
+
+	@Override
+	public int updateOrderStatus(Map<String, Object> orderParams) throws SQLException {
+		try (SqlSession ss = ssf.openSession()) {
+			int result = ss.update("orders.updateOrderStatus", orderParams);
+			ss.commit();
+			ss.close();
+			return result;
+		}
+	}
+
 }

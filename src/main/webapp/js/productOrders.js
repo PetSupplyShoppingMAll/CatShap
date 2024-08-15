@@ -23,7 +23,6 @@ $(document).ready(function() {
 	// 결제하기 버튼 클릭한 경우
 	$('#payBtn').on('click', (e) => {
 		e.preventDefault();
-		console.log('결제 버튼 클릭');
 
 		const isDeliveryValid = validateDelivery();
 		const isAgreeCheckValid = validateAgreeCheck();
@@ -78,7 +77,7 @@ const registOrders = () => {
 	const prodTotalPrice = $('input[name="prodTotalPrice"]').val()
 	$.ajax({
 		type: 'POST',
-		url: '/catshap/regist/orders', // 서블릿 URL
+		url: '/catshap/orders/register', // 서블릿 URL
 		data: {
 			prodTotalPrice: prodTotalPrice
 		},
@@ -97,7 +96,7 @@ const registOrders = () => {
 				ordTotalPrice: prodTotalPrice
 			};
 			const prodDescript = $('input[name="prodDescript"]').val();
-			
+
 			// 결제 진행
 			requestPay(formData, orders, prodDescript, email);
 		},
@@ -122,15 +121,37 @@ const requestPay = (formData, orders, prodDescript, email) => {
 		buyer_tel: formData.delRecPhone,
 		buyer_addr: formData.delAddress + delDetailAddress,
 		buyer_postcode: formData.delMailAddress
-	}, function(rsp) { // callback
+	}, function(rsp) { 
 		//rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
 		if (rsp.success) {
 			var msg = '결제가 완료되었습니다.';
 			alert(msg);
+			updateOrdStatus(orders.ordNo, '주문완료');
 		} else {
-			var msg = '결제에 실패하였습니다.';
-			msg += '에러내용 : ' + rsp.error_msg;
+			var msg = '결제에 실패하였습니다.' + rsp.error_msg;
+			updateOrdStatus(orders.ordNo, '주문실패');
 			alert(msg);
 		}
+	});
+}
+
+// 주문 상태 업데이트 메소드
+const updateOrdStatus = (ordNo, status) => {
+	$.ajax({
+		type: 'POST',
+		url: `/catshap/orders/status/${ordNo}`,
+		data: {
+			status: status
+		},
+		success: function (response) {
+            if (response.success) {
+               	alert(`주문 상태가 '${status}'로 업데이트 되었습니다.`);
+            } else {
+                alert("주문 상태 업데이트 실패...");
+            }
+        },
+        error: function () {
+            alert('주문 상태 업데이트 중 에러가 발생했습니다.');
+        }
 	});
 }
