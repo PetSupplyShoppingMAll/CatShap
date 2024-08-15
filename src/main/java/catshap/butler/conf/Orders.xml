@@ -9,12 +9,7 @@
             SELECT seq_ordNo.currval FROM dual
         </selectKey>
 	</insert>
-	
-	<insert id="insertOrderProduct" parameterType="OrderProduct">
-		insert into orderProduct
-		values (seq_ordProdNo.nextval, #{prodNo}, #{ordNo}, #{ordProdAmt}, #{ordProdPrice})
-	</insert>
-	
+
 	<select id="getOrder" parameterType="int" resultType="Orders">
 		SELECT *
 		FROM ORDERS

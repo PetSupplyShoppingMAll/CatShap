@@ -33,6 +33,7 @@
 		<mapper resource="catshap/butler/conf/ReviewView.xml" />
 		<mapper resource="catshap/butler/conf/Image.xml" />
 		<mapper resource="catshap/butler/conf/Orders.xml" />
+		<mapper resource="catshap/butler/conf/OrderProduct.xml" />
 		<mapper resource="catshap/butler/conf/Delivery.xml" />
 	</mappers>
 </configuration>

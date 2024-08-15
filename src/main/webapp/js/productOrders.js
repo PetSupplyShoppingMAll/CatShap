@@ -93,7 +93,7 @@ const registOrders = () => {
 			const email = response.email;
 			const orders = {
 				ordNo: response.ordNo,
-				ordTotalPrice: prodTotalPrice
+				ordProdPrice: prodTotalPrice
 			};
 			const prodDescript = $('input[name="prodDescript"]').val();
 
@@ -115,7 +115,7 @@ const requestPay = (formData, orders, prodDescript, email) => {
 		pay_method: "card",
 		merchant_uid: orders.ordNo,   // 주문번호
 		name: prodDescript,	// 주문상품명
-		amount: orders.ordTotalPrice, // 결제가격
+		amount: orders.ordProdPrice, // 결제가격
 		buyer_email: email,
 		buyer_name: formData.delReciPient,
 		buyer_tel: formData.delRecPhone,
@@ -127,6 +127,7 @@ const requestPay = (formData, orders, prodDescript, email) => {
 			var msg = '결제가 완료되었습니다.';
 			alert(msg);
 			updateOrdStatus(orders.ordNo, '주문완료');
+			registOrderProduct(orders);
 		} else {
 			var msg = '결제에 실패하였습니다.' + rsp.error_msg;
 			updateOrdStatus(orders.ordNo, '주문실패');
@@ -145,13 +146,36 @@ const updateOrdStatus = (ordNo, status) => {
 		},
 		success: function (response) {
             if (response.success) {
-               	alert(`주문 상태가 '${status}'로 업데이트 되었습니다.`);
             } else {
                 alert("주문 상태 업데이트 실패...");
             }
         },
         error: function () {
             alert('주문 상태 업데이트 중 에러가 발생했습니다.');
+        }
+	});
+}
+
+// 주문 상품 내역 등록 메소드
+const registOrderProduct = orders => {
+	$.ajax({
+		type: 'POST',
+		url: '/catshap/orderProduct/register',
+		data: {
+			prodNo: $('input[name="prodNo"]').val(),
+			ordNo: orders.ordNo,
+			ordProdPrice: orders.ordProdPrice,
+			ordProdAmt: $('input[name="ordProdAmt"]').val()
+		},
+		success: function (response) {
+            if (response.success) {
+            	alert('주문 상품 등록 완료!')
+            } else {
+                alert("주문 상품 등록 실패...");
+            }
+        },
+        error: function () {
+            alert('주문 상품 등록 중 에러가 발생했습니다.');
         }
 	});
 }

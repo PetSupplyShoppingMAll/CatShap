@@ -42,8 +42,10 @@
     <%@include file="header.jsp" %>
     <main id="main">
         <form id="paymentForm" action="/orders/register" method="post">
+        <input type="hidden" name="prodNo" value="${product.prodNo}" />
         <input type="hidden" name="prodDescript" value="${product.prodDescript}" />
         <input type="hidden" name="prodTotalPrice" value="${prodTotalPrice}" />
+        <input type="hidden" name="ordProdAmt" value="${prodCnt}" />
             <p class="pay">주문/결제</p>
             <section id="main1">
                 <div id="main1Wrapper">
