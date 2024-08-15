@@ -1,27 +1,22 @@
 package catshap.butler.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
 
 import catshap.butler.bean.Delivery;
-import catshap.butler.bean.OrderProduct;
-import catshap.butler.bean.Users;
 import catshap.butler.dao.DeliveryDao;
-import catshap.butler.dao.OrdersDao;
 import catshap.butler.interfaces.DeliveryInterface;
-import catshap.butler.interfaces.OrdersInterface;
 
-@WebServlet("/pay")
+@WebServlet("/delivery/register")
 public class DeliveryRegisterServlet extends HttpServlet {
 
 	private DeliveryInterface deliveryDao;
@@ -37,29 +32,25 @@ public class DeliveryRegisterServlet extends HttpServlet {
 		try {
 			JsonObject jsonResponse = new JsonObject();
 			Delivery delivery = new Delivery();
-			
-			HttpSession session = request.getSession(false);
-			Users user = (Users)session.getAttribute("user");
-			int userNo = user.getUserNo();
-			
-			OrdersInterface oi = new OrdersDao();
-			List<OrderProduct> orderProductList = oi.getOrderProductList(userNo);
-			for (OrderProduct orderProduct : orderProductList) {
-				delivery.setOrdNo(orderProduct.getOrdNo());
-				delivery.setDelRecipient(request.getParameter("delReciPient"));
-				delivery.setDelMailAddress(request.getParameter("delMailAddress"));
-				delivery.setDelAddress(request.getParameter("delAddress"));
-				delivery.setDelDetailAddress(request.getParameter("delDetailAddress"));
-				delivery.setDelRecPhone(request.getParameter("delRecPhone"));
-				delivery.setDelRequest(request.getParameter("delRequest"));
-				int result = deliveryDao.registDelivery(delivery);
-				if (result > 0) {
-					jsonResponse.addProperty("success", true);
-				} else {
-					jsonResponse.addProperty("success", false);
-					break;
-				}
+
+			delivery.setOrdNo(Integer.parseInt(request.getParameter("ordNo")));
+			delivery.setDelMailAddress(request.getParameter("delMailAddress"));
+			delivery.setDelAddress(request.getParameter("delAddress"));
+			delivery.setDelDetailAddress(request.getParameter("delDetailAddress"));
+			delivery.setDelRecipient(request.getParameter("delReciPient"));
+			delivery.setDelRecPhone(request.getParameter("delRecPhone"));
+			delivery.setDelRequest(request.getParameter("delRequest"));
+
+			int result = deliveryDao.insertDelivery(delivery);
+			if (result > 0) {
+				jsonResponse.addProperty("success", true);
+			} else {
+				jsonResponse.addProperty("success", false);
 			}
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.print(jsonResponse.toString());
+			out.flush();
 		} catch (SQLException e) {
 			throw new ServletException("Database error", e);
 		}

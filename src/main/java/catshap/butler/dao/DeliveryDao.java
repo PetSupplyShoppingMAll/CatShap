@@ -25,11 +25,11 @@ public class DeliveryDao implements DeliveryInterface {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
-	public int registDelivery(Delivery delivery) throws SQLException {
+	public int insertDelivery(Delivery delivery) throws SQLException {
 		try (SqlSession ss = ssf.openSession()) {
-			int result = ss.insert("delivery.registDelivery", delivery);
+			int result = ss.insert("delivery.insertDelivery", delivery);
 			ss.commit();
 			ss.close();
 			return result;

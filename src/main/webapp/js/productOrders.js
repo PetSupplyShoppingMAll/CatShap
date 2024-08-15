@@ -88,7 +88,7 @@ const registOrders = () => {
 				delAddress: $('#uaddress').val(),
 				delDetailAddress: $('#delDetailAddress').val(),
 				delRecPhone: $('#delRecPhone').val(),
-				delRequest: $('#delRequest').val()
+				delRequest: $('#delRequest option:selected').text()
 			};
 			const email = response.email;
 			const orders = {
@@ -128,6 +128,7 @@ const requestPay = (formData, orders, prodDescript, email) => {
 			alert(msg);
 			updateOrdStatus(orders.ordNo, '주문완료');
 			registOrderProduct(orders);
+			registDelivery(formData, orders);
 		} else {
 			var msg = '결제에 실패하였습니다.' + rsp.error_msg;
 			updateOrdStatus(orders.ordNo, '주문실패');
@@ -169,13 +170,38 @@ const registOrderProduct = orders => {
 		},
 		success: function (response) {
             if (response.success) {
-            	alert('주문 상품 등록 완료!')
             } else {
                 alert("주문 상품 등록 실패...");
             }
         },
         error: function () {
             alert('주문 상품 등록 중 에러가 발생했습니다.');
+        }
+	});
+}
+
+// 배달 정보 내역 등록 메소드
+const registDelivery = (formData, orders) => {
+	$.ajax({
+		type: 'POST',
+		url: '/catshap/delivery/register',
+		data: {
+			ordNo: orders.ordNo,
+			delMailAddress: formData.delAddress,
+			delAddress: formData.delAddress,
+			delDetailAddress: formData.delDetailAddress,
+			delReciPient: formData.delReciPient,
+			delRecPhone: formData.delRecPhone,
+			delRequest: formData.delRequest
+		},
+		success: function (response) {
+            if (response.success) {
+            } else {
+                alert("배달 정보 등록 실패...");
+            }
+        },
+        error: function () {
+            alert('배달 정보 등록 중 에러가 발생했습니다.');
         }
 	});
 }

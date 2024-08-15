@@ -46,6 +46,7 @@ public class OrderRegisterServlet extends HttpServlet {
 				} else { // 이미 주문 내역이 존재하는 경우
 					Orders order = orderDao.getOrder(userNo);
 					order.setOrdTotalPrice(prodTotalPrice);
+					order.setOrdStatus("주문중");
 					orderDao.updateOrder(order);
 					ordNo = order.getOrdNo();
 				}
