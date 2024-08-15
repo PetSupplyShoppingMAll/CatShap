@@ -3,7 +3,6 @@ package catshap.butler.dao;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
@@ -12,7 +11,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import catshap.butler.bean.OrderProduct;
-import catshap.butler.bean.OrderProductList;
 import catshap.butler.bean.Orders;
 import catshap.butler.interfaces.OrdersInterface;
 
@@ -56,15 +54,6 @@ public class OrdersDao implements OrdersInterface {
 			ss.commit();
 			ss.close();
 			return result;
-		}
-	}
-
-	@Override
-	public List<OrderProductList> getOrderProductList(int userNo) throws SQLException {
-		try (SqlSession ss = ssf.openSession()) {
-			List<OrderProductList> orderProductList = ss.selectList("orders.getOrderProductList", userNo);
-			ss.close();
-			return orderProductList;
 		}
 	}
 

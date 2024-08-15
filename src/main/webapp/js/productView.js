@@ -37,30 +37,9 @@ $(function () {
 
         const prodNo = $(e.currentTarget).data('prodno');
         const prodCnt = $('#number-display').text();
-        if (prodNo) {
-            $.ajax({
-                url: '/catshap/registOrder',
-                type: 'POST',
-                data: {
-                    prodNo: prodNo,
-                    prodCnt: prodCnt
-                },
-                success: (response) => {
-                    if (response.success) {
-                        window.location.href = `productOrders.jsp?prodNo=${prodNo}`;
-                    } else {
-						alert(response.falseMessage);
-                        window.location.href = 'user_orders_page.jsp';
-                    }
-                },
-                error: (textStatus, errorThrown) => {
-                    console.error('Error:', textStatus, errorThrown);
-                }
-            });
-        } else {
-            console.error('해당 상품이 존재하지 않습니다.');
-        }
-    });
+		window.location.href = `productOrders.jsp?prodNo=${prodNo}&prodCnt=${prodCnt}`;
+	});
+
 });
 
 function goToScroll(name) {

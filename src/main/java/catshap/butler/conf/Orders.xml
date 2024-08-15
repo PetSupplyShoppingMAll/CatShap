@@ -11,12 +11,6 @@
 	    AND o.ORDSTATUS = '주문중'
 	</select>
 
-	<select id="selectProductPrice" parameterType="int" resultType="ProductPrice">
-		select *
-		from prodPrice
-		where prodNo=#{prodNo}
-	</select>
-
 	<insert id="insertOrders" parameterType="Orders" useGeneratedKeys="true" keyProperty="ordNo">
 		<selectKey keyProperty="ordNo" resultType="int" order="AFTER">
             SELECT seq_ordNo.currval FROM dual
@@ -30,43 +24,5 @@
 		values (seq_ordProdNo.nextval, #{prodNo}, #{ordNo}, #{ordProdAmt}, #{ordProdPrice})
 	</insert>
 	
-	<select id="getOrderProductPrice" parameterType="int" resultType="int">
-		SELECT
-		    SUM(op.ordProdAmt * op.ordProdPrice) AS totalOrderPrice
-		FROM
-		    ORDERS o
-		JOIN
-		    ORDERPRODUCT op ON o.ORDNO = op.ORDNO
-		JOIN
-		    PRODUCT p ON op.PRODNO = p.PRODNO
-		WHERE
-		    o.USERNO = #{userNo}
-		    AND o.ORDSTATUS = '주문중'
-	</select>
-	
-	<select id="getOrderProductList" parameterType="int" resultMap="OrderProductMap">
-		SELECT
-		    op.PRODNO, p.PRDOTITLENAME, op.ORDPRODAMT, op.ORDPRODPRICE ,o.ORDTOTALPRICE, pi.PRODIMGPATH 
-		FROM
-		    ORDERS o
-		JOIN
-		    ORDERPRODUCT op ON o.ORDNO = op.ORDNO
-		JOIN
-		    PRODUCT p ON op.PRODNO = p.PRODNO
-		JOIN 
-			PRODIMAGE pi ON pi.PRODNO = p.PRODNO 
-		WHERE
-		    o.USERNO = 1
-		    AND o.ORDSTATUS = '주문중'
-	</select>
-	
-	<resultMap id="OrderProductMap" type="OrderProductList">
-        <result column="PRODNO" property="prodNo" />
-        <result column="PRDOTITLENAME" property="prodTitleName" />
-        <result column="ORDPRODAMT" property="ordProdAmt" />
-        <result column="ORDPRODPRICE" property="ordProdPrice" />
-        <result column="ORDTOTALPRICE" property="ordTotalPrice" />
-        <result column="PRODIMGPATH" property="prodImgPath" />
-    </resultMap>
 	
 </mapper>

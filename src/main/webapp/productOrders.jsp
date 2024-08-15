@@ -1,9 +1,8 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="java.util.List"%>
+<%@page import="catshap.butler.bean.Product"%>
+<%@page import="catshap.butler.dao.ProductDao"%>
+<%@page import="catshap.butler.interfaces.ProductInterface"%>
 <%@page import="catshap.butler.bean.Users"%>
-<%@page import="catshap.butler.bean.OrderProductList"%>
-<%@page import="catshap.butler.interfaces.OrdersInterface"%>
-<%@page import="catshap.butler.dao.OrdersDao"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -12,12 +11,14 @@
 	Users user = (Users)session.getAttribute("user");
 	int userNo = user.getUserNo();
 	
-	OrdersInterface oi = new OrdersDao();
-	List<OrderProductList> orderProductList = oi.getOrderProductList(userNo);
-	int orderProductPrice = oi.getOrderProductPrice(userNo);
+	int prodNo = Integer.parseInt(request.getParameter("prodNo"));
+	int prodCnt = Integer.parseInt(request.getParameter("prodCnt"));
+	ProductInterface pi = new ProductDao();	
+	Product product = pi.selectProduct(prodNo);
 	
-	request.setAttribute("orderProductList", orderProductList);
-	request.setAttribute("orderProductPrice", orderProductPrice);
+	request.setAttribute("product", product);
+	request.setAttribute("prodCnt", prodCnt);
+	request.setAttribute("prodTotalPrice", prodCnt * (product.getProdPrice()));
 %>
 
 <!DOCTYPE html>
@@ -149,23 +150,21 @@
                     <a href="#"><img class="slidebtn" src="../img/slidebtn.png" /></a>
                 </div>
                 <div id="content2" class="content">
-                 <c:forEach var="orderProduct" items="${orderProductList}">
                     <div class="main2_2">
                             <a href="#" class="product-title-img">
-                                <img src="${orderProduct.prodImgPath}" alt="${orderProduct.prodTitleName} 이미지" />
+                                <img src="${product.prodImgPath}" alt="${product.prodImgPath} 이미지" />
                             </a>
                         <div class="main2_2text">
-                           <p>상품명: ${orderProduct.prodTitleName}</p>
-                           <p>수량: ${orderProduct.ordProdAmt}개</p>
-                           <p>${orderProduct.ordProdPrice}원</p>
+                           <p>상품명: ${product.prodDescript}</p>
+                           <p>수량: ${prodCnt}개</p>
+                           <p>${prodTotalPrice}원</p>
                         </div>
                     </div>
-                  </c:forEach>
                 </div>
             </section>
             <div class="main2_3 endtitle">
                 <p>배송비</p>
-                <b>3,000원</b>
+                <b>무료배송</b>
             </div>
             <section id="main3">
                 <div class="main3_1 title" id="title3" data-target="content3">
@@ -175,11 +174,11 @@
                 <div id="content3" class="content">
                     <div class="middletext">
                         <p>주문상품</p>
-                        <b>${orderProductPrice}원</b>
+                        <b>${prodTotalPrice}원</b>
                     </div>
                     <div class="middletext">
                         <p>배송비</p>
-                        <b>+3.000원</b>
+                        <b>무료배송</b>
                     </div>
                     <div class="middletext">
                         <p>할인/부가결제</p>
@@ -189,7 +188,7 @@
             </section>
             <div class="main3_2 endtitle">
                 <b>최종 결제 금액</b>
-                <b>${orderProductPrice + 3000}원</b>
+                <b>${prodTotalPrice}원</b>
             </div>
             <section id="main4">
                 <div class="main4_1 title" id="title4" data-target="content4">
@@ -249,7 +248,7 @@
                 </div>
             </section>
            
-            <button id="payBtn" type="submit" class="main5a">${orderProductPrice}원 결제하기</button>
+            <button id="payBtn" type="submit" class="main5a">${prodTotalPrice}원 결제하기</button>
             <section id="main6">
                 <p>- 무이자할부가 적용되지 않은 상품과 무이자할부가 가능한 상품을 동시에 구매할 경우 전체 주문 상품 금액에 대해 무이자할부가 적용되지 않습니다. 무이자할부를 원하시는 경우
                     장바구니에서 무이자 할부 상품만 선택하여 주문하여 주시기 바랍니다.</p>

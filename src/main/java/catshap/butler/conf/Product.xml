@@ -3,9 +3,19 @@
 <mapper namespace="product">
 
 	<select id="selectProduct" parameterType="int" resultType="Product">
-		select *
-		from product
-		where prodNo=#{prodNo}
+		SELECT
+			p.PRODNO, p.PRODDESCRIPT, 
+			p.PRODCOUNT, p.REVCOUNT, 
+			pr.PRODPRICE, pc.PRDCATNAME, pi.PRODIMGPATH
+		FROM PRODUCT p
+		JOIN
+			PRODIMAGE pi ON pi.PRODNO = p.PRODNO 
+		JOIN 
+			PRODPRICE pr ON pr.PRODNO = p.PRODNO 
+		JOIN 
+			PRODATEGORY pc ON pc.PRODCATNO = p.PRODCATNO
+		WHERE 
+			p.PRODNO = #{prodNo}
 	</select>
 
     <select id="selectProductList" parameterType="map" resultMap="ProductMap">
