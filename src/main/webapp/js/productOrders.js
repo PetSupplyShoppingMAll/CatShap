@@ -27,7 +27,6 @@ $(document).ready(function () {
         const isDeliveryValid = validateDelivery();
         const isAgreeCheckValid = validateAgreeCheck();
         if (isDeliveryValid && isAgreeCheckValid) {
-
             registOrders();
         }
     });
@@ -94,7 +93,7 @@ const registOrders = () => {
 
 // 결제 메소드
 const requestPay = (formData, orders, prodDescript, email) => {
-    IMP.init('가맹점 식별코드'); // 가맹점 식별코드
+    IMP.init(' 가맹점 식별코드'); // 가맹점 식별코드
     IMP.request_pay({
         pg: "kakaopay",
         pay_method: "card",
@@ -115,6 +114,7 @@ const requestPay = (formData, orders, prodDescript, email) => {
             registOrderProduct(orders);
             registDelivery(formData, orders);
             registPay(orders, 'kakaopay', '0');
+            window.location.href = 'user_orders_page.jsp';
         } else {
             var msg = '결제에 실패하였습니다.' + rsp.error_msg;
             updateOrdStatus(orders.ordNo, '주문실패');

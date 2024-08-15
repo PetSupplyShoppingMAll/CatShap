@@ -37,7 +37,7 @@ $(function () {
 
         const prodNo = $(e.currentTarget).data('prodno');
         const prodCnt = $('#number-display').text();
-		window.location.href = `productOrders.jsp?prodNo=${prodNo}&prodCnt=${prodCnt}`;
+		window.location.href = `productOrders.jsp?purchaseType=direct&prodNo=${prodNo}&prodCnt=${prodCnt}`;
 	});
 
 });

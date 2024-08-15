@@ -1,9 +1,16 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="com.google.gson.Gson"%>
-<%@page import="catshap.butler.bean.Product"%>
-<%@page import="catshap.butler.dao.ProductDao"%>
 <%@page import="catshap.butler.interfaces.ProductInterface"%>
+<%@page import="catshap.butler.interfaces.BasketInterface"%>
+<%@page import="catshap.butler.bean.Basket"%>
+<%@page import="catshap.butler.bean.Product"%>
 <%@page import="catshap.butler.bean.Users"%>
+<%@page import="catshap.butler.dao.BasketDao"%>
+<%@page import="catshap.butler.dao.ProductDao"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
+<%@page import="com.google.gson.Gson"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -14,14 +21,37 @@
 	Users user = (Users)session.getAttribute("user");
 	int userNo = user.getUserNo();
 	
+	ProductInterface pi = new ProductDao();	
+	String purchaseType = request.getParameter("purchaseType");
 	int prodNo = Integer.parseInt(request.getParameter("prodNo"));
 	int prodCnt = Integer.parseInt(request.getParameter("prodCnt"));
-	ProductInterface pi = new ProductDao();	
-	Product product = pi.selectProduct(prodNo);
 	
-	request.setAttribute("product", product);
-	request.setAttribute("prodCnt", prodCnt);
-	request.setAttribute("prodTotalPrice", prodCnt * (product.getProdPrice()));
+	if (purchaseType.equalsIgnoreCase("direct")) {	// 단일 상품 구매할 경우
+		Product product = pi.selectProduct(prodNo);
+		request.setAttribute("product", product);
+		request.setAttribute("prodCnt", prodCnt);
+		request.setAttribute("prodTotalPrice", prodCnt * (product.getProdPrice()));
+		request.setAttribute("basketProductList", null);
+	} else {	// 장바구니에서 상품 구매할 경우
+		List<Product> basketProductList = pi.selectBasketProductList(userNo);
+		BasketInterface bi = new BasketDao();
+		int totalProductCount = 0;
+		int prodTotalPrice = 0;
+		Map<Integer, Integer> basketProductDetails = new HashMap<>();
+		for (Product basketProduct : basketProductList) {
+			int basketProdNo = basketProduct.getProdNo();
+			Basket basket = bi.getBasket(userNo, basketProdNo);
+			int basketAmt = basket.getBaskAmt();
+			basketProductDetails.put(basketProdNo, basketAmt);
+			totalProductCount += basketAmt;
+			prodTotalPrice += basketAmt * basketProduct.getProdPrice();
+		}
+		
+		request.setAttribute("basketProductList", basketProductList);
+		request.setAttribute("basketProductDetails", basketProductDetails);
+		request.setAttribute("prodCnt", totalProductCount);
+		request.setAttribute("prodTotalPrice", prodTotalPrice);
+	}
 %>
 
 <!DOCTYPE html>
@@ -157,6 +187,26 @@
                     <a href="#"><img class="slidebtn" src="../img/slidebtn.png" /></a>
                 </div>
                 <div id="content2" class="content">
+                 <c:choose>
+	                 <c:when test="${basketProductList != null}">
+	                    <!-- Basket Products -->
+				        <c:forEach var="basketProduct" items="${basketProductList}">
+				       	 	<c:set var="basketProdNo" value="${basketProduct.prodNo}" />
+				        	<c:set var="basketAmt" value="${basketProductDetails[basketProdNo]}" />
+				            <div class="main2_2">
+				                <a href="#" class="product-title-img">
+				                    <img src="${basketProduct.prodImgPath}" alt="${basketProduct.prodImgPath} 이미지" />
+				                </a>
+				                <div class="main2_2text">
+				                    <p>상품명: ${basketProduct.prodDescript}</p>
+				                    <p>수량: ${basketAmt}개</p>
+				                    <p>${basketAmt * basketProduct.prodPrice}원</p>
+				                </div>
+				            </div>
+				        </c:forEach>
+				        </c:when>
+                 	<c:otherwise>
+                	 <!-- Selected Product -->
                     <div class="main2_2">
                             <a href="#" class="product-title-img">
                                 <img src="${product.prodImgPath}" alt="${product.prodImgPath} 이미지" />
@@ -167,6 +217,8 @@
                            <p>${prodTotalPrice}원</p>
                         </div>
                     </div>
+                    </c:otherwise>
+                   </c:choose> 
                 </div>
             </section>
             <div class="main2_3 endtitle">

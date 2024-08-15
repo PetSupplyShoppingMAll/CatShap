@@ -41,6 +41,22 @@
             </choose>
     </select>
     
+    <select id="selectBasketProductList" parameterType="int" resultMap="ProductMap">
+	    SELECT p.PRODNO, 
+	       p.PRODDESCRIPT, 
+	       p.PRODCOUNT, 
+	       p.REVCOUNT, 
+	       pr.PRODPRICE, 
+	       pc.PRDCATNAME, 
+	       pi.PRODIMGPATH
+		FROM BASKET b
+		JOIN PRODUCT p ON p.PRODNO = b.PRODNO  
+		JOIN PRODPRICE pr ON pr.PRODNO = b.PRODNO  
+		JOIN PRODIMAGE pi ON pi.PRODNO = b.PRODNO 
+		JOIN PRODATEGORY pc ON pc.PRODCATNO = p.PRODCATNO  
+		WHERE b.USERNO = #{userNo}
+    </select>
+    
     <resultMap id="ProductMap" type="Product">
         <result column="PRODNO" property="prodNo" />
         <result column="PRODDESCRIPT" property="prodDescript" />
