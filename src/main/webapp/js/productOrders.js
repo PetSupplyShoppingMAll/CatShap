@@ -28,6 +28,7 @@ $(document).ready(function() {
 		const isDeliveryValid = validateDelivery();
 		const isAgreeCheckValid = validateAgreeCheck();
 		if (isDeliveryValid && isAgreeCheckValid) {
+			
 			registOrders();
 
 			// 결제 성공 후 배달, 결제 테이블에 데이터 저장
@@ -72,7 +73,7 @@ const validateAgreeCheck = () => {
 	return true;
 }
 
-// 결제 전 주문 정보 저장 메소드
+// 결제 전 주문 추가 메소드
 const registOrders = () => {
 	const prodTotalPrice = $('input[name="prodTotalPrice"]').val()
 	$.ajax({

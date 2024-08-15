@@ -37,9 +37,9 @@ public class OrderRegisterServlet extends HttpServlet {
 			JsonObject jsonResponse = new JsonObject();
 			Users user = (Users)session.getAttribute("user");
 			int userNo = user.getUserNo();
-			int prodTotalPrice = Integer.parseInt(request.getParameter("prodTotalPrice"));
 			
-			if (user != null) {
+			if (user != null && validateOrder(userNo)) {
+				int prodTotalPrice = Integer.parseInt(request.getParameter("prodTotalPrice"));
 				int ordNo = insertOrdersAndGetOrdNo(userNo, prodTotalPrice);
 				if (ordNo > 0) {			
 					jsonResponse.addProperty("success", true);
@@ -57,7 +57,17 @@ public class OrderRegisterServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
+	
+	// 이전 주문 내역이 있는지 확인하는 메소드
+	private boolean validateOrder(int userNo) throws SQLException {
+		Orders order = orderDao.getOrder(userNo);
+		System.out.println(order);
+		if (order == null) {
+			return true;
+		} 
+		return false;
+	}
+	
 	// 주문 내역 저장하는 메소드
 	private int insertOrdersAndGetOrdNo(int userNo, int prodTotalPrice) throws SQLException {
 		Orders order = new Orders();

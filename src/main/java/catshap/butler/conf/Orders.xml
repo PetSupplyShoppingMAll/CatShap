@@ -15,5 +15,11 @@
 		values (seq_ordProdNo.nextval, #{prodNo}, #{ordNo}, #{ordProdAmt}, #{ordProdPrice})
 	</insert>
 	
+	<select id="getOrder" parameterType="int" resultType="Orders">
+		SELECT *
+		FROM ORDERS
+		WHERE USERNO = #{userNo}
+		AND ORDSTATUS = '주문중'
+	</select>
 	
 </mapper>

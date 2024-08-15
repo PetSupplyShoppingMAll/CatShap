@@ -48,4 +48,13 @@ public class OrdersDao implements OrdersInterface {
 		}
 	}
 
+	@Override
+	public Orders getOrder(int userNo) throws SQLException {
+		try (SqlSession ss = ssf.openSession()) {
+			Orders order = ss.selectOne("orders.getOrder", userNo);
+			ss.close();
+			return order;
+		}
+	}
+
 }
