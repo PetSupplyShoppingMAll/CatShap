@@ -81,4 +81,11 @@ public class Product {
 		this.prodImgPath = prodImgPath;
 	}
 
+	@Override
+	public String toString() {
+		return "Product [prodNo=" + prodNo + ", prodDescript=" + prodDescript + ", prodCount=" + prodCount
+				+ ", revCount=" + revCount + ", prodPrice=" + prodPrice + ", prdCatName=" + prdCatName
+				+ ", prodImgPath=" + prodImgPath + "]";
+	}
+
 }

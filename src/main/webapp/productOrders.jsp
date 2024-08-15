@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.google.gson.Gson"%>
 <%@page import="catshap.butler.bean.Product"%>
 <%@page import="catshap.butler.dao.ProductDao"%>
 <%@page import="catshap.butler.interfaces.ProductInterface"%>
@@ -8,6 +9,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <%
+	request.setCharacterEncoding("utf-8");
+
 	Users user = (Users)session.getAttribute("user");
 	int userNo = user.getUserNo();
 	
@@ -38,7 +41,9 @@
 <body>
     <%@include file="header.jsp" %>
     <main id="main">
-        <form id="paymentForm" action="/pay" method="post">
+        <form id="paymentForm" action="/regist/orders" method="post">
+        <input type="hidden" name="prodDescript" value="${product.prodDescript}" />
+        <input type="hidden" name="prodTotalPrice" value="${prodTotalPrice}" />
             <p class="pay">주문/결제</p>
             <section id="main1">
                 <div id="main1Wrapper">

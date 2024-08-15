@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="orders">
-
-	<select id="getBeforeOrders" parameterType="map" resultType="int">
-	    SELECT COUNT(*)
-	    FROM ORDERS o
-	    JOIN ORDERPRODUCT op ON o.ORDNO = op.ORDNO
-	    WHERE o.USERNO = #{userNo}
-	    AND op.PRODNO = #{prodNo}
-	    AND o.ORDSTATUS = '주문중'
-	</select>
-
-	<insert id="insertOrders" parameterType="Orders" useGeneratedKeys="true" keyProperty="ordNo">
+	
+	<insert id="insertOrdersAndGetOrdNo" parameterType="Orders" useGeneratedKeys="true" keyProperty="ordNo">
+		insert into orders
+		values (seq_ordNo.nextval, #{userNo}, sysdate, #{ordTotalPrice}, '주문중')
 		<selectKey keyProperty="ordNo" resultType="int" order="AFTER">
             SELECT seq_ordNo.currval FROM dual
         </selectKey>
-		insert into orders
-		values (seq_ordNo.nextval, #{userNo}, sysdate, #{ordTotalPrice}, '주문중')
 	</insert>
 	
 	<insert id="insertOrderProduct" parameterType="OrderProduct">

@@ -29,21 +29,12 @@ public class OrdersDao implements OrdersInterface {
 	}
 
 	@Override
-	public int getBeforeOrders(Map<String, Object> userParams) throws SQLException {
-		try (SqlSession ss = ssf.openSession()) {
-			int result = ss.selectOne("orders.getBeforeOrders", userParams);
-			ss.close();
-			return result;
-		}
-	}
-
-	@Override
 	public int insertOrdersAndGetOrdNo(Orders orders) {
 		try (SqlSession ss = ssf.openSession()) {
-			ss.insert("orders.insertOrders", orders);
+			int result = ss.insert("orders.insertOrdersAndGetOrdNo", orders);
 			ss.commit();
 			ss.close();
-			return orders.getOrdNo();
+			return result;
 		}
 	}
 
@@ -54,15 +45,6 @@ public class OrdersDao implements OrdersInterface {
 			ss.commit();
 			ss.close();
 			return result;
-		}
-	}
-
-	@Override
-	public int getOrderProductPrice(int userNo) throws SQLException {
-		try (SqlSession ss = ssf.openSession()) {
-			int orderProductPrice = ss.selectOne("orders.getOrderProductPrice", userNo);
-			ss.close();
-			return orderProductPrice;
 		}
 	}
 
