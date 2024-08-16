@@ -45,12 +45,18 @@
                             		out.print("<h2>사용자 정보를 불러올 수 없습니다.</h2>");
                             	}
                             %>
-                            <nav class='profile-nav'>
-                                <a href='#'>주문내역</a>
-                                <a href='/catshap/user_modify.jsp'>회원정보 수정</a>
-                                <a href='#'>내 리뷰 보기</a>
-                                <a href='#'>내 게시글 보기</a>
-                            </nav>
+                             <button type="button" class="userExitBtn" id="userExitBtn">
+								<div class="container47">
+									<div>회원 탈퇴하기</div>
+								</div>
+							</button>     
+							<div class="profile-info">
+				              <nav class='profile-nav'>
+				                <a href='#'>주문내역</a>
+				                <a href='/catshap/user_modify.jsp'>회원정보 수정</a>
+				                <a href='/catshap/user_myReview.jsp'>내 리뷰 보기</a>
+				                <a href='/catshap/user_myQnA.jsp'>내 게시글 보기</a>
+				              </nav>
                         </div>
                     </div>
                 </form>

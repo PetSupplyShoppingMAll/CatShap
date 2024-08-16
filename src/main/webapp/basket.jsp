@@ -1,11 +1,11 @@
-<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="catshap.butler.bean.Basket"%>
 <%@page import="java.util.List"%>
 <%@page import="catshap.butler.dao.BasketDao"%>
 <%@page import="catshap.butler.interfaces.BasketInterface"%>
 <%@page import="catshap.butler.bean.Users"%>
-
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
     
 <%
 	response.setCharacterEncoding("UTF-8");
@@ -16,6 +16,7 @@
 	List<Basket> basketList = bi.listBasket(userNo);
 	
 	pageContext.setAttribute("basketList", basketList);
+	System.out.println(basketList);
 	
 %>
 
@@ -30,49 +31,115 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="./js/check_login.js"></script>
 	<script src="./js/basket.js"></script>
+	<style>
+    ul {
+        list-style-type: none;
+        padding: 30px;
+        width: 100%;
+        margin-right: 300px;
+    }
+
+    ul li {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    ul li.header {
+        background-color: var(--color-mediumaquamarine);
+        color: white;
+        font-weight: bold;
+        gap: 100px;
+    }
+
+    ul li.header div {
+        flex: 1;
+        text-align: center;
+    }
+
+    ul li div {
+        flex: 1;
+        text-align: center;
+    }
+
+    ul li:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    ul li:hover {
+        background-color: #f1f1f1;
+    }
+
+    .input1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .decrease-btn, .increase-btn {
+        padding: 5px 10px;
+        border: none;
+        background-color: var(--color-mediumaquamarine);
+        color: white;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+    .decrease-btn:hover, .increase-btn:hover {
+        background-color: #45a049;
+    }
+
+    .number-display {
+        width: 50px;
+        text-align: center;
+        border: 1px solid #ddd;
+        margin: 0 5px;
+    }
+
+    .quantity-display {
+        font-weight: bold;
+    }
+
+    #submitSelectedOrder, #submitAllOrder {
+        padding: 10px 20px;
+        background-color: var(--color-mediumaquamarine);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+    }
+
+    #submitSelectedOrder:hover, #submitAllOrder:hover {
+        background-color: #45a049;
+    }
+
+    a {
+        color: #FF5722;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .product-price, .total-price {
+        font-weight: bold;
+    }
+
+    #allcheckbox {
+        cursor: pointer;
+    }
+
+    .product-checkbox {
+        cursor: pointer;
+    }
+</style>
   </head>
   <body>
 
-<table border="1">
-    <thead>
-        <tr>
-            <th><input type="checkbox" id="allcheckbox" /></th>
-            <th>제품 번호</th>
-            <th>제품 이름</th>
-            <th>가격</th>
-            <th>총가격</th>
-            <th>수량</th>
-            <th>총수량</th>
-            <th>선택</th>
-        </tr>
-    </thead>
-    <form id="orderForm" action="productOrders.jsp?purchaseType=basket" method="post">
-        <input type="hidden" name="userno" value="<%= userNo %>">
-        <tbody>
-        	<!-- 수정 필요 -->
-            <c:forEach var="basket" items="${basketList}">
-                <tr class="product-row">
-                    <td><input type="checkbox" class="product-checkbox" value="${basket.basketNo}" 
-                    	data-prodno="${basket.prodNo}" data-price="${basket.prodPrice}"
-                    	data-prodimgpath="${basket.prodimgpath}" data-proddescript="${basket.proddescript}">
-                    </td>
-                    <td class="product-number">${basket.prodNo}</td>
-                    <td>${basket.proddescript}</td>
-                    <td><div class="product-price">${basket.prodPrice}원</div></td>
-                    <td><div class="total-price">0원</div></td>
-                    <td class="input1">
-                        <button class="decrease-btn">-</button>
-                        <div class="input-field number-display">1</div>
-                        <button class="increase-btn">+</button>
-                    </td>
-                    <td><div class="quantity-display">(1개)</div></td>
-                    <td><a href="basketDelete.jsp?basketNo=${basket.basketNo}">[삭제]</a></td>
-                </tr>
-            </c:forEach>
-        </tbody>
-        <button type="button" id="submitSelectedOrder">[선택상품 주문하기]</button>
-    </form>
-</table>
+
 
   
     <div class="c-01">
@@ -163,7 +230,7 @@
                         class="container-icon"
                         loading="lazy"
                         alt=""
-                        src="./public/container@2x.png"
+                        src="/catshap/image/iii2.png"
                       />
                     </div>
                     <div class="vertical-divider-parent">
@@ -239,7 +306,7 @@
                           class="ddb5f2541png-icon"
                           loading="lazy"
                           alt=""
-                          src="./public/20210510155806-5ddb5f2541png@2x.png"
+                          src="/catshap/image/iii3.png"
                         />
 
                         <div class="frame">
@@ -258,7 +325,7 @@
                               class="e229a30png-icon"
                               loading="lazy"
                               alt=""
-                              src="./public/20210510155801-656e229a30png@2x.png"
+                              src="/catshap/image/iii4.png"
                             />
 
                             <div class="wrapper1">
@@ -275,7 +342,7 @@
                               class="e8d6f0575png-icon"
                               loading="lazy"
                               alt=""
-                              src="./public/20210510155136-2e8d6f0575png@2x.png"
+                              src="/catshap/image/iii5.png"
                             />
 
                             <div class="wrapper2">
@@ -292,7 +359,7 @@
                           class="f7a406fccpng-icon"
                           loading="lazy"
                           alt=""
-                          src="./public/20210510155413-3f7a406fccpng@2x.png"
+                          src="/catshap/image/iii6.png"
                         />
 
                         <div class="wrapper3">
@@ -306,7 +373,7 @@
                       class="backgroundshadow-icon"
                       loading="lazy"
                       alt=""
-                      src="./public/backgroundshadow@2x.png"
+                      src=""
                     />
                   </div>
                 </div>
@@ -327,56 +394,48 @@
                     </div>
                     <div class="div15">   국내배송상품</div>
                   </div>
-                  <div class="icon-parent">
-                    <img
-                      class="icon3"
-                      loading="lazy"
-                      alt=""
-                      src="./public/icon-3.svg"
-                    />
+                </div>
+              </div>
+              
+<form id="orderForm" action="productOrders.jsp?purchaseType=basket" method="post">
+    <input type="hidden" name="userno" value="<%= userNo %>">
 
-                    <div class="item3"></div>
-                    <div class="list-content">
-                      <div class="list"></div>
-                      <img
-                        class="image-3-icon"
-                        alt=""
-                        src="./public/image-3@2x.png"
-                      />
-                    </div>
-                  </div>
+    <ul>
+        <li class="header">
+            <div><input type="checkbox" id="allcheckbox" /></div>
+            <div>번호</div>
+            <div>제품 이미지</div>
+            <div>제품 이름</div>
+            <div>가격</div>
+            <div>총가격</div>
+            <div>수량</div>
+            <div>총수량</div>
+            <div>선택</div>
+        </li>
+
+        <c:forEach var="basket" items="${basketList}">
+            <li class="product-row">
+                <div><input type="checkbox" class="product-checkbox" value="${basket.basketNo}" 
+                       data-prodno="${basket.prodNo}" data-price="${basket.prodPrice}"
+                       data-prodimgpath="${basket.prodimgpath}" data-proddescript="${basket.proddescript}">
+				</div>
+				<div class="product-number">${basket.prodNo}</div>
+                <div><img src="${basket.prodimgpath}" /></div>
+                <div>${basket.proddescript}</div>
+                <div class="product-price">${basket.prodPrice}원</div>
+                <div class="total-price">0원</div>
+                <div class="input1">
+                    <button type="button" class="decrease-btn">-</button>
+                    <div class="input-field number-display">1</div>
+                    <button type="button" class="increase-btn">+</button>
                 </div>
-              </div>
-              <div class="wrapper4">
-                <div class="div16">장바구니가 비어 있습니다.</div>
-              </div>
-              <div class="separator-group">
-                <div class="separator"></div>
-                <div class="order-button-link">
-                  <div class="link" id="linkContainer">
-                    <div class="icon-wrapper1">
-                      <img
-                        class="icon4"
-                        loading="lazy"
-                        alt=""
-                        src="./public/icon-4.svg"
-                      />
-                    </div>
-                    <div class="div17">   전체상품 주문</div>
-                  </div>
-                  <div class="link1" id="linkContainer1">
-                    <div class="icon-wrapper2">
-                      <img
-                        class="icon5"
-                        loading="lazy"
-                        alt=""
-                        src="./public/icon-5.svg"
-                      />
-                    </div>
-                    <div class="div18">   선택상품 주문</div>
-                  </div>
-                </div>
-              </div>
+                <div class="quantity-display">(1개)</div>
+                <div><a href="basketDelete.jsp?basketNo=${basket.basketNo}">[삭제]</a></div>
+            </li>
+        </c:forEach>
+    </ul>
+    <button type="button" id="submitSelectedOrder">[선택상품 주문하기]</button>
+</form>
             </div>
           </div>
         </div>
@@ -389,7 +448,7 @@
               class="item-icon"
               loading="lazy"
               alt=""
-              src="./public/item.svg"
+              src="/catshap/image/iii1.png"
             />
 
             <div class="vertical-divider5"></div>
@@ -462,12 +521,6 @@
                   </div>
                   <b class="b2">   무이자할부 이용안내</b>
                 </div>
-                <img
-                  class="separator-icon3"
-                  loading="lazy"
-                  alt=""
-                  src="./public/separator-3.svg"
-                />
 
                 <div class="installment-details">
                   <div class="parent1">

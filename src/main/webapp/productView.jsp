@@ -245,24 +245,49 @@
         </div>
     </div>
 
-    </div>
+    
     <img class="separator-icon7" loading="lazy" alt="" src="./image/separator2.svg" />
     <img class="separator-icon8" loading="lazy" alt="" src="./image/separator-11.svg" />
     <img id="a" class="km1907-77jpg-icon" loading="lazy" alt="" src="./image/product/${productView.prodDetailImgPath}" />
     <img class="separator-icon9" loading="lazy" alt="" src="./image/separator-21.svg" />
+    <c:set var="pageSize" value="3" />
+	<c:set var="currentPage" value="${param.page != null ? param.page : 1}" />
+	<c:set var="totalReviews" value="${fn:length(listReview)}" />
+	<c:set var="totalPages" value="${totalReviews / pageSize + (totalReviews % pageSize == 0 ? 0 : 1)}" />
+	<c:set var="startIndex" value="${(currentPage - 1) * pageSize}" />
+	<c:set var="endIndex" value="${startIndex + pageSize - 1}" />
+	<c:set var="endIndexCorrected" value="${endIndex >= totalReviews ? totalReviews - 1 : endIndex}" />
+   
     <h2 class="strong-review" id="b">REVIEW</h2>
     <div class="div88">
-        <c:forEach var="review" items="${listReview}">
-            <div>
-                <div><strong>제목:</strong> ${review.revTitle}</div>
-                <div><strong>닉네임:</strong> ${review.uname}</div>
-                <div><strong>등록 날짜:</strong> ${review.revRegDate}</div>
-                <div><strong>별점:</strong> ${review.revScore}</div>
-                <div><strong>내용:</strong> ${review.revText}</div>
+    <c:choose>
+    <c:when test="${totalReviews > 0}">
+
+            <c:forEach var="review" items="${listReview}" begin="${startIndex}" end="${endIndexCorrected}">
+                <div class="review-item">
+				    <div class="review-title"><strong>제목:</strong> ${review.revTitle}</div>
+				    <div class="review-nickname"><strong>닉네임:</strong> ${review.unick}</div>
+				    <div class="review-date"><strong>등록 날짜:</strong> ${review.revRegDate}</div>
+				    <div class="review-score"><strong>별점:</strong> ${review.revScore}</div>
+				    <div class="review-text"><strong>내용:</strong> ${review.revText}</div>
+				</div>
+                <hr />
+            </c:forEach>
+
+            <div class="pagination">
+                <c:if test="${currentPage > 1}">
+                    <a href="?page=${currentPage - 1}&prodNo=${param.prodNo}">이전</a>
+                </c:if>
+                <c:forEach var="i" begin="1" end="${totalPages}">
+                    <a href="?page=${i}&prodNo=${param.prodNo}" class="<c:if test="${i == currentPage}">active</c:if>">${i}</a>
+                </c:forEach>
+                <c:if test="${currentPage < totalPages}">
+                    <a href="?page=${currentPage + 1}&prodNo=${param.prodNo}">다음</a>
+                </c:if>
             </div>
-            <hr />
-        </c:forEach>
-    </div>
+
+    </c:when>
+    <c:otherwise>
     <section class="backgroundborder3">
         <div class="review-list-content">
             <div class="review-list-content-wrapper">
@@ -274,6 +299,34 @@
         </div>
         <div class="div90">지금 첫번째 게시글을 작성해보세요.</div>
     </section>
+    </c:otherwise>
+	</c:choose>
+	</div>
+	<!-- 모달 -->
+		<div id="reviewModal" class="modal">
+		    <!-- 모달 내용 -->
+		    <div class="modal-content">
+		        <span class="close">&times;</span>
+		        <h2>상품후기 작성</h2>
+		        <!-- 모달 내용 -->
+		        <input type="hidden" id="prodNo" value="<%= prodNo %>"/>
+		         <input type="hidden" id="userNo" value="<%= user != null ? user.getUserNo() : 0 %>"/>
+   				<div id="displayProdNo"></div>
+		        <label for="revTitle">후기 제목:</label><br>
+		        <input type="text" id="revTitle" name="revTitle"><br>
+		        
+		        <label for="revText">후기 내용:</label><br>
+		        <textarea id="revText" name="revText"></textarea><br>
+		        
+		        <label for="revScore">평점:</label><br>
+		        <input type="number" id="revScore" name="revScore" min="1" max="5"><br>
+		        
+		        <button id="submitReview">등록</button>
+		        <p id="message"></p> <!-- 메시지 출력 -->
+		        <div id="displayProdNo"></div>
+		    </div>
+		</div>
+	</div>
     <div class="support-and-guide" id="d">
         <div class="support">
             <div class="support-link">

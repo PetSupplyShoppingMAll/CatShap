@@ -59,7 +59,7 @@ $(document).ready(function() {
     
         $('.product-checkbox:checked').each(function() {
             let prodNo = $(this).data('prodno');
-            let quantity = parseInt($(this).closest('tr').find('.number-display').text());
+            let quantity = parseInt($(this).closest('li').find('.number-display').text());
             let price = parseInt($(this).data('price')) * quantity;
      		let prodimgpath = $(this).data('prodimgpath');
      		let proddescript = $(this).data('proddescript');

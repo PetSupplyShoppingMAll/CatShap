@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna">
+
+    <insert id="insertQna" parameterType="catshap.butler.bean.QnaBoard">
+        <selectKey keyProperty="qnano" order="BEFORE" resultType="int">
+            SELECT seq_qnano.NEXTVAL FROM dual
+        </selectKey>
+        INSERT INTO QNA (QNANO, USERNO, PRODNO, QNACATNO, QNATITLE, QNATEXT, QNAREGDATE, QNAUPDATE, QSORT)
+        VALUES (#{qnano}, #{userno}, #{prodno}, #{qnacatno}, #{qnatitle}, #{qnatext}, #{qnaregdate}, #{qnaupdate,jdbcType=TIMESTAMP}, #{qsort})
+    </insert>
+
+	<select id="selectQnaBoardList" parameterType="catshap.butler.bean.Search" resultType="catshap.butler.bean.QnaBoard">
+	    SELECT QNACATNO, QNATITLE, USERNO, QNAREGDATE 
+	    FROM QNA
+	    WHERE 1=1
+	   <if test="bsort!=null">
+			and qsort=#{qsort}
+		</if>
+		<if test="searchKeyword!=null and searchKeyword=='btitle'">
+			and qnatitle like '%'||#{searchValue}||'%'
+		</if>
+		<if test="searchKeyword!=null and searchKeyword=='bcontent'">
+			and qnatext like '%'||#{searchValue}||'%'
+		</if>
+		<if test="searchKeyword!=null and (searchKeyword!='btitle' and searchKeyword!='bcontent')">
+			and (qnatitle like '%'||#{searchValue}||'%' or qnatext like '%'||#{searchValue}||'%')
+		</if>
+		order by bid desc
+	</select>
+
+    <select id="getQnaBoard" parameterType="int" resultType="catshap.butler.bean.QnaBoard">    
+        SELECT * 
+        FROM QNA 
+        WHERE QNANO = #{qnano}        
+    </select>
+
+    <update id="updateQnaBoard" parameterType="catshap.butler.bean.QnaBoard">
+        UPDATE QNA
+        SET QNATITLE = #{qnatitle},
+            QNATEXT = #{qnatext},
+            QNAUPDATE = CURRENT_TIMESTAMP
+        WHERE QNANO = #{qnano}
+    </update>
+
+    <delete id="deleteQnaBoard" parameterType="int">
+        DELETE FROM QNA 
+        WHERE QNANO = #{qnano}
+    </delete>
+</mapper>

@@ -1,0 +1,258 @@
+/* 전체 리뷰 목록 스타일 */
+.review-item {
+	width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+
+.review-title {
+    display: flex;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+
+.review-nickname {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.review-date {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.review-score {
+    font-size: 1em;
+    color: #ff9800;
+    margin-bottom: 10px;
+}
+
+.review-text {
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+.review-title-label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.review-score, .review-author, .review-text {
+    margin: 5px 0;
+    font-size: 14px;
+}
+/* 구분선 스타일 */
+hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+/* 페이지 네이션 스타일 */
+.pagination {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 4px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.pagination a:hover {
+    background-color: #e9ecef;
+}
+
+/* 빈 리뷰 메시지 스타일 */
+.empty-review-message {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.icon57 {
+    width: 50px;
+    height: 50px;
+}
+
+.div89 {
+    font-size: 1.2em;
+    color: #555;
+    margin-top: 10px;
+}
+
+.div90 {
+    text-align: center;
+    font-size: 1em;
+    color: #007bff;
+    margin-top: 10px;
+}
+
+
+.link75 {
+  flex: 1;
+  border-radius: var(--br-10xs);
+  background-color: rgb(112,198,199);;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: var(--padding-smi) var(--padding-mid) var(--padding-mini);
+  gap: var(--gap-6xs);
+  opacity: 0.95;
+  cursor: pointer;
+  border: 1px solid var(--color-whitesmoke-400);
+  color: var(--color-darkslategray-200);
+}  
+.action-icons {  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0 0 var(--padding-9xs-4);
+}
+.div344 {
+  width: 65px;
+  position: relative;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+/* 모달 기본 스타일링 */
+.modal {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* 배경 어둡게 */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* 모달 배경 스타일링 */
+.modal {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* 반투명 배경 */
+    backdrop-filter: blur(5px); /* 배경 블러 처리 */
+}
+
+/* 모달 내용 스타일링 */
+.modal-content {
+    background-color: #ffffff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px; /* 모서리 둥글게 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+    width: 90%;
+    max-width: 500px; /* 최대 너비 설정 */
+    animation: slideDown 0.4s ease-out; /* 슬라이드 다운 애니메이션 */
+}
+
+/* 슬라이드 다운 애니메이션 */
+@keyframes slideDown {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 닫기 버튼 스타일링 */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: #000000;
+}
+
+/* 제목 스타일링 */
+h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+/* 입력 필드 스타일링 */
+input[type="text"], textarea, input[type="number"] {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #cccccc;
+    border-radius: 5px; /* 둥근 모서리 */
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+}
+
+/* 제출 버튼 스타일링 */
+button[type="submit"] {
+    background-color: #28a745; /* 녹색 배경 */
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #218838; /* 호버 시 짙은 녹색 */
+}

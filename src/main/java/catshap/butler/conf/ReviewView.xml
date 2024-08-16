@@ -15,4 +15,24 @@
         	P.PRODNO = #{prodNo}
     </select>
     
+    <select id="selectUserReviewList" parameterType="int" resultType="ReviewView">
+    	SELECT
+            P.PRODNO,P.PRDOTITLENAME,
+            U.USERNO,U.UNICK,
+            R.REVIEWNO,R.REVTITLE,R.REVTEXT,R.REVREGDATE,R.REVSCORE,
+            I.PRODIMGNO,I.PRODIMGPATH 
+        FROM
+            REVIEW R
+            JOIN PRODUCT P ON P.PRODNO = R.PRODNO
+            JOIN USERS U ON U.USERNO = R.USERNO
+            JOIN PRODIMAGE I ON I.PRODNO  = P.PRODNO 
+        WHERE
+        	U.USERNO = #{userNo}
+    </select>
+    
+    <insert id="registReview" parameterType="ReviewView"> 
+    	INSERT INTO REVIEW VALUES (seq_reviewno.nextval, #{userNo},
+    	#{prodNo}, #{revTitle}, #{revText}, sysdate, NULL ,#{revScore})
+    </insert>
+    
 </mapper>

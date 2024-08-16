@@ -6,7 +6,7 @@ let products = [];
 let currentCategory = 'ALL';
 let filteredProducts = [];
 let currentPage = 1;
-const productsPerPage = 5;
+const productsPerPage = 8;
 
 // 전체적으로 데이터를 JSON파일로 api파일 안에서 만들걸 배열로 받고 그걸 카테고리별로 분리후 카테고리에 맞는 것만 뿌린다
 // 검색을하면  searchValue 랑 ${product.prodDescript} 의 값이랑 비교후 출력
@@ -118,9 +118,9 @@ const displayProducts = function(productList) {
         const productHtml = `
             <div class="product ${product.prodNo}">
                 <a href="productView.jsp?prodNo=${product.prodNo}">
-                    <img src="${product.prodImgPath}" alt="${product.prodDescript}" />
-                    <h3>${product.prodDescript}</h3>
-                    <p>${product.prodPrice}원</p>
+                    <img src="/catshap/image/${product.prodImgPath}" alt="${product.prodDescript}" />
+                    <h3 id="name">${product.prodTitleName}</h3>
+                    <p id="name2">${product.prodPrice}원</p>
                 </a>
             </div>
         `;

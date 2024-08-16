@@ -2,6 +2,7 @@ package catshap.butler.dao;
 
 import java.io.Reader;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -9,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import catshap.butler.bean.ProductView;
+import catshap.butler.bean.ReviewView;
 import catshap.butler.interfaces.ProductViewInterface;
 
 public class ProductViewDao implements ProductViewInterface {

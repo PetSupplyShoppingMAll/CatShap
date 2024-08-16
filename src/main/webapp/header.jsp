@@ -1,4 +1,12 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="catshap.butler.dao.UserDao"%>
+<%@page import="catshap.butler.interfaces.UserInterface"%>
+<%@page import="catshap.butler.bean.Users"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%
+	Users user = (Users)session.getAttribute("user");
+%>
     
 <!DOCTYPE html>
 <html lang="ko">
@@ -23,6 +31,9 @@
                 </div>
                 <div class="category-name-parent">
                     <div class="category-name">
+                        <div class="div417"><a href="productProc.jsp?category=ALL">ALL</a></div>
+                    </div>
+                    <div class="category-name">
                         <div class="div417"><a href="productProc.jsp?category=간식">간식</a></div>
                     </div>
                     <div class="category-name">
@@ -35,26 +46,23 @@
                         <div class="div417"><a href="productProc.jsp?category=옷">옷</a></div>
                     </div>
                     <div class="category-name4">
-                        <div class="div421 div417"><a href="productProc.jsp?category=기타">기타</a></div>
+                        <div class="div421 div417 category-name"><a href="productProc.jsp?category=기타">기타</a></div>
                     </div>
                     <div class="item-wrapper6">
                         <img class="item-icon58" loading="lazy" alt="" src="./image/icon4.png" />
                     </div>
                     <div class="strong-q-a-wrapper3">
-                        <b class="strong-q18" id="strongQ"><a href="./D-01.html">Q & A</a></b>
+                        <b class="strong-q18" id="strongQ"><a href="qnaboarddetail.jsp">Q & A</a></b>
                     </div>
                     <div class="review-container-container">
                         <div class="review-container3">
                             <div class="reviews-wrapper9">
-                                <div class="reviews17"><a href="./D-04.html">REVIEWS</a></div>
+                                <div class="reviews17"><a href="review.jsp">REVIEWS</a></div>
                             </div>
                             <div class="emphasis16"></div>
                         </div>
                     </div>
                 </div>
-                <img class="item-icon59" src="./image/catSvg5.svg" />
-                <div class="paint"></div>
-                <input class="search" id="search" type="text" placeholder="search" />
             </div>
         </div>
         <div class="horizontalborder26">
@@ -73,8 +81,13 @@
         </div>
         </div>
         <div class="user">
-            <div class="username"></div>
+            <div class="username">${user.uname}</div>
+            <c:if test="${!empty user}">
             <div class="itis"> 님! 환영합니다</div>
+        	</c:if>
+        	<c:if test="${empty user}">
+            <div class="itis"></div>        	
+        	</c:if>
         </div>
         <div>
             <img class="icon212" alt="" src="./image/icon1.png" />
@@ -82,8 +95,14 @@
             <div class="div422">  고객 지원센터</div>
             <a class="strong-0109230444918">01012345678</a>
             <img class="icon214" alt="" src="./image/icon2.png" />
-            <div class="link93" id="link">로그인</div>
-            <div class="link95" id="link">로그아웃</div>
+			
+			<c:if test="${empty user}">
+            	<div class="link93" id="link">로그인</div>
+            </c:if>
+			<c:if test="${!empty user}">
+            	<div class="link95" id="link" >로그아웃</div>
+            </c:if>
+
             <img class="icon215" alt="" src="./image/icon3.png" />
             <div class="link94" id="linkContainer">
                 <a class="a66">회원가입</a>

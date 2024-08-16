@@ -4,6 +4,7 @@
 	<properties resource="catshap/butler/conf/db.properties" />
 	<typeAliases>
 		<typeAlias type="catshap.butler.bean.Grade" alias="Grade" />
+		<typeAlias type="catshap.butler.bean.Main" alias="Main" />
 		<typeAlias type="catshap.butler.bean.Image" alias="Image" />
 		<typeAlias type="catshap.butler.bean.Users" alias="Users" />
 		<typeAlias type="catshap.butler.bean.UserAuthcode" alias="UserAuthcode" />
@@ -16,6 +17,10 @@
 		<typeAlias type="catshap.butler.bean.Pay" alias="Pay" />
 		<typeAlias type="catshap.butler.bean.Basket" alias="Basket" />
 		<typeAlias type="catshap.butler.bean.BasketOrder" alias="BasketOrder" />
+		<typeAlias type="catshap.butler.bean.Search" alias="Search" />
+		<typeAlias type="catshap.butler.bean.QnaBoard" alias="QnaBoard" />
+        <typeAlias type="catshap.butler.bean.QnaProduct" alias="QnaProduct" />
+        <typeAlias type="catshap.butler.bean.UserQnA" alias="UserQnA" />
 	</typeAliases>	
 	<environments default="development">
 		<environment id="development">
@@ -41,5 +46,9 @@
 		<mapper resource="catshap/butler/conf/Pay.xml" />
 		<mapper resource="catshap/butler/conf/Basket.xml" />
 		<mapper resource="catshap/butler/conf/BasketOrder.xml" />
+		<mapper resource="catshap/butler/conf/Main.xml" />
+		<mapper resource="catshap/butler/conf/QnaBoardMapper.xml"/>
+        <mapper resource="catshap/butler/conf/QnaBoardProduct.xml"/>
+        <mapper resource="catshap/butler/conf/UserQnA.xml"/>
 	</mappers>
 </configuration>

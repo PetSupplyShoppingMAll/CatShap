@@ -217,7 +217,7 @@
 				                <div class="main2_2text">
 				                    <p>상품명: ${proddescriptMap[basketProduct.prodNo]}</p>
 				                    <p>수량: ${basketAmt}개</p>
-				                    <p>${basketAmt * basketProduct.ordProdPrice}원</p>
+				                    <p>${basketProduct.ordProdPrice}원</p>
 				                </div>
 				            </div>
 				        </c:forEach>

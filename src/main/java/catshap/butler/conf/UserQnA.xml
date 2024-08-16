@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userqna">
+	<select id="selectUserQnAList" parameterType="int" resultType="UserQnA">
+		SELECT 
+			P.PRODNO,P.PRDOTITLENAME,
+			PIMG.PRODIMGPATH,
+			U.USERNO,U.UNICK,
+			Q.QNANO,Q.QNATITLE ,Q.QNATEXT,Q.QNAREGDATE,
+			QC.QNACATNO,QC.QNACATNAME  
+		FROM QNA q 	
+		JOIN PRODUCT p ON P.PRODNO = Q.PRODNO 
+		JOIN PRODIMAGE PIMG ON PIMG.PRODNO = P.PRODNO 
+		JOIN USERS u  ON U.USERNO  = Q.USERNO 
+		JOIN QNACATEGORY QC ON QC.QNACATNO = Q.QNACATNO
+		WHERE U.USERNO = #{userNo}
+	</select>
+</mapper>

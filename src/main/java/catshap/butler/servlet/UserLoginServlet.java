@@ -43,7 +43,6 @@ public class UserLoginServlet extends HttpServlet {
 
             if (user != null) {
                 session.setAttribute("user", user);
-                //session.setAttribute("userNo", user.getUserNo()); // 세션에 userNo 저장
 
                 jsonResponse.addProperty("success", true);
                 jsonResponse.addProperty("uname", user.getUname());
