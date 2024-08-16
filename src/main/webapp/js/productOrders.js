@@ -93,7 +93,7 @@ const registOrders = () => {
 
 // 결제 메소드
 const requestPay = (formData, orders, prodDescript, email) => {
-    IMP.init(' 가맹점 식별코드'); // 가맹점 식별코드
+    IMP.init('가맹점 식별코드'); // 가맹점 식별코드
     IMP.request_pay({
         pg: "kakaopay",
         pay_method: "card",

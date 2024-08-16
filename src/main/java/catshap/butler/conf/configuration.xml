@@ -15,6 +15,7 @@
 		<typeAlias type="catshap.butler.bean.Delivery" alias="Delivery" />
 		<typeAlias type="catshap.butler.bean.Pay" alias="Pay" />
 		<typeAlias type="catshap.butler.bean.Basket" alias="Basket" />
+		<typeAlias type="catshap.butler.bean.BasketOrder" alias="BasketOrder" />
 	</typeAliases>	
 	<environments default="development">
 		<environment id="development">
@@ -39,5 +40,6 @@
 		<mapper resource="catshap/butler/conf/Delivery.xml" />
 		<mapper resource="catshap/butler/conf/Pay.xml" />
 		<mapper resource="catshap/butler/conf/Basket.xml" />
+		<mapper resource="catshap/butler/conf/BasketOrder.xml" />
 	</mappers>
 </configuration>

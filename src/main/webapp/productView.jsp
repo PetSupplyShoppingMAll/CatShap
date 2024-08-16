@@ -19,6 +19,9 @@
 		ReviewViewInterface ri = new ReviewViewDao();
 		List<ReviewView> listReview = ri.selectReviewList(prodNo);
 		
+		Users user = (session != null) ? (Users) session.getAttribute("user") : null;
+		int userNo = (user != null) ? user.getUserNo() : 0;
+		
 		pageContext.setAttribute("productView", productView);
 		pageContext.setAttribute("listReview", listReview);
 		
@@ -35,10 +38,37 @@
     <link rel="stylesheet" href="./css/B-02.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./js/productView.js"></script>
+    <script>
+        var userNo = <%= userNo %>; // 사용자 번호가 없으면 0
+        
+        function checkLogin() {
+            if (userNo === 0) {
+                alert("로그인 후 장바구니에 추가할 수 있습니다.");
+                return false;
+            }
+            return true;
+        }
+        
+        function handleSubmit(event) {
+            if (!checkLogin()) {
+                event.preventDefault();
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 
 <body>
     <jsp:include page="header.jsp"></jsp:include>
+     
+     <form action="add.jsp" method="post" onsubmit="return handleSubmit(event);">
+        <input type="hidden" name="prodNo" value="<%= productView.getProdNo() %>">
+        <input type="hidden" name="userNo" value="<%= userNo %>">
+        <input type="hidden" name="baskAmt" value="1">
+        <button type="submit">장바구니 추가</button>
+    </form>
+    
     <div class="div63">
         <main class="container11">
             <div class="hygiene-info">

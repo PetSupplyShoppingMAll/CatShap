@@ -2,7 +2,9 @@ package catshap.butler.dao;
 
 import java.io.Reader;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -41,8 +43,11 @@ public class ProductDao implements ProductInterface {
 	}
 	
 	@Override
-	public List<Product> selectBasketProductList(int userNo) throws SQLException {
+	public List<Product> selectBasketProductList(int userNo, String[] prodNos) throws SQLException {
 		try (SqlSession ss = ssf.openSession()) {
+			Map<String, Object> basketParams = new HashMap<>();
+			basketParams.put("userNo", userNo);
+			basketParams.put("prodNos", prodNos);
 			List<Product> basketProductList = ss.selectList("product.selectBasketProductList", userNo);
 			ss.close();
 			return basketProductList;

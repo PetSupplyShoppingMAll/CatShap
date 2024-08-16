@@ -41,7 +41,7 @@
             </choose>
     </select>
     
-    <select id="selectBasketProductList" parameterType="int" resultMap="ProductMap">
+    <select id="selectBasketProductList" parameterType="map" resultMap="ProductMap">
 	    SELECT p.PRODNO, 
 	       p.PRODDESCRIPT, 
 	       p.PRODCOUNT, 
@@ -55,6 +55,10 @@
 		JOIN PRODIMAGE pi ON pi.PRODNO = b.PRODNO 
 		JOIN PRODATEGORY pc ON pc.PRODCATNO = p.PRODCATNO  
 		WHERE b.USERNO = #{userNo}
+		AND b.PRODNO IN
+      <foreach item="prodNo" collection="prodNos" open="(" separator="," close=")">
+        #{prodNo}
+      </foreach>
     </select>
     
     <resultMap id="ProductMap" type="Product">

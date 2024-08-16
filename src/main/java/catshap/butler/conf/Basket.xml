@@ -9,4 +9,43 @@
 		and USERNO = #{userNo}
 	</select>
 	
+	<select id="listBasket" parameterType="int" resultType="Basket">
+	    SELECT 
+	        P.PRODNO,P.PRODDESCRIPT,P.PRODCOUNT,
+	        PC.PRODCATNO,PC.PRDCATNAME,
+	        PP.PRODNO,PP.PRODREGDATE,PP.PRODPRICE,
+	        PI.PRODIMGNO,PI.PRODNO,PI.PRODIMGPATH,
+	        B.BASKETNO,B.USERNO,B.PRODNO,B.BASKAMT
+	    FROM 
+	        BASKET B
+	        JOIN PRODUCT P ON B.PRODNO = P.PRODNO
+	        JOIN PRODIMAGE PI ON P.PRODNO = PI.PRODNO
+	        JOIN PRODPRICE PP ON P.PRODNO = PP.PRODNO
+	        JOIN PRODATEGORY PC ON P.PRODCATNO = PC.PRODCATNO
+	        JOIN USERS U ON B.USERNO = U.USERNO
+	    WHERE 
+	        B.USERNO = #{userNo}
+	</select>
+	
+	<insert id="addToBasket" parameterType="Basket">
+        INSERT INTO BASKET (BASKETNO,USERNO, PRODNO, BASKAMT)
+        VALUES (seq_BASKETNO.nextval,#{userNo}, #{prodNo}, #{baskAmt})
+    </insert>
+	
+	<delete id="deleteBasket" parameterType="int">
+		delete from Basket
+		where BASKETNO = #{basketNo}
+	</delete>
+	
+	<select id="isProductInBasket" parameterType="map" resultType="int">
+	    SELECT COUNT(*)
+	    FROM basket
+	    WHERE userNo = #{userNo} AND prodNo = #{prodNo}
+	</select>
+	
+	<delete id="removeProductFromBasket" parameterType="map">
+	    DELETE FROM basket
+	    WHERE userNo = #{userNo} AND prodNo = #{prodNo}
+	</delete>
+	
 </mapper>

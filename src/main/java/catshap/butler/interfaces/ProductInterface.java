@@ -11,6 +11,6 @@ public interface ProductInterface {
 
 	public abstract List<Product> selectAll(String category);
 
-	public abstract List<Product> selectBasketProductList(int userNo) throws SQLException;
+	public abstract List<Product> selectBasketProductList(int userNo, String[] prodNos) throws SQLException;
 
 }

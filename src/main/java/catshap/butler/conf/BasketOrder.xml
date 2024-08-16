@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orderproduct">
+
+    <insert id="insertOrder" parameterType="BasketOrder">
+        INSERT INTO ORDERS (ORDNO, USERNO, ORDDATE, ORDTOTALPRICE, ORDSTATUS)
+        VALUES (seq_ordNo.nextval, #{userNo}, sysdate, #{ordTotalPrice}, #{ordStatus})
+    </insert>
+
+	<select id="getLastOrderNo" resultType="Integer">
+	    SELECT SEQ_ORDNO.currval FROM dual
+	</select>
+    
+   	<insert id="insertOrderProducts2" parameterType="OrderProduct">
+         INSERT INTO ORDERPRODUCT (ORDPRODNO, PRODNO, ORDNO, ORDPRODAMT, ORDPRODPRICE)
+         VALUES (SEQ_ORDPRODNO.NEXTVAL, #{prodNo}, #{ordNo}, #{ordProdAmt}, #{ordProdPrice})
+    </insert>
+    
+</mapper>
