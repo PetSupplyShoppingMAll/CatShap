@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/user_mypage.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./js/check_login.js"></script>
+    <script src="./js/user.js"></script>
 </head>
 <body>
     <jsp:include page="header.jsp"></jsp:include>
@@ -47,12 +48,12 @@
                             %>
                              <button type="button" class="userExitBtn" id="userExitBtn">
 								<div class="container47">
-									<div>회원 탈퇴하기</div>
+									<a href='/catshap/user_exit.jsp'>회원 탈퇴하기</a>
 								</div>
 							</button>     
 							<div class="profile-info">
 				              <nav class='profile-nav'>
-				                <a href='#'>주문내역</a>
+				                <a href='/catshap/user_orders_page.jsp'>주문내역</a>
 				                <a href='/catshap/user_modify.jsp'>회원정보 수정</a>
 				                <a href='/catshap/user_myReview.jsp'>내 리뷰 보기</a>
 				                <a href='/catshap/user_myQnA.jsp'>내 게시글 보기</a>

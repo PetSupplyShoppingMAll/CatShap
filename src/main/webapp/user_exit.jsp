@@ -3,12 +3,7 @@
 <%
 	request.setCharacterEncoding("utf-8");
 
-	// 임시 사용자 생성 ==> 수정 필요
-	Users user = new Users();
-	user.setUserNo(1);
-	request.setAttribute("user", user);
-	
-	user = (Users)request.getAttribute("user");
+	Users user = (Users)session.getAttribute("user");
 %>
 <!DOCTYPE html>
 <html>
@@ -40,7 +35,7 @@
                     </div>
                 </div>
                 <form action="/user-exit-pass-confirm" method="post">
-                 	<input id="userNo" type="hidden" name="userNo" value="<%= user.getUserNo() %>" />
+                 	<div id="user-data" data-user-no="<%=user.getUserNo() %>"></div>
                     <div class="input-fields-parent">
                         <div class="input-fields">
                             <div class="find-input">

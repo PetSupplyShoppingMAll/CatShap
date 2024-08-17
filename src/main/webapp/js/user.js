@@ -359,7 +359,8 @@ $(function () {
         const upassConfirm = $('#upassConfirm').val().trim();
         const isPasswordValid = validatePassword();
         const isEequalPassword = equalPassword(upass, upassConfirm);
-        const userNo = $('#userNo').val();
+        const userNo = $('#user-data').data('user-no');
+
         if (isPasswordValid && isEequalPassword) {
             $('#upassConfirm-error').text("비밀번호가 일치합니다.").css('color', 'blue').show();
             if ($('#accountExit').is(':checked')) {
@@ -373,7 +374,7 @@ $(function () {
                     success: function (response) {
                         if (response.success) {
                             alert('회원탈퇴 성공!');
-                            window.location.href = 'main.jsp';
+                            window.location.href = 'user_logoutProc.jsp';
                         } else {
                             alert('회원탈퇴 실패...');
                         }

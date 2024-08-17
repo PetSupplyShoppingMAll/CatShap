@@ -63,8 +63,9 @@ header p {
     color: #333;
 }
 .profile-info a {
+	text-decoration: none;
 	font-size: var(--font-size-sm);
-	color: var(--color-darkgray-300);
+	color: white;
 }
 
 .profile-nav {
@@ -420,4 +421,11 @@ header p {
   .login-desktop {
     gap: var(--gap-4xl);
   }
+}
+
+#userExitBtn {
+	background-color: #ff7979;
+	border: none;
+	padding: 10px;
+	border-radius: 5px;
 }
