@@ -10,11 +10,12 @@
 	<select id="getMyOrderProductList" parameterType="int" resultMap="MyOrderProductMap">
 		SELECT
 		    O.ORDDATE,             
-		    O.ORDNO,                  
+		    O.ORDNO,
+		    PI.PRODIMGPATH,                  
 		    P.PRODTITLENAME,     
 		    OP.ORDPRODAMT,       
 		    OP.ORDPRODPRICE,   
-		    D.DELSTATUS         
+		    O.ORDSTATUS         
 		FROM 
 		    ORDERS O
 		JOIN 
@@ -22,7 +23,7 @@
 		JOIN 
 		    PRODUCT P ON OP.PRODNO = P.PRODNO      
 		LEFT JOIN 
-		    DELIVERY D ON O.ORDNO = D.ORDNO        
+    		PRODIMAGE PI ON p.PRODNO = PI.PRODNO       
 		WHERE 
 		    O.USERNO = #{userNo}             
 	</select>
@@ -30,10 +31,11 @@
 	<resultMap id="MyOrderProductMap" type="MyOrderProduct">
         <result column="ORDDATE" property="ordDate" />
         <result column="ORDNO" property="ordNo" />
+        <result column="PRODIMGPATH" property="prodImgPath" />
         <result column="PRODTITLENAME" property="ordDescript" />
         <result column="ORDPRODAMT" property="ordProdAmt" />
         <result column="ORDPRODPRICE" property="ordProdPrice" />
-        <result column="DELSTATUS" property="delStatus" />
+        <result column="ORDSTATUS" property="ordStatus" />
     </resultMap>
 	
 </mapper>

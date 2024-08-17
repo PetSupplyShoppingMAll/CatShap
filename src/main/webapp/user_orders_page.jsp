@@ -1,5 +1,8 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="catshap.butler.bean.MyOrderProduct"%>
+<%@page import="java.util.List"%>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -96,14 +99,29 @@
                             </tr>
                         </thead>
                         <tbody class="order-tbody">
-                            <tr class="orders-tr">
-                            </tr>
+                            <!-- 주문 항목 리스트가 있을 경우 -->
+					        <c:forEach var="orderProduct" items="${myOrderProductList}">
+					            <tr class="orders-tr">
+					                <td>${orderProduct.ordDate} / ${orderProduct.ordNo}</td>
+					                <td><img src="/catshap/image/${orderProduct.prodImgPath}" alt="${orderProduct.ordDescript} 이미지" width="100" height="100"></td>
+					                <td>${orderProduct.ordDescript}</td>
+					                <td>${orderProduct.ordProdAmt}</td>
+					                <td>${orderProduct.ordProdPrice} 원</td>
+					                <td>${orderProduct.ordStatus}</td>
+					                <td>
+					                    <button id="orderCancelBtn" class="orderCancelBtn">취소/교환/반품</button>
+					                </td>
+					            </tr>
+					        </c:forEach>
                         </tbody>
                     </table>
-                    <div class="order-table-none">
-                        <img src="./image/order-empty-icon.png" alt="order-icon" />
-                        <p>주문 내역이 없습니다.</p>
-                    </div>
+                    <!-- 주문 내역이 없을 경우 -->
+					<c:if test="${empty myOrderProductList}">
+					    <div class="order-table-none">
+					        <img src="./image/order-empty-icon.png" alt="order-icon" />
+					        <p>주문 내역이 없습니다.</p>
+					    </div>
+					</c:if>
                 </div>
                 <div class="paging-container">
                     <ul id="paging" class="paging-list"></ul>

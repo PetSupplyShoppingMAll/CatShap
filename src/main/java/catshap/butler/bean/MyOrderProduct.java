@@ -6,23 +6,25 @@ public class MyOrderProduct {
 
 	private Timestamp ordDate; // 주문일시
 	private int ordNo; // 주문번호
+	private String prodImgPath; // 상품이미지
 	private String ordDescript; // 상품명
 	private int ordProdAmt; // 수량
 	private int ordProdPrice; // 가격
-	private String delStatus; // 배송상태
+	private String ordStatus; // 주문처리상태
 
 	public MyOrderProduct() {
 	}
 
-	public MyOrderProduct(Timestamp ordDate, int ordNo, String ordDescript, int ordProdAmt, int ordProdPrice,
-			String delStatus) {
+	public MyOrderProduct(Timestamp ordDate, int ordNo, String prodImgPath, String ordDescript, int ordProdAmt,
+			int ordProdPrice, String ordStatus) {
 		super();
 		this.ordDate = ordDate;
 		this.ordNo = ordNo;
+		this.prodImgPath = prodImgPath;
 		this.ordDescript = ordDescript;
 		this.ordProdAmt = ordProdAmt;
 		this.ordProdPrice = ordProdPrice;
-		this.delStatus = delStatus;
+		this.ordStatus = ordStatus;
 	}
 
 	public Timestamp getOrdDate() {
@@ -39,6 +41,14 @@ public class MyOrderProduct {
 
 	public void setOrdNo(int ordNo) {
 		this.ordNo = ordNo;
+	}
+
+	public String getProdImgPath() {
+		return prodImgPath;
+	}
+
+	public void setProdImgPath(String prodImgPath) {
+		this.prodImgPath = prodImgPath;
 	}
 
 	public String getOrdDescript() {
@@ -65,18 +75,19 @@ public class MyOrderProduct {
 		this.ordProdPrice = ordProdPrice;
 	}
 
-	public String getDelStatus() {
-		return delStatus;
+	public String getOrdStatus() {
+		return ordStatus;
 	}
 
-	public void setDelStatus(String delStatus) {
-		this.delStatus = delStatus;
+	public void setOrdStatus(String ordStatus) {
+		this.ordStatus = ordStatus;
 	}
 
 	@Override
 	public String toString() {
-		return "MyOrderProduct [ordDate=" + ordDate + ", ordNo=" + ordNo + ", ordDescript=" + ordDescript
-				+ ", ordProdAmt=" + ordProdAmt + ", ordProdPrice=" + ordProdPrice + ", delStatus=" + delStatus + "]";
+		return "MyOrderProduct [ordDate=" + ordDate + ", ordNo=" + ordNo + ", prodImgPath=" + prodImgPath
+				+ ", ordDescript=" + ordDescript + ", ordProdAmt=" + ordProdAmt + ", ordProdPrice=" + ordProdPrice
+				+ ", ordStatus=" + ordStatus + "]";
 	}
 
 }

@@ -12,8 +12,7 @@
 
     OrderProductInterface oi = new OrderProductDao();
     List<MyOrderProduct> myOrderProductList = oi.getMyOrderProductList(user.getUserNo());
-        
-    System.out.println(myOrderProductList);
+    
     request.setAttribute("myOrderProductList", myOrderProductList);
     
     RequestDispatcher rd = request.getRequestDispatcher("user_orders_page.jsp");
