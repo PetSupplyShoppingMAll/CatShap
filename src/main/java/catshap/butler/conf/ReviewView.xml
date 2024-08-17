@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reviewview">
-
     <select id="selectReviewList" parameterType="int" resultType="ReviewView">
         SELECT
             P.PRODNO,
-            U.USERNO,U.UNAME,
-            R.REVIEWNO,R.REVTITLE,R.REVTEXT,R.REVREGDATE,R.REVSCORE,R.PRODNO,R.USERNO
+            U.USERNO,U.UNICK,
+            R.REVIEWNO,R.REVTITLE,R.REVTEXT,R.REVREGDATE,R.REVSCORE
         FROM
             REVIEW R
             JOIN PRODUCT P ON P.PRODNO = R.PRODNO
@@ -15,24 +14,35 @@
         	P.PRODNO = #{prodNo}
     </select>
     
-    <select id="selectUserReviewList" parameterType="int" resultType="ReviewView">
-    	SELECT
-            P.PRODNO,P.PRDOTITLENAME,
-            U.USERNO,U.UNICK,
-            R.REVIEWNO,R.REVTITLE,R.REVTEXT,R.REVREGDATE,R.REVSCORE,
-            I.PRODIMGNO,I.PRODIMGPATH 
-        FROM
-            REVIEW R
-            JOIN PRODUCT P ON P.PRODNO = R.PRODNO
-            JOIN USERS U ON U.USERNO = R.USERNO
-            JOIN PRODIMAGE I ON I.PRODNO  = P.PRODNO 
-        WHERE
-        	U.USERNO = #{userNo}
-    </select>
-    
     <insert id="registReview" parameterType="ReviewView"> 
     	INSERT INTO REVIEW VALUES (seq_reviewno.nextval, #{userNo},
     	#{prodNo}, #{revTitle}, #{revText}, sysdate, NULL ,#{revScore})
     </insert>
+    
+    <!-- 리뷰 목록을 페이지네이션하여 조회하는 쿼리 -->
+	<select id="userReviewPage" parameterType="map" resultType="ReviewView">
+	    SELECT * FROM (
+	        SELECT
+	            R.REVIEWNO, R.REVTITLE,R.REVTEXT,R.REVREGDATE, R.REVSCORE,
+	            P.PRODNO, P.PRODTITLENAME,
+	            U.USERNO, U.UNICK,
+	            I.PRODIMGPATH,
+	            ROW_NUMBER() OVER (ORDER BY R.REVIEWNO DESC) AS rnum
+	        FROM
+	            REVIEW R
+	            JOIN PRODUCT P ON P.PRODNO = R.PRODNO
+	            JOIN USERS U ON U.USERNO = R.USERNO
+	            JOIN PRODIMAGE I ON I.PRODNO = P.PRODNO
+	        WHERE
+	            U.USERNO = #{userNo}
+	    ) WHERE rnum BETWEEN #{offset} AND #{pageSize}
+	</select>
+
+	
+	<!-- 사용자의 리뷰 총 개수를 조회하는 쿼리 -->
+	<select id="countUserReviews" parameterType="int" resultType="int">
+	    SELECT COUNT(*) FROM review
+	    WHERE userno = #{userNo}
+	</select>
     
 </mapper>

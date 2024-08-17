@@ -1,10 +1,85 @@
+/* 전체 배경 그림자 */
+.backgroundshadow {
+  border-radius: 10px;
+  margin-bottom: 20px;
+  position: absolute;
+  top: 1100px;
+  left: 30px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.02);
+  background-color: rgba(255, 255, 255, 0.97);
+  width: 1890px;
+  justify-content: space-between;
+  padding: var(--padding-xl) 716px 20.4px var(--padding-696xl);
+  box-sizing: border-box;
+  gap: var(--gap-18xl-6);
+  max-width: 50%;
+  font-size: var(--font-size-base);
+  color: var(--color-darkslategray-200);
+}
+
+/* 각 링크 스타일 */
+.link20, .link21, .link23 {
+    flex-grow: 1;
+    text-align: center;
+}
+
+/* 버튼 스타일 */
+.buttonshap {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+    background-color: #0056b3;
+}
+
+/* 버튼 텍스트 스타일 */
+.div79, .div80 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div80 {
+    position: relative;
+}
+
+/* 리뷰 카운트와 같은 카운트 스타일 */
+.tab-value-containers {
+    display: inline-block;
+    margin-left: 5px;
+    padding: 2px 8px;
+    background-color: #ffeb3b;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+
+/* 구분선 스타일 */
+.vertical-divider4 {
+    height: 20px;
+    width: 1px;
+    background-color: #ccc;
+    margin: 0 10px;
+}
+
+
 /* 전체 리뷰 목록 스타일 */
 .review-item {
-	width: 100%;
+   	width: 70%;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px;
-    margin-bottom: 20px;
     background-color: #f9f9f9;
 }
 
@@ -47,6 +122,46 @@
     margin: 5px 0;
     font-size: 14px;
 }
+
+/* 이미지 컨테이너 스타일 */
+.image-container {
+    position: relative;
+    max-width: 70%; /* 이미지 컨테이너의 최대 너비 설정 */
+    margin-left: 500px;
+}
+
+/* 이미지를 미리보기로 900px만큼 자름 */
+.full-image {
+    width: 70%;
+    height: 900px;
+    object-fit: cover; /* 이미지를 컨테이너에 맞게 자름 */
+    display: block;
+    overflow: hidden;
+}
+
+/* 전체보기 버튼 스타일 */
+#viewAllBtn {
+    position: absolute;
+    width: 80%;
+    height: 50px;
+    bottom: 10px; /* 버튼을 이미지 하단에 위치 */
+    left: 465px;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#viewAllBtn:hover {
+    background-color: #0056b3; /* 버튼 호버 시 색상 변경 */
+}
+
+
 /* 구분선 스타일 */
 hr {
     border: 0;
@@ -128,7 +243,6 @@ hr {
   padding: 0 0 var(--padding-9xs-4);
 }
 .div344 {
-  width: 65px;
   position: relative;
   line-height: 20px;
   display: flex;
@@ -240,11 +354,16 @@ input[type="text"], textarea, input[type="number"] {
     font-size: 16px;
 }
 
+#reviewBtn{
+	width:150px;
+}
 /* 제출 버튼 스타일링 */
+#reviewBtn,
 button[type="submit"] {
+    margin-left: 10px;
     background-color: #28a745; /* 녹색 배경 */
     color: #ffffff;
-    padding: 10px 20px;
+    padding: 10px 17px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -252,7 +371,7 @@ button[type="submit"] {
     font-size: 16px;
     transition: background-color 0.3s ease;
 }
-
+#reviewBtn,
 button[type="submit"]:hover {
     background-color: #218838; /* 호버 시 짙은 녹색 */
 }

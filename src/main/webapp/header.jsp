@@ -1,12 +1,8 @@
-<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="catshap.butler.dao.UserDao"%>
 <%@page import="catshap.butler.interfaces.UserInterface"%>
 <%@page import="catshap.butler.bean.Users"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<%
-	Users user = (Users)session.getAttribute("user");
-%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     
 <!DOCTYPE html>
 <html lang="ko">
@@ -105,7 +101,7 @@
 
             <img class="icon215" alt="" src="./image/icon3.png" />
             <div class="link94" id="linkContainer">
-                <a class="a66">회원가입</a>
+                <a href="/catshap/user_join.jsp">회원가입</a>
             </div>
             <img class="icon216" alt="" src="./image/catSvg4.svg" />
             <a class="a67" id="text3">주문정보</a>

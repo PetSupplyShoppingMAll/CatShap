@@ -3,6 +3,8 @@ package catshap.butler.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +33,7 @@ public class UserGetReviewServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
 
@@ -41,18 +43,27 @@ public class UserGetReviewServlet extends HttpServlet {
         }
 
         int userNo = user.getUserNo();
-        System.out.println("UserNo from session: " + userNo);
+        int page = Integer.parseInt(request.getParameter("page"));
+        int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 
         try {
-            // Fetch the reviews for the user
-            List<ReviewView> reviews = reviewDao.selectUserReviewList(userNo);
-            
+            // Fetch the reviews for the user with pagination
+            List<ReviewView> reviews = reviewDao.userReviewPage(userNo, page, pageSize);
+            int totalReviews = reviewDao.countUserReviews(userNo);
+            int totalPages = (int) Math.ceil((double) totalReviews / pageSize);
+
+            // Create a response map
+            Map<String, Object> responseMap = new HashMap<>();
+            responseMap.put("reviews", reviews);
+            responseMap.put("totalPages", totalPages);
+            responseMap.put("currentPage", page);
+
             // Set the response type to JSON
             response.setContentType("application/json");
             PrintWriter out = response.getWriter();
             Gson gson = new Gson();
-            // Write the reviews as JSON
-            out.print(gson.toJson(reviews));
+            // Write the map as JSON
+            out.print(gson.toJson(responseMap));
             out.flush();
         } catch (Exception e) {
             e.printStackTrace();

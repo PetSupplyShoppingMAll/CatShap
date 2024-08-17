@@ -68,4 +68,10 @@
 		and upass=#{upass}
 	</update>
 	
+	<select id="getUserByUserNo" parameterType="int" resultType="catshap.butler.bean.Users">
+	    SELECT *
+	    FROM users
+	    WHERE userno = #{userno}
+	</select>
+	
 </mapper>

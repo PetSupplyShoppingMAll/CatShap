@@ -6,29 +6,39 @@ public class ReviewView {
 	
 	private int prodNo;
     private int userNo;
-    private String uname;
-    private int rewviewNo;
+    private String unick;
+    private int reviewNo;
     private String revTitle;
     private String revText;
     private Timestamp revRegDate;
     private int revScore;
+    private String prodTitleName;
+    private String prodImgPath;
     
     public ReviewView() {
     	
     }
 
-	public ReviewView(int prodNo, int userNo, String uname, int rewviewNo, String revTitle, String revText,
-			Timestamp revRegDate, int revScore) {
+
+
+
+	ReviewView(int prodNo, int userNo, String unick, int reviewNo, String revTitle, String revText,
+			Timestamp revRegDate, int revScore, String prodTitleName, String prodImgPath) {
 		super();
 		this.prodNo = prodNo;
 		this.userNo = userNo;
-		this.uname = uname;
-		this.rewviewNo = rewviewNo;
+		this.unick = unick;
+		this.reviewNo = reviewNo;
 		this.revTitle = revTitle;
 		this.revText = revText;
 		this.revRegDate = revRegDate;
 		this.revScore = revScore;
+		this.prodTitleName = prodTitleName;
+		this.prodImgPath = prodImgPath;
 	}
+
+
+
 
 	public int getProdNo() {
 		return prodNo;
@@ -46,20 +56,20 @@ public class ReviewView {
 		this.userNo = userNo;
 	}
 
-	public String getUname() {
-		return uname;
+	public String getUnick() {
+		return unick;
 	}
 
-	public void setUname(String uname) {
-		this.uname = uname;
+	public void setUnick(String unick) {
+		this.unick = unick;
 	}
 
-	public int getRewviewNo() {
-		return rewviewNo;
+	public int getReviewNo() {
+		return reviewNo;
 	}
 
-	public void setRewviewNo(int rewviewNo) {
-		this.rewviewNo = rewviewNo;
+	public void setReviewNo(int reviewNo) {
+		this.reviewNo = reviewNo;
 	}
 
 	public String getRevTitle() {
@@ -92,6 +102,27 @@ public class ReviewView {
 
 	public void setRevScore(int revScore) {
 		this.revScore = revScore;
+	}
+
+
+	public String getProdTitleName() {
+		return prodTitleName;
+	}
+
+
+
+	public void setProdTitleName(String prodTitleName) {
+		this.prodTitleName = prodTitleName;
+	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "ReviewView [prodNo=" + prodNo + ", userNo=" + userNo + ", unick=" + unick + ", reviewNo=" + reviewNo
+				+ ", revTitle=" + revTitle + ", revText=" + revText + ", revRegDate=" + revRegDate + ", revScore="
+				+ revScore + ", prodTitleName=" + prodTitleName + ", prodImgPath=" + prodImgPath + "]";
 	}
 
 	

@@ -1,4 +1,24 @@
 $(document).ready(function() {
+	
+      // 전체보기 버튼 클릭 이벤트
+    $('#viewAllBtn').on('click', function() {
+        const $fullImage = $('#fullImage');
+
+        if ($fullImage.css('height') === '900px') {
+            $fullImage.css('height', 'auto'); // 이미지 전체를 표시
+            $(this).text('닫기'); // 버튼 텍스트 변경
+        } else {
+            $fullImage.css('height', '900px'); // 이미지 높이를 다시 900px로 설정
+            $(this).text('전체보기'); // 버튼 텍스트 변경
+        }
+    });
+
+
+
+    // prodNo input 요소를 선택하고 값을 페이지에 표시
+    const prodNoValue = $('#prodNo').val();
+    $('#displayProdNo').text("Product Number: " + prodNoValue);
+
     // 페이지 로드 시 저장된 스크롤 위치로 이동
     const scrollPosition = localStorage.getItem('scrollPosition');
     if (scrollPosition) {
@@ -82,25 +102,24 @@ $(document).ready(function() {
             });
         });
     });
-});
 
-// 로그인 상태 확인
-const checkLoginStatus = (callback) => {
-    $.ajax({
-        url: '/catshap/check-login-status',
-        method: 'GET',
-        dataType: 'json',
-        success: function(response) {
-            if (!response.loggedIn) {
-                alert('로그인 정보가 없습니다. 로그인 페이지로 이동합니다.');
-                window.location.href = '/catshap/user_login.jsp'; // 로그인 페이지로 리디렉션
-            } else {
-                callback(); // 로그인 상태가 유효하면 콜백 함수 호출
+    // 로그인 상태 확인
+    function checkLoginStatus(callback) {
+        $.ajax({
+            url: '/catshap/check-login-status',
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                if (!response.loggedIn) {
+                    alert('로그인 정보가 없습니다. 로그인 페이지로 이동합니다.');
+                    window.location.href = '/catshap/user_login.jsp'; // 로그인 페이지로 리디렉션
+                } else {
+                    callback(); // 로그인 상태가 유효하면 콜백 함수 호출
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error checking login status:', textStatus, errorThrown);
             }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error('Error checking login status:', textStatus, errorThrown);
-        }
-    });
-};
-
+        });
+    }
+});

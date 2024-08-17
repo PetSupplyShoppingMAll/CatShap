@@ -3,7 +3,7 @@
 <mapper namespace="userqna">
 	<select id="selectUserQnAList" parameterType="int" resultType="UserQnA">
 		SELECT 
-			P.PRODNO,P.PRDOTITLENAME,
+			P.PRODNO,P.PRODTITLENAME,
 			PIMG.PRODIMGPATH,
 			U.USERNO,U.UNICK,
 			Q.QNANO,Q.QNATITLE ,Q.QNATEXT,Q.QNAREGDATE,

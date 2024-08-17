@@ -4,7 +4,7 @@
 
 	<select id="selectMain" resultType="Main">
         SELECT
-            P.PRODNO, P.PRODDESCRIPT,P.PRDOTITLENAME,
+            P.PRODNO, P.PRODDESCRIPT,P.PRODTITLENAME,
             P.PRODCOUNT, P.REVCOUNT,P.PRODDETAILNAME,
             PC.PRODCATNO, PC.PRDCATNAME,
             PP.PRODNO, PP.PRODREGDATE, PP.PRODPRICE,
