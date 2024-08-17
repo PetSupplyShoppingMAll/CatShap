@@ -1,16 +1,9 @@
-const orders = [
-    /* 여기에 실제 주문 데이터 수정 필요 */
-    // { orderDate: '2023-08-01', orderNumber: '123456', productName: '상품 A', quantity: 1, price: 10000, status: '배송완료' },
-    // { orderDate: '2023-08-02', orderNumber: '123457', productName: '상품 B', quantity: 2, price: 20000, status: '배송중' }
-];
-
 // 한 페이지당 보여줄 주문 수
 const ordersPerPage = 10;
 let currentPage = 1;
-const totalPages = Math.max(Math.ceil(orders.length / ordersPerPage), 1);
+//const totalPages = Math.max(Math.ceil(orders.length / ordersPerPage), 1);
 
 $(function () {
-    renderOrders();
     renderPaging();
 	updateOrderTitle($('.tab-menu .tab.active'));
 	
@@ -18,8 +11,9 @@ $(function () {
     $('.page-link').on('click', function (event) {
         event.preventDefault();
         currentPage = parseInt($(this).text());
-        renderOrders();
-        renderPaging();
+        getMyOrderProductList($(this));
+        //renderOrders(orders);
+        //renderPaging();
     });
     
     // 클릭한 메뉴 활성화
@@ -27,12 +21,32 @@ $(function () {
 		$('.tab-menu .tab').removeClass('active');
     	$(this).addClass('active');
        	updateOrderTitle($(this));
+       	getMyOrderProductList($(this).data('ordstatus'));
     });
     
 });
 
+// 현재 주문내역정보 추출 메소드
+const getMyOrderProductList = ordStatus => {
+	$.ajax({
+        type: 'GET',
+        url: `/catshap/userOrdersPageProc.jsp?ordStatus=${ordStatus}`,
+        success: function (response) {
+            if (response.success) {
+				console.log(response);
+				alert('내 주문 정보 확인 성공!!');
+            } else {
+                alert("내 주문 정보 확인 실패...");
+            }
+        },
+        error: function () {
+            alert('주문 상태 업데이트 중 에러가 발생했습니다.');
+        }
+    });
+}
+
 // 주문내역 테이블 출력 메소드
-const renderOrders = () => {
+const renderOrders = orders => {
     const startIndex = (currentPage - 1) * ordersPerPage;
     const endIndex = Math.min(startIndex + ordersPerPage, orders.length);
     const tbody = $('.order-tbody');
@@ -70,7 +84,7 @@ const renderPaging = () => {
     var paging = $('#paging');
     paging.empty();
 
-    for (let i = 1; i <= totalPages; i++) {
+    for (let i = 1; i <= 1; i++) {
         let pageItem = `<li class="page-item ${i === currentPage ? 'active' : ''}">
                                 <a href="#" class="page-link">${i}</a>
                             </li>`;

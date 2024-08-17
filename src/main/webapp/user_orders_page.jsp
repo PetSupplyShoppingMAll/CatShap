@@ -34,9 +34,9 @@
                 </div>
                 <div class="orders-list-container">
                     <ul class="tab-menu">
-					    <li class="tab active" data-title="주문 상품 정보" data-subtitle="/ 아래 주문 상품 정보을(를) 확인하세요.">주문내역조회 (<span id="recentOrdersAmt">0</span>)</li>
-					    <li class="tab" data-title="취소/반품/교환" data-subtitle="/ 아래 취소/반품/교환을(를) 확인하세요.">취소/반품/교환 내역 (<span id="cancelOrdersAmt">0</span>)</li>
-					    <li class="tab" data-title="이전 주문 내역" data-subtitle="과거 주문 내역들을 조회할 수 있습니다.">과거주문내역 (<span id="beforeOrdersAmt">0</span>)</li>
+					    <li class="tab active" data-title="주문 상품 정보" data-subtitle="/ 아래 주문 상품 정보을(를) 확인하세요." data-ordstatus="주문완료">주문내역조회 (<span id="recentOrdersAmt">${myOrderProductCnt}</span>)</li>
+					    <li class="tab" data-title="취소/반품/교환" data-subtitle="/ 아래 취소/반품/교환을(를) 확인하세요." data-ordstatus="주문취소">취소/반품/교환 내역 (<span id="cancelOrdersAmt">0</span>)</li>
+					    <li class="tab" data-title="이전 주문 내역" data-subtitle="과거 주문 내역들을 조회할 수 있습니다." data-ordstatus="과거이력">과거주문내역 (<span id="beforeOrdersAmt">0</span>)</li>
 					</ul>
                 </div>
                 <div class="order-list-info">

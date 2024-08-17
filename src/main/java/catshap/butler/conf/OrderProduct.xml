@@ -7,7 +7,7 @@
 		values (seq_ordProdNo.nextval, #{prodNo}, #{ordNo}, #{ordProdAmt}, #{ordProdPrice})
 	</insert>
 	
-	<select id="getMyOrderProductList" parameterType="int" resultMap="MyOrderProductMap">
+	<select id="getMyOrderProductList" parameterType="map" resultMap="MyOrderProductMap">
 		SELECT
 		    O.ORDDATE,             
 		    O.ORDNO,
@@ -25,7 +25,26 @@
 		LEFT JOIN 
     		PRODIMAGE PI ON p.PRODNO = PI.PRODNO       
 		WHERE 
+			O.ORDSTATUS = #{ordStatus}
+		AND
 		    O.USERNO = #{userNo}             
+	</select>
+	
+	<select id="getMyOrderProductCnt" parameterType="map" resultType="int">
+		SELECT
+		    COUNT(*)     
+		FROM 
+		    ORDERS O
+		JOIN 
+		    ORDERPRODUCT OP ON O.ORDNO = OP.ORDNO  
+		JOIN 
+		    PRODUCT P ON OP.PRODNO = P.PRODNO      
+		LEFT JOIN 
+    		PRODIMAGE PI ON p.PRODNO = PI.PRODNO       
+		WHERE 
+			O.ORDSTATUS = #{ordStatus}
+		AND
+		    O.USERNO = #{userNo} 
 	</select>
 	
 	<resultMap id="MyOrderProductMap" type="MyOrderProduct">

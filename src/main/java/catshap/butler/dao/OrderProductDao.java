@@ -3,7 +3,9 @@ package catshap.butler.dao;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -39,11 +41,26 @@ public class OrderProductDao implements OrderProductInterface {
 	}
 
 	@Override
-	public List<MyOrderProduct> getMyOrderProductList(int userNo) throws SQLException {
+	public List<MyOrderProduct> getMyOrderProductList(int userNo, String ordStatus) throws SQLException {
 		try (SqlSession ss = ssf.openSession()) {
-			List<MyOrderProduct> myOrderProduct = ss.selectList("orderproduct.getMyOrderProductList", userNo);
+			Map<String, Object> myOrderProductParam = new HashMap<>();
+			myOrderProductParam.put("userNo", userNo);
+			myOrderProductParam.put("ordStatus", ordStatus);
+			List<MyOrderProduct> myOrderProduct = ss.selectList("orderproduct.getMyOrderProductList", myOrderProductParam);
 			ss.close();
 			return myOrderProduct;
+		}
+	}
+	
+	@Override
+	public int getMyOrderProductCnt(int userNo, String ordStatus) throws SQLException {
+		try (SqlSession ss = ssf.openSession()) {
+			Map<String, Object> myOrderProductParam = new HashMap<>();
+			myOrderProductParam.put("userNo", userNo);
+			myOrderProductParam.put("ordStatus", ordStatus);
+			int myOrderProductCnt = ss.selectOne("orderproduct.getMyOrderProductCnt", myOrderProductParam);
+			ss.close();
+			return myOrderProductCnt;
 		}
 	}
 

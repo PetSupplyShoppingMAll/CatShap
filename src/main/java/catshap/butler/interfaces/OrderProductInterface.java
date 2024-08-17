@@ -10,6 +10,8 @@ public interface OrderProductInterface {
 
 	public abstract int insertOrderProduct(OrderProduct orderProduct) throws SQLException; // 주문 상품 내역 등록
 
-	public abstract List<MyOrderProduct> getMyOrderProductList(int userNo) throws SQLException; // 내 주문 상품 내역 리스트 추출
+	public abstract List<MyOrderProduct> getMyOrderProductList(int userNo, String ordStatus) throws SQLException; // 내 주문 상품 내역 리스트 추출
 
+	public abstract int getMyOrderProductCnt(int userNo, String ordStatus) throws SQLException; // 내 주문 상품 내역 총 개수
+	
 }
