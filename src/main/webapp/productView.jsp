@@ -532,12 +532,12 @@
                         </div>
                     </div>
                     <div class="purchase-buttons">
-                        <div class="item12" id="itemContainer">
-                            <a href="buy.jsp?prodNo=${productView.prodNo}">
-                                <div class="link30">
-                                    <b class="strong-b1">B U Y</b>
-                                </div>
-                            </a>
+                        <div class="item12" id="itemContainer">       
+                               <div class="link30">
+                               <button id="buyBtn" class="strong-b1" data-prodno="${productView.prodNo}">
+								    B U Y
+								</button>
+							</div>
                         </div>
                         <div class="item13">
                                 <form action="add.jsp" method="post" onsubmit="return handleSubmit(event);">

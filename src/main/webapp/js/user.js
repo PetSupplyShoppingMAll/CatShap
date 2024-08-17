@@ -20,7 +20,7 @@ $(function () {
             success: function(response) {
                if (response.success) {
                   alert(response.uname + '님 환영합니다.');
-                  window.location.href = 'main.jsp';
+                  window.location.href = 'mainProc.jsp';
                } else {
                   alert("로그인 실패... 정보를 확인해주세요.");
                }
@@ -173,7 +173,7 @@ $(function () {
 
         const upass = $('#upass').val().trim();
         const upassConfirm = $('#upassConfirm').val().trim();
-        const user = JSON.parse(sessionStorage.getItem('user'));
+		const user = JSON.parse(sessionStorage.getItem('user'));
         const isUpassValid = validatePassword();
         const isEequalPassword = equalPassword(upass, upassConfirm);
         if (isUpassValid && isEequalPassword) {
@@ -181,7 +181,7 @@ $(function () {
                 type: 'POST',
                 url: '/catshap/user-pass-change',
                 data: {
-                    usid: user.usid,
+					usid: user.usid,
                     upass: upass
                 },
                 success: function (response) {
@@ -314,13 +314,18 @@ $(function () {
 
     // 로그인하러 가기 버튼 클릭 시
     $('#toLoginBtn').on('click', () => {
-        window.location.href = 'user_login.jsp';
+        window.location.href = 'user_logoutProc_to_login.jsp';
     });
 
     // 메인화면으로 이동 버튼 클릭 시
     $('#toMainBtn').on('click', () => {
-        window.location.href = 'main.jsp';
+        window.location.href = 'mainProc.jsp';
     });
+    
+    // 회원정보수정의 비밀번호 변경 버튼 클릭 시
+    $('#changePw').on('click', () => {
+       window.location.href = 'user_change_pw.jsp';
+   	});
 
     $('#modifyBtn').click((e) => {
         e.preventDefault();  // 기본 동작을 막음

@@ -76,7 +76,7 @@
 								</div>
 							</div>
 						</div>
-						<button type="button" class="passwordBtn" id="changPw">
+						<button type="button" class="passwordBtn" id="changePw">
 							<div class="container47">
 								<div>비밀번호 변경</div>
 							</div>

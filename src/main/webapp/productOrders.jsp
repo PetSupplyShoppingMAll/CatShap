@@ -212,7 +212,7 @@
 				        	<c:set var="basketAmt" value="${basketProduct.ordProdAmt}" />
 				            <div class="main2_2">
 				                <a href="#" class="product-title-img">
-				                    <img src="${prodimgpathMap[basketProduct.prodNo]}" alt="${proddescriptMap[basketProduct.prodNo]} 이미지" />
+				                    <img src="/catshap/image/${prodimgpathMap[basketProduct.prodNo]}" alt="${proddescriptMap[basketProduct.prodNo]} 이미지" />
 				                </a>
 				                <div class="main2_2text">
 				                    <p>상품명: ${proddescriptMap[basketProduct.prodNo]}</p>
@@ -226,7 +226,7 @@
                 	 <!-- Selected Product -->
                     <div class="main2_2">
                             <a href="#" class="product-title-img">
-                                <img src="${product.prodImgPath}" alt="${product.prodImgPath} 이미지" />
+                                <img src="/catshap/image/${product.prodImgPath}" alt="${product.prodImgPath} 이미지" />
                             </a>
                         <div class="main2_2text">
                            <p>상품명: ${product.prodDescript}</p>

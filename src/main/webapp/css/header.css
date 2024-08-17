@@ -507,6 +507,11 @@
   text-align: left;
 }
 
+.link94 a {
+	text-decoration: none;
+	color: var(--color-mediumaquamarine);
+}
+
 .a66 {
   text-decoration: none;
   width: 52px;
