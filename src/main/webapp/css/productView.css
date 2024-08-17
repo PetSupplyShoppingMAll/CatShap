@@ -2334,7 +2334,6 @@
 .product-title-container {
   flex: 1;
   flex-direction: column;
-  margin-top: 70px;
   justify-content: flex-start;
   padding: 0 0 0 var(--padding-12xs);
   gap: 80px;
@@ -3287,7 +3286,7 @@
 }
 .price-summary-container-parent {
   position: absolute;
-  top: +120px;
+  top: +220px;
   left: 269px;
   width: 1398.8px;
   display: flex;

@@ -21,7 +21,7 @@ window.onload = function (){
 
 	//헤더에 장바구니 눌렀을때
 	$(".icon211").click(function(){
-		window.location.href="user_orders_page.jsp";
+		window.location.href="basket.jsp";
 	})
 
 }

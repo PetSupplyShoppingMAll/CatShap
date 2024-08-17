@@ -2,7 +2,11 @@
 <%@page import="catshap.butler.interfaces.UserInterface"%>
 <%@page import="catshap.butler.bean.Users"%>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%
+	Users user = (Users)session.getAttribute("user");
+%>
     
 <!DOCTYPE html>
 <html lang="ko">
@@ -14,7 +18,10 @@
     <link rel="stylesheet" href="./css/global.css" />
     <link rel="stylesheet" href="./css/header.css" />
     <script src="./js/header.js"></script>
+
 </head>
+
+
 <body>
     <header class="header2">
         <div class="backgroundhorizontalbordersh34">
@@ -48,15 +55,7 @@
                         <img class="item-icon58" loading="lazy" alt="" src="./image/icon4.png" />
                     </div>
                     <div class="strong-q-a-wrapper3">
-                        <b class="strong-q18" id="strongQ"><a href="qnaboarddetail.jsp">Q & A</a></b>
-                    </div>
-                    <div class="review-container-container">
-                        <div class="review-container3">
-                            <div class="reviews-wrapper9">
-                                <div class="reviews17"><a href="review.jsp">REVIEWS</a></div>
-                            </div>
-                            <div class="emphasis16"></div>
-                        </div>
+                        <b class="strong-q18" id="strongQ"><a href="qnaboardmainProc.jsp">Q & A</a></b>
                     </div>
                 </div>
             </div>
@@ -101,10 +100,10 @@
 
             <img class="icon215" alt="" src="./image/icon3.png" />
             <div class="link94" id="linkContainer">
-                <a href="/catshap/user_join.jsp">회원가입</a>
+                <a class="a66" href="user_join.jsp">회원가입</a>
             </div>
             <img class="icon216" alt="" src="./image/catSvg4.svg" />
-            <a class="a67" id="text3">주문정보</a>
+            <a class="a67" id="text3" href="user_orders_page.jsp">주문정보</a>
         </div>
         <div class="div423">
             <div class="child11"></div>

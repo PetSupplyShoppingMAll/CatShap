@@ -6,4 +6,22 @@
         FROM PRODUCT
         WHERE PRODNAME LIKE '%' || #{keyword} || '%'
     </select>
+    
+    
+    <select id="getProductByQnaNo" parameterType="int" resultType="catshap.butler.bean.QnaProduct">
+	    SELECT 
+	        q.QNANO,
+	        p.PRODNO, 
+	        p.PRODNAME, 
+	        pi.PRODIMGPATH,
+	        pp.PRODPRICE
+	    FROM 
+	        PRODUCT p
+	    LEFT JOIN PRODIMAGE pi ON p.PRODNO = pi.PRODNO
+	    LEFT JOIN PRODPRICE pp ON p.PRODNO = pp.PRODNO	
+	    LEFT JOIN QNA q ON p.PRODNO = q.PRODNO 
+	    WHERE 
+	        q.QNANO = #{qnano}
+	        AND p.PRODNO != 9999
+	</select>
 </mapper>

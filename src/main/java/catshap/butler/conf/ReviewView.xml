@@ -15,11 +15,10 @@
     </select>
     
     <insert id="registReview" parameterType="ReviewView"> 
-    	INSERT INTO REVIEW VALUES (seq_reviewno.nextval, #{userNo},
+    	INSERT INTO REVIEW VALUES (seq_review.nextval, #{userNo},
     	#{prodNo}, #{revTitle}, #{revText}, sysdate, NULL ,#{revScore})
     </insert>
     
-    <!-- 리뷰 목록을 페이지네이션하여 조회하는 쿼리 -->
 	<select id="userReviewPage" parameterType="map" resultType="ReviewView">
 	    SELECT * FROM (
 	        SELECT
@@ -38,8 +37,6 @@
 	    ) WHERE rnum BETWEEN #{offset} AND #{pageSize}
 	</select>
 
-	
-	<!-- 사용자의 리뷰 총 개수를 조회하는 쿼리 -->
 	<select id="countUserReviews" parameterType="int" resultType="int">
 	    SELECT COUNT(*) FROM review
 	    WHERE userno = #{userNo}

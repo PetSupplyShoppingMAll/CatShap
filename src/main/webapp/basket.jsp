@@ -138,14 +138,10 @@
 </style>
   </head>
   <body>
-
-
-
-  
+<jsp:include page="header.jsp"></jsp:include>
     <div class="c-01">
       <div class="item"></div>
       <div class="item1"></div>
-      <section class="cart-product"></section>
       <section class="c-01-inner">
         <div class="frame-parent">
           <div class="frame-wrapper">
@@ -420,7 +416,7 @@
                        data-prodimgpath="${basket.prodimgpath}" data-proddescript="${basket.proddescript}">
 				</div>
 				<div class="product-number">${basket.prodNo}</div>
-                <div><img src="${basket.prodimgpath}" /></div>
+                <div><img src="/catshap/image/${basket.prodimgpath}" /></div>
                 <div>${basket.proddescript}</div>
                 <div class="product-price">${basket.prodPrice}원</div>
                 <div class="total-price">0원</div>

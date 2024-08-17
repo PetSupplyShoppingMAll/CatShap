@@ -24,7 +24,7 @@ function loadQnas() {
                     }else{
 					 	productInfo = '<img src="./image/' + qna.prodImgPath 
                     	+ '"  style="width: 50px; height: 50px;"> ' 
-                   	 	+'<a href="#">'+ qna.prdoTitleName+'</a>';
+                   	 	+'<a href="productView.jsp?prodNo=' + qna.prodNo + '">'+ qna.prodTitleName+'</a>';
 					}
                     
                     const shortText = qna.qnaText.length > 15 ? qna.qnaText.substring(0, 15) + '...' : qna.qnaText;
@@ -34,7 +34,7 @@ function loadQnas() {
                         '<td>' + qna.qnaCatName + '</td>' +
                         '<td>' + productInfo + '</td>' +
                         '<td>' + qna.qnaTitle + '</td>' +
-                        '<td><a href="#">' + shortText + '</a></td>' +
+                        '<td><a href="qnaboarddetail.jsp?qnano=' + qna.qnaNo + ' ">' + shortText + '</a></td>' +
                         '<td>' + qna.unick + '</td>' +
                         '<td>' + qna.qnaRegdate + '</td>' +
                         '</tr>');

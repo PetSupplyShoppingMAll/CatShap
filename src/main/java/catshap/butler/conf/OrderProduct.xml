@@ -11,7 +11,7 @@
 		SELECT
 		    O.ORDDATE,             
 		    O.ORDNO,                  
-		    P.PRDOTITLENAME,     
+		    P.PRODTITLENAME,     
 		    OP.ORDPRODAMT,       
 		    OP.ORDPRODPRICE,   
 		    D.DELSTATUS         
@@ -30,7 +30,7 @@
 	<resultMap id="MyOrderProductMap" type="MyOrderProduct">
         <result column="ORDDATE" property="ordDate" />
         <result column="ORDNO" property="ordNo" />
-        <result column="PRDOTITLENAME" property="ordDescript" />
+        <result column="PRODTITLENAME" property="ordDescript" />
         <result column="ORDPRODAMT" property="ordProdAmt" />
         <result column="ORDPRODPRICE" property="ordProdPrice" />
         <result column="DELSTATUS" property="delStatus" />

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="qna">
+<mapper namespace="qnaBoard">
 
     <insert id="insertQna" parameterType="catshap.butler.bean.QnaBoard">
         <selectKey keyProperty="qnano" order="BEFORE" resultType="int">
@@ -9,24 +9,34 @@
         INSERT INTO QNA (QNANO, USERNO, PRODNO, QNACATNO, QNATITLE, QNATEXT, QNAREGDATE, QNAUPDATE, QSORT)
         VALUES (#{qnano}, #{userno}, #{prodno}, #{qnacatno}, #{qnatitle}, #{qnatext}, #{qnaregdate}, #{qnaupdate,jdbcType=TIMESTAMP}, #{qsort})
     </insert>
+    
+    <insert id="registQnaBoard" parameterType="catshap.butler.bean.QnaBoard">
+        insert into qna(qnano, userno, prodno, qnacatno, qnatitle, qnatext, qnaregdate, qnaupdate)
+        values(seq_qnano.nextval, #{userno}, #{prodno}, #{qnacatno}, #{qnatitle}, #{qnatext}, sysdate, sysdate)
+    </insert>
 
-	<select id="selectQnaBoardList" parameterType="catshap.butler.bean.Search" resultType="catshap.butler.bean.QnaBoard">
-	    SELECT QNACATNO, QNATITLE, USERNO, QNAREGDATE 
-	    FROM QNA
-	    WHERE 1=1
-	   <if test="bsort!=null">
-			and qsort=#{qsort}
-		</if>
-		<if test="searchKeyword!=null and searchKeyword=='btitle'">
-			and qnatitle like '%'||#{searchValue}||'%'
-		</if>
-		<if test="searchKeyword!=null and searchKeyword=='bcontent'">
-			and qnatext like '%'||#{searchValue}||'%'
-		</if>
-		<if test="searchKeyword!=null and (searchKeyword!='btitle' and searchKeyword!='bcontent')">
-			and (qnatitle like '%'||#{searchValue}||'%' or qnatext like '%'||#{searchValue}||'%')
-		</if>
-		order by bid desc
+	<select id="selectQnaBoard" parameterType="catshap.butler.bean.Search" resultType="catshap.butler.bean.QnaBoard">
+	    SELECT q.*, u.uname 
+	    FROM qna q
+	    JOIN users u ON q.userno = u.userno
+	    WHERE 1 = 1
+	    <if test="qnacatno != null and qnacatno != ''">
+	        AND q.qnacatno = #{qnacatno}
+	    </if>
+	    <if test="searchKeyword != null and searchKeyword != ''">
+	        <choose>
+	            <when test="searchKeyword == 'qnatitle'">
+	                AND q.qnatitle LIKE '%' || COALESCE(#{searchValue}, '') || '%'
+	            </when>
+	            <when test="searchKeyword == 'qnatext'">
+	                AND q.qnatext LIKE '%' || COALESCE(#{searchValue}, '') || '%'
+	            </when>
+	            <otherwise>
+	                AND (q.qnatitle LIKE '%' || COALESCE(#{searchValue}, '') || '%' OR q.qnatext LIKE '%' || COALESCE(#{searchValue}, '') || '%')
+	            </otherwise>
+	        </choose>
+	    </if>
+	    ORDER BY q.qnano DESC
 	</select>
 
     <select id="getQnaBoard" parameterType="int" resultType="catshap.butler.bean.QnaBoard">    
@@ -47,4 +57,13 @@
         DELETE FROM QNA 
         WHERE QNANO = #{qnano}
     </delete>
+    
+     <select id="getUserByUserNo" parameterType="int" resultType="catshap.butler.bean.Users">
+	    SELECT UNAME
+	    FROM users
+	    WHERE userno = #{userno}
+	</select>
+	
+	
+	
 </mapper>

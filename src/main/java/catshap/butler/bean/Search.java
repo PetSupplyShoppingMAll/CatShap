@@ -2,26 +2,27 @@ package catshap.butler.bean;
 
 public class Search {
 
-	private String qsort;
+	private String qnacatno;
 	private String searchKeyword;
 	private String searchValue;
+	private int userNo;
 
 	public Search() {
 	}
 
-	public Search(String qsort, String searchKeyword, String searchValue) {
+	public Search(String qnacatno, String searchKeyword, String searchValue) {
 		super();
-		this.qsort = qsort;
+		this.qnacatno = qnacatno;
 		this.searchKeyword = searchKeyword;
 		this.searchValue = searchValue;
 	}
 
-	public String getQsort() {
-		return qsort;
+	public String getQnacatno() {
+		return qnacatno;
 	}
 
-	public void setQsort(String qsort) {
-		this.qsort = qsort;
+	public void setQnacatno(String qnacatno) {
+		this.qnacatno = qnacatno;
 	}
 
 	public String getSearchKeyword() {
@@ -40,9 +41,17 @@ public class Search {
 		this.searchValue = searchValue;
 	}
 
-	@Override
-	public String toString() {
-		return "Search [qsort=" + qsort + ", searchKeyword=" + searchKeyword + ", searchValue=" + searchValue + "]";
+	public int getUserNo() {
+		return userNo;
 	}
 
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
+
+	@Override
+	public String toString() {
+		return "Search [qnacatno=" + qnacatno + ", searchKeyword=" + searchKeyword + ", searchValue=" + searchValue
+				+ "]";
+	}
 }

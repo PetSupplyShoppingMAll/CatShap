@@ -15,7 +15,8 @@ public class QnaBoard implements Serializable {
 	private String qnatext; // 내용
 	private Timestamp qnaregdate; // 등록날짜
 	private Timestamp qnaupdate; // 수정날짜
-	private String qsort; // 정렬
+
+	private String uname;
 
 	public QnaBoard() {
 	}
@@ -84,33 +85,18 @@ public class QnaBoard implements Serializable {
 		this.qnaupdate = qnaupdate;
 	}
 
-	public String getQsort() {
-		return qsort;
+	public String getUname() {
+		return uname;
 	}
 
-	public void setQsort(String qsort) {
-		this.qsort = qsort;
+	public void setUname(String uname) {
+		this.uname = uname;
 	}
 
 	@Override
 	public String toString() {
 		return "QnaBoard [qnano=" + qnano + ", userno=" + userno + ", prodno=" + prodno + ", qnacatno=" + qnacatno
 				+ ", qnatitle=" + qnatitle + ", qnatext=" + qnatext + ", qnaregdate=" + qnaregdate + ", qnaupdate="
-				+ qnaupdate + ", qsort=" + qsort + "]";
+				+ qnaupdate + ", uname=" + uname + "]";
 	}
-
-	public QnaBoard(int qnano, int userno, int prodno, int qnacatno, String qnatitle, String qnatext, String qnaimg1,
-			String qnaimg2, Timestamp qnaregdate, Timestamp qnaupdate, String qsort) {
-		super();
-		this.qnano = qnano;
-		this.userno = userno;
-		this.prodno = prodno;
-		this.qnacatno = qnacatno;
-		this.qnatitle = qnatitle;
-		this.qnatext = qnatext;
-		this.qnaregdate = qnaregdate;
-		this.qnaupdate = qnaupdate;
-		this.qsort = qsort;
-	}
-
 }
