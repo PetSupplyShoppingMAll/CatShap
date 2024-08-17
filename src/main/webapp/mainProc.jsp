@@ -9,7 +9,6 @@
 	List<Main> listMain = ii.selectMain();
 	RequestDispatcher rd = request.getRequestDispatcher("main.jsp");
 	
-	System.out.println(listMain);
 	request.setAttribute("listMain", listMain);
 	rd.forward(request, response);
 %>

@@ -117,7 +117,6 @@ const requestPay = (formData, orders, prodDescript, email) => {
             window.location.href = 'user_orders_page.jsp';
         } else {
             var msg = '결제에 실패하였습니다.' + rsp.error_msg;
-            updateOrdStatus(orders.ordNo, '주문실패');
             alert(msg);
         }
     });

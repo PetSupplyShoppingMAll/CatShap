@@ -17,58 +17,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <%
-	request.setCharacterEncoding("utf-8");
-
 	Users user = (Users)session.getAttribute("user");
 	int userNo = user.getUserNo();
-	
-	ProductInterface pi = new ProductDao();	
-	String purchaseType = request.getParameter("purchaseType");
-	int prodNo, prodCnt;
-	
-	if (purchaseType.equalsIgnoreCase("direct")) {	// 단일 상품 구매할 경우
-		prodNo = Integer.parseInt(request.getParameter("prodNo"));
-		prodCnt = Integer.parseInt(request.getParameter("prodCnt"));
-		
-		Product product = pi.selectProduct(prodNo);
-		request.setAttribute("product", product);
-		request.setAttribute("prodCnt", prodCnt);
-		request.setAttribute("prodTotalPrice", prodCnt * (product.getProdPrice()));
-		request.setAttribute("basketProductList", null);
-	} else {	// 장바구니에서 상품 구매할 경우
-		String[] prodNos = request.getParameterValues("prodno[]");
-	    String[] quantities = request.getParameterValues("quantity[]");
-	    String[] prices = request.getParameterValues("price[]");
-	    String[] prodimgpath = request.getParameterValues("prodimgpath[]");
-	    String[] proddescript = request.getParameterValues("proddescript[]");
-	    
-	    Map<Integer, String> prodimgpathMap = new HashMap<>();
-	    Map<Integer, String> proddescriptMap = new HashMap<>();
-	    int totalProductCount = 0;
-		int prodTotalPrice = 0;
-		
-	    ArrayList<OrderProduct> orderProducts = new ArrayList<>();
-	    if (prodNos != null && quantities != null && prices != null) {
-	        int prodNosLeng = prodNos.length;
-	        for (int i = 0; i < prodNosLeng; i++) {
-	            OrderProduct orderProduct = new OrderProduct();
-	            orderProduct.setProdNo(Integer.parseInt(prodNos[i]));
-	            orderProduct.setOrdProdAmt(Integer.parseInt(quantities[i]));
-	            orderProduct.setOrdProdPrice(Integer.parseInt(prices[i]));
-	            orderProducts.add(orderProduct);
-	            prodimgpathMap.put(Integer.parseInt(prodNos[i]), prodimgpath[i]);
-	            proddescriptMap.put(Integer.parseInt(prodNos[i]), proddescript[i]);
-	            totalProductCount += orderProduct.getOrdProdAmt();
-	            prodTotalPrice += orderProduct.getOrdProdPrice();
-	        }
-	    }
-		
-		request.setAttribute("basketProductList", orderProducts);
-		request.setAttribute("prodimgpathMap", prodimgpathMap);
-		request.setAttribute("proddescriptMap", proddescriptMap);
-		request.setAttribute("prodCnt", totalProductCount);
-		request.setAttribute("prodTotalPrice", prodTotalPrice);
-	}
 %>
 
 <!DOCTYPE html>
