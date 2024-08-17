@@ -13,6 +13,7 @@
 		<typeAlias type="catshap.butler.bean.ReviewView" alias="ReviewView" />
 		<typeAlias type="catshap.butler.bean.Orders" alias="Orders" />
 		<typeAlias type="catshap.butler.bean.OrderProduct" alias="OrderProduct" />
+		<typeAlias type="catshap.butler.bean.MyOrderProduct" alias="MyOrderProduct" />
 		<typeAlias type="catshap.butler.bean.Delivery" alias="Delivery" />
 		<typeAlias type="catshap.butler.bean.Pay" alias="Pay" />
 		<typeAlias type="catshap.butler.bean.Basket" alias="Basket" />

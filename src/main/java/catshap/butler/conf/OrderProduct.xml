@@ -7,4 +7,33 @@
 		values (seq_ordProdNo.nextval, #{prodNo}, #{ordNo}, #{ordProdAmt}, #{ordProdPrice})
 	</insert>
 	
+	<select id="getMyOrderProductList" parameterType="int" resultMap="MyOrderProductMap">
+		SELECT
+		    O.ORDDATE,             
+		    O.ORDNO,                  
+		    P.PRDOTITLENAME,     
+		    OP.ORDPRODAMT,       
+		    OP.ORDPRODPRICE,   
+		    D.DELSTATUS         
+		FROM 
+		    ORDERS O
+		JOIN 
+		    ORDERPRODUCT OP ON O.ORDNO = OP.ORDNO  
+		JOIN 
+		    PRODUCT P ON OP.PRODNO = P.PRODNO      
+		LEFT JOIN 
+		    DELIVERY D ON O.ORDNO = D.ORDNO        
+		WHERE 
+		    O.USERNO = #{userNo}             
+	</select>
+	
+	<resultMap id="MyOrderProductMap" type="MyOrderProduct">
+        <result column="ORDDATE" property="ordDate" />
+        <result column="ORDNO" property="ordNo" />
+        <result column="PRDOTITLENAME" property="ordDescript" />
+        <result column="ORDPRODAMT" property="ordProdAmt" />
+        <result column="ORDPRODPRICE" property="ordProdPrice" />
+        <result column="DELSTATUS" property="delStatus" />
+    </resultMap>
+	
 </mapper>

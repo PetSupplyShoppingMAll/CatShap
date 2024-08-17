@@ -86,7 +86,7 @@
     <script src="./js/productOrders.js"></script>
 </head>
 <body>
-    <%@include file="header.jsp" %>
+    <jsp:include page="header.jsp"></jsp:include>
     <main id="main">
         <form id="paymentForm" action="/orders/register" method="post">
         <input type="hidden" name="prodNo" value="${product.prodNo}" />
