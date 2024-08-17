@@ -9,9 +9,16 @@
     <link rel="stylesheet" href="./css/global.css" />
     <link rel="stylesheet" href="./css/qnaboardmain.css" />   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="js/user_orders.js"></script> 
+    <script src="./js/qna.js"></script>
 </head>
 <body>
+	 <script type="text/javascript">
+      var qnaBoardJson = '<%= request.getAttribute("qnaBoardJson") %>';
+      var qnaBoardList = JSON.parse(qnaBoardJson);
+      
+      window.qnaBoardList = qnaBoardList;
+    </script>
+
 	<jsp:include page="header.jsp"></jsp:include>
     <div class="div">
       <main class="container">
@@ -53,37 +60,24 @@
 				<input type="submit" value="검색" />
 		    </form>
             </div>
-            <div class="question-list">
-              <div class="tablecontainer">                
-                <table>
-                  <thead>
-                    <tr>
-                      <th>카테고리</th>
-                      <th>제목</th>
-                      <th>작성자</th>
-                      <th>작성일</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-					<c:forEach var="qna" items="${qnaBoardList}">
-					    <tr onclick="location.href='qnaboarddetail.jsp?qnano=${qna.qnano}'" style="cursor:pointer;">
-					        <td>
-					            <c:choose>
-					                <c:when test="${qna.qnacatno == 1}">상품문의</c:when>
-					                <c:when test="${qna.qnacatno == 2}">배송문의</c:when>
-					                <c:when test="${qna.qnacatno == 3}">기타문의</c:when>
-					                <c:otherwise>알 수 없음</c:otherwise>
-					            </c:choose>
-					        </td>
-					        <td>${qna.qnatitle}</td>
-					        <td>${qna.uname}</td>
-					        <td><fmt:formatDate value="${qna.qnaregdate}" pattern="yy/MM/dd HH:mm"/></td>
-					    </tr>
-					</c:forEach>
-				  </tbody>
-                </table>   
-              </div>
-            </div>
+			    <div class="question-list">
+			        <div class="tablecontainer">
+			            <table>
+			                <thead>
+			                    <tr>
+			                        <th>카테고리</th>
+			                        <th>제목</th>
+			                        <th>작성자</th>
+			                        <th>작성일</th>
+			                    </tr>
+			                </thead>
+			                <tbody id="qnaTableBody">
+			                </tbody>
+			                <div id="pagination">
+            				</div>
+			            </table>
+			        </div>
+			    </div>
             <div class="footer-action">
               <div class="navigation-links">
                 <div class="shopping-link-wrapper">

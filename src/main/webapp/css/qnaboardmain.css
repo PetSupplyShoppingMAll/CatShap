@@ -91,6 +91,9 @@
   width: 758.6px;
   justify-content: space-between;
   gap: var(--gap-xl);
+  position: relative;
+  top: 200px;
+  right: 250px;
   max-width: 100%;
 }
 
@@ -295,6 +298,7 @@
   justify-content: space-between;
   padding: 0 0 9.5px;
   box-sizing: border-box;
+  margin-right: 20px;
   gap: var(--gap-xl);
   text-align: left;
   font-size: var(--font-size-smi);
@@ -474,6 +478,7 @@ td:last-child {
 .div86 {
   flex: 1;
   position: relative;
+  color: white;
   line-height: 19px;
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 }
@@ -481,6 +486,7 @@ td:last-child {
 .link6 {
   align-self: stretch;
   border-radius: var(--br-10xs);
+  width: 100px;
   background-color: var(--color-darkslategray-100);
   display: flex;
   flex-direction: row;
@@ -506,6 +512,8 @@ td:last-child {
 .navigation-links,
 .q-a-container {
   display: flex;
+  margin-right: 25px;
+  margin-top: 20px;
   flex-direction: row;
   max-width: 100%;
 }
@@ -676,7 +684,6 @@ td:last-child {
 
 .container,
 .div {
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -688,7 +695,9 @@ td:last-child {
   align-self: stretch;
   flex-shrink: 0;
   padding: var(--padding-40xl-3) 252px 112px;
-  gap: 309px;
+  position: relative;
+     row-gap: 300px;
+     top:100px;
   max-width: 102%;
   z-index: 2;
   margin-top: -42px;
@@ -700,10 +709,14 @@ td:last-child {
 
 .div {
   width: 1909px;
-  height: 2262px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 400px;
   background-color: var(--color-white);
   max-width: 100%;
-  padding: 0 7px 2041px 2px;
+  padding: 0 7px 1000px 2px;
   line-height: normal;
   letter-spacing: normal;
 }

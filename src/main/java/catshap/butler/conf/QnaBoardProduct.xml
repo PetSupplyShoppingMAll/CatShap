@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="catshap.butler.interfaces.QnaBoardProductDaoInterface">
-    <select id="searchProductsByName" parameterType="string" resultType="QnaProduct">
-        SELECT PRODNO, PRODNAME
-        FROM PRODUCT
-        WHERE PRODNAME LIKE '%' || #{keyword} || '%'
+        <select id="searchProductsByName" parameterType="string" resultType="QnaProduct">
+        SELECT 
+           p.PRODNO,
+           p.PRODNAME, 
+           pi.PRODIMGPATH,
+           pp.PRODPRICE
+       FROM 
+           PRODUCT p
+       JOIN PRODIMAGE pi ON p.PRODNO = pi.PRODNO
+       JOIN PRODPRICE pp ON p.PRODNO = pp.PRODNO   
+        WHERE 
+           p.PRODNAME LIKE '%' || #{keyword} || '%'
     </select>
-    
+
     
     <select id="getProductByQnaNo" parameterType="int" resultType="catshap.butler.bean.QnaProduct">
 	    SELECT 
