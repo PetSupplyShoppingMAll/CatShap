@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import catshap.butler.bean.Grade;
 import catshap.butler.bean.UserAuthcode;
 import catshap.butler.bean.Users;
 import catshap.butler.interfaces.UserInterface;
@@ -172,6 +173,13 @@ public class UserDao implements UserInterface {
 		ss.commit();
 		ss.close();
 		return result;
+	}
+	
+	@Override
+	public Grade getUserGrade(int userNo) throws SQLException {
+	    try (SqlSession ss = openSession()) {
+	        return ss.selectOne("usergrade.getUserGrade", userNo);
+	    }
 	}
 
 }

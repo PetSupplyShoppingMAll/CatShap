@@ -42,4 +42,19 @@
 	    WHERE userno = #{userNo}
 	</select>
     
+    <select id="selectUserReviewList" parameterType="int" resultType="ReviewView">
+    	SELECT
+            P.PRODNO,P.PRODTITLENAME,
+            U.USERNO,U.UNICK,
+            R.REVIEWNO,R.REVTITLE,R.REVTEXT,R.REVREGDATE,R.REVSCORE,
+            I.PRODIMGNO,I.PRODIMGPATH 
+        FROM
+            REVIEW R
+            JOIN PRODUCT P ON P.PRODNO = R.PRODNO
+            JOIN USERS U ON U.USERNO = R.USERNO
+            JOIN PRODIMAGE I ON I.PRODNO  = P.PRODNO 
+        WHERE
+        	U.USERNO = #{userNo}
+    </select>
+    
 </mapper>

@@ -3,8 +3,6 @@ package catshap.butler.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import catshap.butler.bean.ReviewView;
 import catshap.butler.bean.Users;
@@ -24,50 +23,36 @@ import catshap.butler.interfaces.ReviewViewInterface;
 public class UserGetReviewServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1156746531545L;
-    private ReviewViewInterface reviewDao;
+    private ReviewViewInterface ri;
 
     @Override
     public void init() throws ServletException {
         // Initialize ReviewViewDao directly
-        reviewDao = new ReviewViewDao();
+        ri = new ReviewViewDao();
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
 
-        if (user == null) {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "User not logged in");
-            return;
-        }
-
         int userNo = user.getUserNo();
-        int page = Integer.parseInt(request.getParameter("page"));
-        int pageSize = Integer.parseInt(request.getParameter("pageSize"));
-
         try {
-            // Fetch the reviews for the user with pagination
-            List<ReviewView> reviews = reviewDao.userReviewPage(userNo, page, pageSize);
-            int totalReviews = reviewDao.countUserReviews(userNo);
-            int totalPages = (int) Math.ceil((double) totalReviews / pageSize);
+            List<ReviewView> reviews = ri.selectUserReviewList(userNo);
 
-            // Create a response map
-            Map<String, Object> responseMap = new HashMap<>();
-            responseMap.put("reviews", reviews);
-            responseMap.put("totalPages", totalPages);
-            responseMap.put("currentPage", page);
+            // 응답 객체 생성
+            JsonObject jsonResponse = new JsonObject();
+            jsonResponse.add("reviews", new Gson().toJsonTree(reviews));
 
-            // Set the response type to JSON
             response.setContentType("application/json");
             PrintWriter out = response.getWriter();
-            Gson gson = new Gson();
-            // Write the map as JSON
-            out.print(gson.toJson(responseMap));
+            out.print(jsonResponse.toString()); // 응답 객체를 JSON으로 변환하여 출력
             out.flush();
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error retrieving reviews");
         }
     }
+
 }

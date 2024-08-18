@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
 
+import catshap.butler.bean.Grade;
 import catshap.butler.bean.Users;
 import catshap.butler.dao.UserDao;
 import catshap.butler.interfaces.UserInterface;
@@ -44,6 +45,11 @@ public class UserLoginServlet extends HttpServlet {
             if (user != null) {
                 session.setAttribute("user", user);
 
+                // 사용자 등급 정보를 조회하고 세션에 저장
+                Grade grade = userDao.getUserGrade(user.getUserNo());
+                String gradeName = (grade != null) ? grade.getGname() : "Unknown"; // grade.getGname() 메서드로 등급 이름 가져오기
+                session.setAttribute("userGrade", gradeName);
+                
                 jsonResponse.addProperty("success", true);
                 jsonResponse.addProperty("uname", user.getUname());
                 jsonResponse.addProperty("unick", user.getUnick());

@@ -36,6 +36,7 @@
 	</environments>
 	<mappers>
 		<mapper resource="catshap/butler/conf/User.xml"/>
+		<mapper resource="catshap/butler/conf/UserGrade.xml"/>
 		<mapper resource="catshap/butler/conf/UserAuthcode.xml"/>
 		<mapper resource="catshap/butler/conf/Product.xml" />
 		<mapper resource="catshap/butler/conf/ProductView.xml" />

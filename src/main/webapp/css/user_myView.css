@@ -1,4 +1,7 @@
 /* user_myReview.css */
+#searchform {
+	float: right;
+}
 /* 기본 별 아이콘 스타일 */
 .star-rating {
     font-size: 20px; /* 별 크기 조정 */
@@ -275,6 +278,8 @@ li {
 }
 .sp--box > ul {
     display: flex;
+    float: left;
+    gap: var(--font-size-smi);
 }
 .sp__layout_panel__left {
     top: 0;

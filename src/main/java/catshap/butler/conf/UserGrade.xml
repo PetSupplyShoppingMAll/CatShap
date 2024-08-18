@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="usergrade">
+
+    <resultMap id="GradeResultMap" type="Grade">
+        <id property="gradeNo" column="GRADENO"/>
+        <result property="gname" column="GNAME"/>
+        <result property="gbenefit" column="GBENEFIT"/>
+    </resultMap>
+
+    <select id="getUserGrade" parameterType="int" resultMap="GradeResultMap">
+        SELECT g.GRADENO, g.GNAME, g.GBENEFIT
+        FROM USERS u
+        JOIN GRADE g ON g.GRADENO = u.GRADENO
+        WHERE u.USERNO = #{userNo}
+    </select>
+
+</mapper>
