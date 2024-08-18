@@ -34,8 +34,8 @@
                 </div>
                 <div class="orders-list-container">
                     <ul class="tab-menu">
-					    <li class="tab active" data-title="주문 상품 정보" data-subtitle="/ 아래 주문 상품 정보을(를) 확인하세요." data-ordstatus="주문완료">주문내역조회 (<span id="recentOrdersAmt">${myOrderProductCnt}</span>)</li>
-					    <li class="tab" data-title="취소/반품/교환" data-subtitle="/ 아래 취소/반품/교환을(를) 확인하세요." data-ordstatus="주문취소">취소/반품/교환 내역 (<span id="cancelOrdersAmt">0</span>)</li>
+					    <li class="tab active" data-title="주문 상품 정보" data-subtitle="/ 아래 주문 상품 정보을(를) 확인하세요." data-ordstatus="주문완료">주문내역조회 (<span id="recentOrdersAmt">${myOrderSuccessCnt}</span>)</li>
+					    <li class="tab" data-title="취소/반품/교환" data-subtitle="/ 아래 취소/반품/교환을(를) 확인하세요." data-ordstatus="주문취소">취소/반품/교환 내역 (<span id="cancelOrdersAmt">${myOrderCancelCnt}</span>)</li>
 					    <li class="tab" data-title="이전 주문 내역" data-subtitle="과거 주문 내역들을 조회할 수 있습니다." data-ordstatus="과거이력">과거주문내역 (<span id="beforeOrdersAmt">0</span>)</li>
 					</ul>
                 </div>
@@ -54,22 +54,6 @@
                             <li>주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
                             <li>취소/교환/반품 신청은 배송완료일 기준 7일까지만 가능합니다.</li>
                         </ul>
-                        <div class="order-actions">
-                            <button id="totalOrderBtn" class="status-btn">전체 주문처리상태</button>
-                            <div class="date-buttons">
-                                <button id="todayOrderBtn" class="date-btn">오늘</button>
-                                <button id="oneWeekOrderBtn" class="date-btn">1주일</button>
-                                <button id="oneMonthOrderBtn" class="date-btn">1개월</button>
-                                <button id="threeMonthOrderBtn" class="date-btn">3개월</button>
-                                <button id="sixMonthOrderBtn" class="date-btn">6개월</button>
-                            </div>
-                            <div class="date-picker">
-                                <input type="date" id="startDate">
-                                <span>~</span>
-                                <input type="date" id="endDate">
-                            </div>
-                            <button id="orderSearchBtn" class="search-btn">조회하기</button>
-                        </div>
                     </div>
                 </div>
                 <div class="order-info-container">

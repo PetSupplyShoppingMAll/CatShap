@@ -53,7 +53,7 @@
 							</button>     
 							<div class="profile-info">
 				              <nav class='profile-nav'>
-				                <a href='/catshap/userOrdersPageProc.jsp?ordStatus=주문완료'>주문내역</a>
+				                <a href='/catshap/userOrdersPageProc.jsp'>주문내역</a>
 				                <a href='/catshap/user_modify.jsp'>회원정보 수정</a>
 				                <a href='/catshap/user_myReview.jsp'>내 리뷰 보기</a>
 				                <a href='/catshap/user_myQnA.jsp'>내 게시글 보기</a>

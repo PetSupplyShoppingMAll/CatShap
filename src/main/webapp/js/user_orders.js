@@ -12,8 +12,6 @@ $(function () {
         event.preventDefault();
         currentPage = parseInt($(this).text());
         getMyOrderProductList($(this));
-        //renderOrders(orders);
-        //renderPaging();
     });
     
     // 클릭한 메뉴 활성화
@@ -31,10 +29,11 @@ const getMyOrderProductList = ordStatus => {
 	$.ajax({
         type: 'GET',
         url: `/catshap/userOrdersPageProc.jsp?ordStatus=${ordStatus}`,
+        dataType: 'json',
         success: function (response) {
-            if (response.success) {
-				console.log(response);
-				alert('내 주문 정보 확인 성공!!');
+            if (response.length > 0) {
+				renderOrders(response);
+				renderPaging();
             } else {
                 alert("내 주문 정보 확인 실패...");
             }
@@ -52,7 +51,7 @@ const renderOrders = orders => {
     const tbody = $('.order-tbody');
     const noOrderContainer = $('.order-table-none');
 
-    tbody.empty();
+    tbody.empty(); 
 
     if (orders.length === 0) {
         // 주문 내역이 없을 경우
@@ -66,12 +65,12 @@ const renderOrders = orders => {
         for (let i = startIndex; i < endIndex; i++) {
             let order = orders[i];
             let row = `<tr class="orders-tr">
-                            <td>${order.orderDate} / ${order.orderNumber}</td>
-                            <td><img src="상품 이미지 경로" alt="이미지"></td>
-                            <td>${order.productName}</td>
-                            <td>${order.quantity}</td>
-                            <td>${order.price}원</td>
-                            <td>${order.status}</td>
+                            <td>${order.ordDate} / ${order.ordNo}</td>
+                            <td><img src="/catshap/image/${order.prodImgPath}" alt="${order.ordDescript} 이미지"></td>
+                            <td>${order.ordDescript}</td>
+                            <td>${order.ordProdAmt}</td>
+                            <td>${order.ordProdPrice}원</td>
+                            <td>${order.ordStatus}</td>
                             <td><button id=orderCancelBtn${i + 1} class="orderCancelBtn">취소/교환/반품</button></td>
                         </tr>`;
             tbody.append(row);
