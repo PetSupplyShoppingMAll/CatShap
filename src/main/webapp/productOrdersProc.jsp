@@ -59,8 +59,6 @@
 	            prodTotalPrice += orderProduct.getOrdProdPrice();
 	        }
 	    }
-	    
-	    System.out.println(orderProducts);
 		
 		request.setAttribute("basketProductList", orderProducts);
 		request.setAttribute("prodimgpathMap", prodimgpathMap);

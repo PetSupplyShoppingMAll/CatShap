@@ -4,7 +4,6 @@
 <html>
 <%
 	Users user = (Users)session.getAttribute("user");
-	System.out.println(user);
 	if(user != null){
 		int userNo = user.getUserNo(); 
 	}

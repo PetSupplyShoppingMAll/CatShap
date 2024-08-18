@@ -16,7 +16,6 @@
 	List<Basket> basketList = bi.listBasket(userNo);
 	
 	pageContext.setAttribute("basketList", basketList);
-	System.out.println(basketList);
 	
 %>
 
@@ -393,7 +392,7 @@
                 </div>
               </div>
               
-<form id="orderForm" action="productOrders.jsp?purchaseType=basket" method="post">
+<form id="orderForm" action="productOrdersProc.jsp?purchaseType=basket" method="post">
     <input type="hidden" name="userno" value="<%= userNo %>">
 
     <ul>

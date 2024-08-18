@@ -324,8 +324,37 @@ $(function () {
     
     // 회원정보수정의 비밀번호 변경 버튼 클릭 시
     $('#changePw').on('click', () => {
-       window.location.href = 'user_change_pw.jsp';
+       window.location.href = 'user_mypage_change_pw.jsp';
    	});
+   	
+   	// 회원정보수정 비밀번호 변경의 비밀번호 변경 버튼 클릭한 경우
+    $('#userMypageChangePwBtn').on('click', (e) => {
+        e.preventDefault();
+
+        const upass = $('#upass').val().trim();
+        const upassConfirm = $('#upassConfirm').val().trim();
+        const isUpassValid = validatePassword();
+        const isEequalPassword = equalPassword(upass, upassConfirm);
+        if (isUpassValid && isEequalPassword) {
+            $.ajax({
+                type: 'POST',
+                url: '/catshap/mypage/user-pass-change',
+                data: {
+                    upass: upass
+                },
+                success: function (response) {
+                    if (response.success) {
+                        window.location.href = 'user_change_pw_ok.jsp';
+                    } else {
+                        alert('비밀번호 변경 실패...');
+                    }
+                },
+                error: function () {
+                    alert('서버 오류가 발생했습니다.');
+                }
+            });
+        }
+    });
 
     $('#modifyBtn').click((e) => {
         e.preventDefault();  // 기본 동작을 막음
