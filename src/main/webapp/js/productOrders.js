@@ -114,7 +114,7 @@ const requestPay = (formData, orders, prodDescript, email) => {
             registOrderProduct(orders);
             registDelivery(formData, orders);
             registPay(orders, 'kakaopay', '0');
-            window.location.href = 'user_orders_page.jsp';
+            window.location.href = 'userOrdersPageProc.jsp';
         } else {
             var msg = '결제에 실패하였습니다.' + rsp.error_msg;
             alert(msg);

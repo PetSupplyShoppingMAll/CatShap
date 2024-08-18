@@ -101,7 +101,7 @@
                     </table>
                     <!-- 주문 내역이 없을 경우 -->
 					<c:if test="${empty myOrderProductList}">
-					    <div class="order-table-none">
+					    <div class="order-table-none" style="display: none;">
 					        <img src="./image/order-empty-icon.png" alt="order-icon" />
 					        <p>주문 내역이 없습니다.</p>
 					    </div>

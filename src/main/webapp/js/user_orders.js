@@ -1,41 +1,38 @@
-// 한 페이지당 보여줄 주문 수
 const ordersPerPage = 10;
 let currentPage = 1;
-//const totalPages = Math.max(Math.ceil(orders.length / ordersPerPage), 1);
+let totalPages = 1;
+let currentOrdStatus = ''; // 현재 선택된 주문 상태를 저장할 변수
 
 $(function () {
-    renderPaging();
-	updateOrderTitle($('.tab-menu .tab.active'));
-	
-    // 페이징 번호 클릭 이벤트 추가
-    $('.page-link').on('click', function (event) {
-        event.preventDefault();
-        currentPage = parseInt($(this).text());
-        getMyOrderProductList($(this));
-    });
+    updateOrderTitle($('.tab-menu .tab.active'));
+    currentOrdStatus = $('.tab-menu .tab.active').data('ordstatus'); // 초기 로드 시 현재 주문 상태 설정
+    getMyOrderProductList(currentOrdStatus);
     
-    // 클릭한 메뉴 활성화
-     $('.tab-menu .tab').click(function() {
-		$('.tab-menu .tab').removeClass('active');
-    	$(this).addClass('active');
-       	updateOrderTitle($(this));
-       	getMyOrderProductList($(this).data('ordstatus'));
+    // 메뉴 클릭 이벤트 추가
+    $('.tab-menu .tab').click(function() {
+        $('.tab-menu .tab').removeClass('active');
+        $(this).addClass('active');
+        updateOrderTitle($(this));
+        currentOrdStatus = $(this).data('ordstatus'); // 현재 주문 상태 갱신
+        currentPage = 1; // 메뉴를 변경할 때마다 페이지를 1로 초기화
+        getMyOrderProductList(currentOrdStatus);
     });
-    
 });
 
-// 현재 주문내역정보 추출 메소드
+// 주문내역 추출 메소드
 const getMyOrderProductList = ordStatus => {
-	$.ajax({
+    $.ajax({
         type: 'GET',
         url: `/catshap/userOrdersPageProc.jsp?ordStatus=${ordStatus}`,
         dataType: 'json',
         success: function (response) {
             if (response.length > 0) {
-				renderOrders(response);
-				renderPaging();
+                totalPages = Math.max(Math.ceil(response.length / ordersPerPage), 1);  // 총 페이지 수 계산
+                renderOrders(response);
+                renderPaging();
             } else {
-                alert("내 주문 정보 확인 실패...");
+                renderOrders(response);
+                renderPaging();
             }
         },
         error: function () {
@@ -54,11 +51,9 @@ const renderOrders = orders => {
     tbody.empty(); 
 
     if (orders.length === 0) {
-        // 주문 내역이 없을 경우
         noOrderContainer.show(); 
         $('.orders-table').hide();
     } else {
-        // 주문 내역이 있을 경우
         noOrderContainer.hide(); 
         $('.orders-table').show(); 
 
@@ -78,21 +73,28 @@ const renderOrders = orders => {
     }
 }
 
-// 해당 페이지 번호 활성화 메소드
+// 페이징 처리 함수
 const renderPaging = () => {
-    var paging = $('#paging');
+    const paging = $('#paging');
     paging.empty();
 
-    for (let i = 1; i <= 1; i++) {
+    for (let i = 1; i <= totalPages; i++) {
         let pageItem = `<li class="page-item ${i === currentPage ? 'active' : ''}">
-                                <a href="#" class="page-link">${i}</a>
-                            </li>`;
+                            <a href="#" class="page-link" data-page="${i}">${i}</a>
+                        </li>`;
         paging.append(pageItem);
     }
+
+    // 페이지 번호 클릭 이벤트 추가 (여기서 재바인딩)
+    $('.page-link').on('click', function (event) {
+        event.preventDefault();
+        currentPage = parseInt($(this).data('page'));  // 현재 페이지 갱신
+        getMyOrderProductList(currentOrdStatus);  // 현재 페이지에 맞는 데이터 요청
+    });
 }
 
 // 선택한 메뉴별로 제목 호출 메소드
 const updateOrderTitle = activeTab => {
-	$('.order-title p').text(activeTab.data('title'));
+    $('.order-title p').text(activeTab.data('title'));
     $('.order-title .span-title-subtext').text(activeTab.data('subtitle'));
 }
