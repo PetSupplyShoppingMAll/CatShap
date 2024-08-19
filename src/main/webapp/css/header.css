@@ -1,4 +1,3 @@
-@charset "utf-8";
 
 .user {
   display: block;
@@ -694,4 +693,55 @@
     font-size: var(--font-size-13xl);
     line-height: 3px;
   }
+}
+/* 사이드바 기본 스타일 */
+.sidebar {
+    height: 100%; /* 전체 높이 설정 */
+    width: 250px; /* 사이드바 너비 설정 */
+    position: fixed; /* 화면에 고정 */
+    z-index: 1000; /* 다른 요소들보다 위에 표시 */
+    top: 0;
+    left: 0;
+    background-color: #333; /* 배경색 설정 */
+    overflow-x: hidden; /* 가로 스크롤 숨김 */
+    transition: 0.3s; /* 애니메이션 효과 */
+    padding-top: 60px; /* 상단 패딩 설정 */
+}
+
+/* 사이드바 링크 기본 스타일 */
+.sidebar a {
+    padding: 15px 20px; /* 패딩 설정 */
+    text-decoration: none; /* 밑줄 제거 */
+    color: #fff; /* 기본 글자 색상 설정 */
+    display: block; /* 블록 요소로 표시 */
+    transition: 0.3s; /* 애니메이션 효과 */
+    font-size: 14px; /* 기본 폰트 크기 설정 (작게) */
+}
+
+/* ALL 카테고리와 마이페이지 스타일 */
+#all-categories,
+#mypage {
+    font-size: 18px; /* 큰 폰트 크기 설정 */
+    color: #f1c40f; /* 특별한 색상 설정 (예: 황금색) */
+}
+
+/* ALL 카테고리와 마이페이지 호버 및 선택 스타일 */
+#all-categories:hover,
+#mypage:hover {
+    background-color: #575757; /* 호버 시 배경색 변경 */
+    color: #ffffff; /* 호버 시 글자 색상 변경 */
+}
+
+/* ALL 카테고리와 마이페이지 선택된 상태 스타일 */
+#all-categories.active,
+#mypage.active {
+    background-color: #444444; /* 선택된 링크의 배경색 */
+    color: #ffffff; /* 선택된 링크의 글자 색상 */
+    font-weight: bold; /* 선택된 링크의 글씨 굵기 */
+}
+
+/* 나머지 링크의 호버 및 선택 스타일 */
+.sidebar a:hover {
+    color: #f1f1f1; /* 호버 시 글자 색상 변경 */
+    background-color: #575757; /* 호버 시 배경색 변경 */
 }

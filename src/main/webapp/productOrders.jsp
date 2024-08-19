@@ -44,7 +44,7 @@
         <input type="hidden" name="prodDescript" value="${product.prodDescript}" />
         <input type="hidden" name="prodTotalPrice" value="${prodTotalPrice}" />
         <input type="hidden" name="ordProdAmt" value="${prodCnt}" />
-        <input type="hidden" name="basketProductList" value="${basketProductList}" />
+        <input type="hidden" name="basketProductListJson" value="${fn:escapeXml(basketProductListJson)}" />
             <p class="pay">주문/결제</p>
             <section id="main1">
                 <div id="main1Wrapper">

@@ -16,7 +16,7 @@
       var qnaBoardJson = '<%= request.getAttribute("qnaBoardJson") %>';
       var qnaBoardList = JSON.parse(qnaBoardJson);
       
-      window.qnaBoardList = qnaBoardList;
+      //window.qnaBoardList = qnaBoardList;
     </script>
 
 	<jsp:include page="header.jsp"></jsp:include>
@@ -32,10 +32,6 @@
                 <div class="qa">상품 Q&A입니다.</div>
               </div>
             </div>
-          </div>
-          <div class="parent">
-            <div class="div8"> 고객지원센터</div>
-            <div class="q-a"> Q & A</div>
           </div>
         </div>
         <section class="inquiry-row-wrapper">

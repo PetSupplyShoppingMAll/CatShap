@@ -77,10 +77,13 @@ const registOrders = () => {
             const email = response.email;
             const orders = {
                 ordNo: response.ordNo,
-                ordProdPrice: prodTotalPrice
+                ordProdPrice: prodTotalPrice,
+                ordProdAmt: $('input[name="ordProdAmt"]').val()
             };
-            const prodDescript = $('input[name="prodDescript"]').val();
-
+            let prodDescript = $('input[name="prodDescript"]').val();
+			if (prodDescript === "" || prodDescript === null) {
+				prodDescript = "catShap";
+			}
             // 결제 진행
             requestPay(formData, orders, prodDescript, email);
         },
@@ -111,7 +114,7 @@ const requestPay = (formData, orders, prodDescript, email) => {
             var msg = '결제가 완료되었습니다.';
             alert(msg);
             updateOrdStatus(orders.ordNo, '주문완료');
-            registOrderProduct(orders);
+			distPurchaseType(orders);
             registDelivery(formData, orders);
             registPay(orders, 'kakaopay', '0');
             window.location.href = 'userOrdersPageProc.jsp';
@@ -142,16 +145,29 @@ const updateOrdStatus = (ordNo, status) => {
     });
 }
 
+// 개별 구매인지 장바구니 구매 구분 메소드
+const distPurchaseType = orders => {
+	const basketProductListJson = $('input[name="basketProductListJson"]').val();
+	if (basketProductListJson === '' || basketProductListJson == null) {
+		registOrderProduct($('input[name="prodNo"]').val(), orders);
+	} else {
+		const products = JSON.parse(basketProductListJson);
+		products.forEach(product => {
+			registOrderProduct(product.prodNo, orders);
+		})
+	}
+}
+
 // 주문 상품 내역 등록 메소드
-const registOrderProduct = orders => {
+const registOrderProduct = (prodNo, orders) => {
     $.ajax({
         type: 'POST',
         url: '/catshap/orderProduct/register',
         data: {
-            prodNo: $('input[name="prodNo"]').val(),
+            prodNo: prodNo,
             ordNo: orders.ordNo,
             ordProdPrice: orders.ordProdPrice,
-            ordProdAmt: $('input[name="ordProdAmt"]').val()
+            ordProdAmt: orders.ordProdAmt
         },
         success: function (response) {
             if (response.success) {

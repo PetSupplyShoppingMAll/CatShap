@@ -16,7 +16,6 @@
    List<Basket> basketList = bi.listBasket(userNo);
    
    pageContext.setAttribute("basketList", basketList);
-   System.out.println(basketList);
    
 %>
 

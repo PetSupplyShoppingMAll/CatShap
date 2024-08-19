@@ -59,8 +59,12 @@
 	            prodTotalPrice += orderProduct.getOrdProdPrice();
 	        }
 	    }
-		
+	    Gson gson = new Gson();
+	    String basketProductListJson = "";
+	   	basketProductListJson = gson.toJson(orderProducts);
+	    
 		request.setAttribute("basketProductList", orderProducts);
+		request.setAttribute("basketProductListJson", basketProductListJson);
 		request.setAttribute("prodimgpathMap", prodimgpathMap);
 		request.setAttribute("proddescriptMap", proddescriptMap);
 		request.setAttribute("prodCnt", totalProductCount);

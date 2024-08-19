@@ -10,7 +10,7 @@
     request.setCharacterEncoding("utf-8");
     
 	Users user = (Users)session.getAttribute("user");
-	int userNo = user.getUserNo();
+	int userNo = (user != null) ? user.getUserNo() : 0;	
 	String ordStatus = request.getParameter("ordStatus");
 	boolean isVisited = true;
 	
@@ -18,7 +18,6 @@
 		isVisited = false;
 		ordStatus = "주문완료";
 	}
-
     OrderProductInterface oi = new OrderProductDao();
     List<MyOrderProduct> myOrderProductList = oi.getMyOrderProductList(userNo, ordStatus);
     int myOrderSuccessCnt = oi.getMyOrderProductCnt(userNo, "주문완료");

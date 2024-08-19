@@ -2,12 +2,8 @@
 <%@page import="catshap.butler.interfaces.UserInterface"%>
 <%@page import="catshap.butler.bean.Users"%>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%
-	Users user = (Users)session.getAttribute("user");
-%>
-    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -17,17 +13,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="./css/global.css" />
     <link rel="stylesheet" href="./css/header.css" />
-    <script src="./js/header.js"></script>
-
+     <script src="./js/header.js" defer></script> 
 </head>
-
-
 <body>
     <header class="header2">
         <div class="backgroundhorizontalbordersh34">
             <div class="backgroundhorizontalbordersh35">
+                <!-- 기존 헤더의 button30 추가 -->
                 <div class="button-wrapper8">
-                    <div class="button30">
+                    <div class="button30" onclick="openNav()">
                         <div class="background101"></div>
                         <div class="background102"></div>
                     </div>
@@ -57,13 +51,20 @@
                     <div class="strong-q-a-wrapper3">
                         <b class="strong-q18" id="strongQ"><a href="qnaboardmainProc.jsp">Q & A</a></b>
                     </div>
+                    <div class="review-container-container">
+                        <div class="review-container3">
+                            <div class="reviews-wrapper9">
+                                <div class="reviews17"><a href="review.jsp">REVIEWS</a></div>
+                            </div>
+                            <div class="emphasis16"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="horizontalborder26">
             <img class="item-icon60" loading="lazy" alt="" src="./image/imgCat.png" />
-            <div class="item43">
-            </div>
+            <div class="item43"></div>
             <div class="external-link-wrapper">
                 <div class="external-link">
                     <img class="link-icon36" loading="lazy" alt="" src="./image/catSvg1.svg" id="linkIcon" />
@@ -74,15 +75,14 @@
                 </div>
             </div>
         </div>
-        </div>
         <div class="user">
             <div class="username">${user.uname}</div>
             <c:if test="${!empty user}">
-            <div class="itis"> 님! 환영합니다</div>
-        	</c:if>
-        	<c:if test="${empty user}">
-            <div class="itis"></div>        	
-        	</c:if>
+                <div class="itis"> 님! 환영합니다</div>
+            </c:if>
+            <c:if test="${empty user}">
+                <div class="itis"></div>
+            </c:if>
         </div>
         <div>
             <img class="icon212" alt="" src="./image/icon1.png" />
@@ -117,6 +117,20 @@
                 </div>
             </div>
         </div>
+
+        <!-- 사이드바 HTML 추가 -->
+		<div id="mySidebar" class="sidebar">
+		    <a id="closeSidebar" class="closebtn">×</a>
+		    <a id="qna" href="qnaboardmainProc.jsp">Q & A</a>
+		    <a id="mypage" href="user_mypage.jsp">마이페이지</a>
+		    <a id="order-history" href="userOrdersPageProc.jsp">주문내역</a>
+		    <a id="modify-info" href="user_modify.jsp">회원정보변경</a>
+		    <a id="my-reviews" href="user_myReview.jsp">내 리뷰 보기</a>
+		    <a id="my-qna" href="user_myQnA.jsp">내 QnA 보기</a>
+		    <a id="basket" href="basket.jsp">장바구니</a>
+		</div>
+
+
     </header>
 </body>
 </html>

@@ -88,13 +88,9 @@
 }
 
 .frame-container {
-  width: 758.6px;
-  justify-content: space-between;
   gap: var(--gap-xl);
-  position: relative;
   top: 200px;
   right: 250px;
-  max-width: 100%;
 }
 
 .div9 {
@@ -332,10 +328,7 @@ td {
   text-align: left; /* 텍스트 정렬 */
 }
 
-th {
-  background-color: #f2f2f2; /* 헤더 배경색 */
-  padding: 12px;
-}
+
 
 th:first-child,
 td:first-child {
@@ -692,35 +685,20 @@ td:last-child {
 }
 
 .container {
-  align-self: stretch;
-  flex-shrink: 0;
-  padding: var(--padding-40xl-3) 252px 112px;
-  position: relative;
-     row-gap: 300px;
-     top:100px;
-  max-width: 102%;
-  z-index: 2;
-  margin-top: -42px;
-  text-align: center;
-  font-size: 22px;
-  color: var(--color-black);
-  font-family: var(--font-jost);
+  align-items: center;
+  width: 100%;
+  row-gap: 200px;
 }
-
 .div {
-  width: 1909px;
-  height: 500px;
+  margin-top: 150px; 
   display: flex;
   justify-content: center;
   position: relative;
-  top: 400px;
   background-color: var(--color-white);
   max-width: 100%;
-  padding: 0 7px 1000px 2px;
   line-height: normal;
   letter-spacing: normal;
 }
-
 @media screen and (max-width: 1200px) {
   .container {
     padding-top: var(--padding-40xl-3);
@@ -770,4 +748,178 @@ td:last-child {
   .pagination-wrapper {
     flex-wrap: wrap;
   }
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+/* Q&A 제목 스타일 */
+.strong-q1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--color-darkslategray-100);
+    letter-spacing: 1.5px;
+    margin: 0;
+}
+
+.strong-q-a-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+/* 일반 텍스트 */
+.qa {
+    font-size: 16px;
+    color: var(--color-darkgray-300);
+    margin-left: 5px;
+}
+
+.frame-div {
+    margin-bottom: 10px;
+}
+
+.parent {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* 폼 및 필터 스타일 */
+.footer-links, 
+.search-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+select, 
+input[type="text"] {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+select:focus, 
+input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* 테이블 스타일 */
+.tablecontainer {
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th, 
+td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--color-darkgray-100);
+    color: #fff;
+    font-weight: bold;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+tr:hover td {
+    background-color: #f1f1f1;
+}
+
+/* 페이지네이션 */
+#pagination {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.pagination-content a {
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0 5px;
+    transition: all 0.3s;
+}
+
+.pagination-content a:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .frame-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tablecontainer {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 20px;
+    }
+
+    th, 
+    td {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .pagination-content a {
+        padding: 8px 10px;
+        margin: 0 2px;
+    }
+}
+ a {
+ text-decoration: none;
+ }
+ 
+ /* 제출 버튼 스타일링 */
+button {
+    background-color: #ccc;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #218838; /* 호버 시 짙은 녹색 */
 }

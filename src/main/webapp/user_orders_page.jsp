@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./css/orders.css" />
     <link rel="stylesheet" href="./css/global.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./js/check_login.js" ></script>
     <script src="js/user_orders.js"></script>
 </head>
 <body>
