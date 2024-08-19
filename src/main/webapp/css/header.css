@@ -27,7 +27,6 @@
 }
 
 .header2 {
-  /* margin-top: -255.2px; */
   width: 1920px;
   margin: 0 auto;
   align-self: stretch;
@@ -41,6 +40,7 @@
   font-size: var(--font-size-smi);
   color: var(--color-darkslategray-100);
   font-family: var(--font-jost);
+  z-index: 800;
 }
 
 .backgroundhorizontalbordersh34 {
@@ -424,7 +424,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 90px;
+  width: 100px;
   height: 19px;
   cursor: pointer;
 }

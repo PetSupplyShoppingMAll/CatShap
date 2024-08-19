@@ -109,7 +109,6 @@ a {
 }
 
 .screen-desktop {
-    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -117,7 +116,7 @@ a {
 /* orders.css */
 /* 섹션 및 헤더 스타일 */
 .section-class {
-    padding: 20px;
+    padding: 115px;
     border-radius: 10px;
 }
 

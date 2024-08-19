@@ -400,6 +400,7 @@ header p {
     font-size: var(--font-size-3xl);
     color: var(--color-black);
     font-family: var(--font-jost);
+    margin-top: 75px;
 }
 
 .login-desktop {
