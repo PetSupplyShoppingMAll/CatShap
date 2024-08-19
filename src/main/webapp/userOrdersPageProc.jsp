@@ -36,6 +36,7 @@
 	    request.setAttribute("myOrderProductList", myOrderProductList);
 	    request.setAttribute("myOrderSuccessCnt", myOrderSuccessCnt);
 	    request.setAttribute("myOrderCancelCnt", myOrderCancelCnt);
+	    
 	  	RequestDispatcher rd = request.getRequestDispatcher("user_orders_page.jsp");
 	    rd.forward(request, response);
     }

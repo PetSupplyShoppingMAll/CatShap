@@ -95,7 +95,7 @@
                 <a class="a66" href="user_join.jsp">회원가입</a>
             </div>
             <img class="icon216" alt="" src="./image/catSvg4.svg" />
-            <a class="a67" id="text3" href="user_orders_page.jsp">주문정보</a>
+            <a class="a67" id="text3" href="userOrdersPageProc.jsp">주문정보</a>
         </div>
         <div class="div423">
             <div class="child11"></div>
@@ -115,7 +115,7 @@
           <a href="javascript:void(0)" id="closeSidebar" class="closebtn">×</a>
           <a id="qna" href="qnaboardmainProc.jsp">Q & A</a>
           <a id="mypage" href="user_mypage.jsp">마이페이지</a>
-          <a id="order-history" href="user_orders_page.jsp">주문내역</a>
+          <a id="order-history" href="userOrdersPageProc.jsp">주문내역</a>
           <a id="modify-info" href="user_modify.jsp">회원정보변경</a>
           <a id="my-reviews" href="user_myReview.jsp">내 리뷰 보기</a>
           <a id="my-qna" href="user_myQnA.jsp">내 QnA 보기</a>
