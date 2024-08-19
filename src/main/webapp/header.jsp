@@ -103,7 +103,7 @@
                 <a class="a66" href="user_join.jsp">회원가입</a>
             </div>
             <img class="icon216" alt="" src="./image/catSvg4.svg" />
-            <a class="a67" id="text3" href="user_orders_page.jsp">주문정보</a>
+            <a class="a67" id="text3" href="userOrdersPageProc.jsp">주문정보</a>
         </div>
         <div class="div423">
             <div class="child11"></div>

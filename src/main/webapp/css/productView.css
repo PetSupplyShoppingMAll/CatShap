@@ -650,19 +650,6 @@
   z-index: 2;
   font-family: var(--font-inter);
 }
-.strong-b {
-  text-decoration: none;
-  align-self: stretch;
-  width: 42px;
-  position: relative;
-  line-height: 22.4px;
-  font-weight: 700;
-  color: inherit;
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  text-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-}
 .link17 {
   height: 57.6px;
   flex: 1;
@@ -3178,6 +3165,8 @@
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
   min-width: 42px;
   color: cornsilk;
+  background-color: transparent;
+  border: none;
 }
 .link30 {
   height: calc(100% - 6px);

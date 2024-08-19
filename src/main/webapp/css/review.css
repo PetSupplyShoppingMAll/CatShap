@@ -76,7 +76,7 @@
 
 /* 전체 리뷰 목록 스타일 */
 .review-item {
-   	width: 70%;
+      width: 70%;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px;
@@ -125,9 +125,11 @@
 
 /* 이미지 컨테이너 스타일 */
 .image-container {
-    position: relative;
-    max-width: 70%; /* 이미지 컨테이너의 최대 너비 설정 */
-    margin-left: 500px;
+    display: flex;
+    flex-direction: column; /* 아이템을 세로로 배치 */
+    justify-content: center; /* 세로 중앙 정렬 */
+    align-items: center; /* 가로 중앙 정렬 */
+    text-align: center; /* 버튼 텍스트 중앙 정렬 */
 }
 
 /* 이미지를 미리보기로 900px만큼 자름 */
@@ -137,16 +139,15 @@
     object-fit: cover; /* 이미지를 컨테이너에 맞게 자름 */
     display: block;
     overflow: hidden;
+    justify-content: center; /* 세로 중앙 정렬 */
+    align-items: center; 
 }
 
 /* 전체보기 버튼 스타일 */
 #viewAllBtn {
-    position: absolute;
-    width: 80%;
+    width: 70%;
     height: 50px;
     bottom: 10px; /* 버튼을 이미지 하단에 위치 */
-    left: 465px;
-    transform: translateX(-50%);
     padding: 10px 20px;
     font-size: 16px;
     color: #ffffff;
@@ -155,6 +156,8 @@
     border-radius: 5px;
     cursor: pointer;
     z-index: 10;
+    justify-content: center; /* 세로 중앙 정렬 */
+    align-items: center; 
 }
 
 #viewAllBtn:hover {
@@ -355,7 +358,7 @@ input[type="text"], textarea, input[type="number"] {
 }
 
 #reviewBtn{
-	width:150px;
+   width:150px;
 }
 /* 제출 버튼 스타일링 */
 #reviewBtn,

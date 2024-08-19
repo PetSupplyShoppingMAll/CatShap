@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="user-input">
                                     <label for="upass">새 비밀번호</label>
-                                    <input id="upass" class="label-input-upass" placeholder="새로운 비밀번호를 입력해주세요." type="text" />
+                                    <input id="upass" class="label-input-upass" placeholder="새로운 비밀번호를 입력해주세요." type="password" />
                                     <p id="upass-error" class="error-message" style="display: none;"></p>
                                     <label for="upassConfirm">비밀번호 확인</label>
                                     <input id="upassConfirm" class="label-input-upassConfirm" placeholder="다시 비밀번호를 입력해주세요." type="password" />

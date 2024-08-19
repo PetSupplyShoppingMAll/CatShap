@@ -8,15 +8,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
     
 <%
-	response.setCharacterEncoding("UTF-8");
+   response.setCharacterEncoding("UTF-8");
 
-	Users user = (Users) session.getAttribute("user");
-	int userNo = (user != null) ? user.getUserNo() : 0;
-	BasketInterface bi = new BasketDao();
-	List<Basket> basketList = bi.listBasket(userNo);
-	
-	pageContext.setAttribute("basketList", basketList);
-	
+   Users user = (Users) session.getAttribute("user");
+   int userNo = (user != null) ? user.getUserNo() : 0;
+   BasketInterface bi = new BasketDao();
+   List<Basket> basketList = bi.listBasket(userNo);
+   
+   pageContext.setAttribute("basketList", basketList);
+   System.out.println(basketList);
+   
 %>
 
 <!DOCTYPE html>
@@ -28,9 +29,9 @@
     <link rel="stylesheet" href="./css/global.css" />
     <link rel="stylesheet" href="./css/index.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="./js/check_login.js"></script>
-	<script src="./js/basket.js"></script>
-	<style>
+   <script src="./js/check_login.js"></script>
+   <script src="./js/basket.js"></script>
+   <style>
     ul {
         list-style-type: none;
         padding: 30px;
@@ -391,46 +392,53 @@
                   </div>
                 </div>
               </div>
-              
-<form id="orderForm" action="productOrdersProc.jsp?purchaseType=basket" method="post">
-    <input type="hidden" name="userno" value="<%= userNo %>">
+      <c:if test="${empty basketList}">
+         <div class="order-table-none" style="margin-right: 400px;">
+            <img src="./image/order-empty-icon.png" alt="order-icon"  />
+            <p>장바구니 내역이 없습니다.</p>
+         </div>
+      </c:if>
+      <c:if test="${!empty basketList}">
+      <form id="orderForm" action="productOrdersProc.jsp?purchaseType=basket" method="post">
+          <input type="hidden" name="userno" value="<%= userNo %>">
+          <ul>
+              <li class="header">
+                  <div><input type="checkbox" id="allcheckbox" /></div>
+                  <div>번호</div>
+                  <div>제품 이미지</div>
+                  <div>제품 이름</div>
+                  <div>가격</div>
+                  <div>총가격</div>
+                  <div>수량</div>
+                  <div>총수량</div>
+                  <div>선택</div>
+              </li>
+      
+              <c:forEach var="basket" items="${basketList}">
+                  <li class="product-row">
+                      <div><input type="checkbox" class="product-checkbox" value="${basket.basketNo}" 
+                             data-prodno="${basket.prodNo}" data-price="${basket.prodPrice}"
+                             data-prodimgpath="${basket.prodimgpath}" data-proddescript="${basket.proddescript}">
+                  </div>
+                  <div class="product-number">${basket.prodNo}</div>
+                      <div><img src="/catshap/image/${basket.prodimgpath}" /></div>
+                      <div>${basket.proddescript}</div>
+                      <div class="product-price">${basket.prodPrice}원</div>
+                      <div class="total-price">0원</div>
+                      <div class="input1">
+                          <button type="button" class="decrease-btn">-</button>
+                          <div class="input-field number-display">1</div>
+                          <button type="button" class="increase-btn">+</button>
+                      </div>
+                      <div class="quantity-display">(1개)</div>
+                      <div><a href="basketDelete.jsp?basketNo=${basket.basketNo}">[삭제]</a></div>
+                  </li>
+              </c:forEach>
+          </ul>
 
-    <ul>
-        <li class="header">
-            <div><input type="checkbox" id="allcheckbox" /></div>
-            <div>번호</div>
-            <div>제품 이미지</div>
-            <div>제품 이름</div>
-            <div>가격</div>
-            <div>총가격</div>
-            <div>수량</div>
-            <div>총수량</div>
-            <div>선택</div>
-        </li>
-
-        <c:forEach var="basket" items="${basketList}">
-            <li class="product-row">
-                <div><input type="checkbox" class="product-checkbox" value="${basket.basketNo}" 
-                       data-prodno="${basket.prodNo}" data-price="${basket.prodPrice}"
-                       data-prodimgpath="${basket.prodimgpath}" data-proddescript="${basket.proddescript}">
-				</div>
-				<div class="product-number">${basket.prodNo}</div>
-                <div><img src="/catshap/image/${basket.prodimgpath}" /></div>
-                <div>${basket.proddescript}</div>
-                <div class="product-price">${basket.prodPrice}원</div>
-                <div class="total-price">0원</div>
-                <div class="input1">
-                    <button type="button" class="decrease-btn">-</button>
-                    <div class="input-field number-display">1</div>
-                    <button type="button" class="increase-btn">+</button>
-                </div>
-                <div class="quantity-display">(1개)</div>
-                <div><a href="basketDelete.jsp?basketNo=${basket.basketNo}">[삭제]</a></div>
-            </li>
-        </c:forEach>
-    </ul>
-    <button type="button" id="submitSelectedOrder">[선택상품 주문하기]</button>
-</form>
+          <button type="button" id="submitSelectedOrder">[선택상품 주문하기]</button>
+      </form>
+            </c:if>      
             </div>
           </div>
         </div>
@@ -554,7 +562,7 @@
         </div>
       </section>
     </div>
-
+   
     <script>
       var linkContainer = document.getElementById("linkContainer");
       if (linkContainer) {

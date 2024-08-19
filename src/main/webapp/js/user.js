@@ -1,37 +1,37 @@
 $(function () {
-   
+
     // 로그인 버튼 클릭한 경우
     $("#userLoginBtn").on('click', (e) => {
-      e.preventDefault();
-      
-      const isUsidValid = validate('usid', regex.usid, '아이디를 입력해주세요.', '아이디 형식이 올바르지 않습니다.');
-      const isUpassValid = validatePassword();
-      if (isUsidValid && isUpassValid) {
-         const usid = $('#usid').val().trim();
-         const upass = $('#upass').val().trim();
-         
-         $.ajax({
-            type: 'POST',
-            url: '/catshap/login',
-            data: {
-               usid: usid,
-               upass: upass
-            },
-            success: function(response) {
-               if (response.success) {
-                  alert(response.uname + '님 환영합니다.');
-                  window.location.href = 'mainProc.jsp';
-               } else {
-                  alert("로그인 실패... 정보를 확인해주세요.");
-               }
-            },
-            error: function() {
-               alert('서버 오류가 발생했습니다.');
-            }
-         });
-      }
-      
-   });
+        e.preventDefault();
+
+        const isUsidValid = validate('usid', regex.usid, '아이디를 입력해주세요.', '아이디 형식이 올바르지 않습니다.');
+        const isUpassValid = validatePassword();
+        if (isUsidValid && isUpassValid) {
+            const usid = $('#usid').val().trim();
+            const upass = $('#upass').val().trim();
+
+            $.ajax({
+                type: 'POST',
+                url: '/catshap/login',
+                data: {
+                    usid: usid,
+                    upass: upass
+                },
+                success: function (response) {
+                    if (response.success) {
+                        alert(response.uname + '님 환영합니다.');
+                        window.location.href = 'mainProc.jsp';
+                    } else {
+                        alert("로그인 실패... 정보를 확인해주세요.");
+                    }
+                },
+                error: function () {
+                    alert('서버 오류가 발생했습니다.');
+                }
+            });
+        }
+
+    });
 
     // 로그인의 아이디 찾기 버튼 클릭한 경우
     $('#userLoginFindIdBtn').on('click', () => {
@@ -51,9 +51,9 @@ $(function () {
     // 아이디 찾기의 아이디 찾기 버튼 클릭한 경우
     $('#userFindIdBtn').on('click', (e) => {
         e.preventDefault();
-        
+
         const isUnameValid = validate('uname', regex.uname, '이름을 입력해주세요.', '이름 형식이 올바르지 않습니다.');
-      const isEmailValid = validate('email', regex.email, '이메일을 입력해주세요.', '이메일 형식이 올바르지 않습니다.');
+        const isEmailValid = validate('email', regex.email, '이메일을 입력해주세요.', '이메일 형식이 올바르지 않습니다.');
         if (isUnameValid && isEmailValid) {
             const uname = $('#uname').val().trim();
             const email = $('#email').val().trim();
@@ -82,10 +82,10 @@ $(function () {
     // 비밀번호 찾기의 비밀번호 찾기 버튼을 클릭한 경우
     $('#userFindPwBtn').on('click', (e) => {
         e.preventDefault();
-        
+
         const isUnameValid = validate('uname', regex.uname, '이름을 입력해주세요.', '이름 형식이 올바르지 않습니다.');
-      	const isUsidValid = validate('usid', regex.usid, '아이디를 입력해주세요.', '아이디 형식이 올바르지 않습니다.');
-      	const isEmailValid = validate('email', regex.email, '이메일을 입력해주세요.', '이메일 형식이 올바르지 않습니다.');
+        const isUsidValid = validate('usid', regex.usid, '아이디를 입력해주세요.', '아이디 형식이 올바르지 않습니다.');
+        const isEmailValid = validate('email', regex.email, '이메일을 입력해주세요.', '이메일 형식이 올바르지 않습니다.');
         if (isUnameValid && isUsidValid && isEmailValid) {
             const uname = $('#uname').val().trim();
             const usid = $('#usid').val().trim();
@@ -173,7 +173,7 @@ $(function () {
 
         const upass = $('#upass').val().trim();
         const upassConfirm = $('#upassConfirm').val().trim();
-		const user = JSON.parse(sessionStorage.getItem('user'));
+        const user = JSON.parse(sessionStorage.getItem('user'));
         const isUpassValid = validatePassword();
         const isEequalPassword = equalPassword(upass, upassConfirm);
         if (isUpassValid && isEequalPassword) {
@@ -181,7 +181,7 @@ $(function () {
                 type: 'POST',
                 url: '/catshap/user-pass-change',
                 data: {
-					usid: user.usid,
+                    usid: user.usid,
                     upass: upass
                 },
                 success: function (response) {
@@ -199,55 +199,56 @@ $(function () {
     });
 
     if ($('body').hasClass('user_join') || $('body').hasClass('user_modify')) {
+        enterprevent();
         validateInput();
     }
 
-   // 회원가입의 회원가입 버튼을 클릭한 경우
-   $('#joinBtn').click((event) => {
-       event.preventDefault(); // 기본 폼 제출 동작 방지
-   
-       if (isFormValid()) {
-           // `mktAgree` 체크 여부에 따라 값 설정
-           const mktAgreeValue = $('#mktAgree').is(':checked') ? 'Y' : 'N';
-   
-           // 폼 데이터에서 하이픈 제거
-           const phoneNumber = $('#uphone').val().replace(/-/g, '');
-   
-           // 데이터를 객체 형태로 준비
-           const formData = {
-               usid: $('#usid').val(),
-               upass: $('#upass').val(),
-               upass_re: $('#upass_re').val(),
-               uname: $('#uname').val(),
-               unick: $('#unick').val(),
-               utelecom: $('#utelecom').val(),
-               uphone: phoneNumber,
-               email: $('#email').val(),
-               umailAddress: $('#umailAddress').val(),
-               uaddress: $('#uaddress').val(),
-               udetailAddress: $('#udetailAddress').val(),
-               mktAgree: mktAgreeValue
-           };
-   
-           // AJAX 요청을 보내서 서버로 데이터를 전송
-           $.ajax({
-             type: 'POST',
-             url: '/catshap/register',
-             data: $.param(formData), // 데이터 URL 인코딩
-             contentType: 'application/x-www-form-urlencoded; charset=utf-8', // 요청 데이터 형식 설정
-             success: function(response) {
-                 alert('등록이 완료되었습니다!');
-                 window.location.href = '/catshap/user_login.jsp'; 
-             },
-             error: function(xhr, status, error) {
-                 alert('등록 중 오류가 발생했습니다. 다시 시도해 주세요.');
-                 console.error('Error:', error); 
-             }
-         });
-       } else {
-           alert('폼을 올바르게 작성해 주세요.');
-       }
-   });
+    // 회원가입의 회원가입 버튼을 클릭한 경우
+    $('#joinBtn').click((event) => {
+        event.preventDefault(); // 기본 폼 제출 동작 방지
+
+        if (isFormValid()) {
+            // `mktAgree` 체크 여부에 따라 값 설정
+            const mktAgreeValue = $('#mktAgree').is(':checked') ? 'Y' : 'N';
+
+            // 폼 데이터에서 하이픈 제거
+            const phoneNumber = $('#uphone').val().replace(/-/g, '');
+
+            // 데이터를 객체 형태로 준비
+            const formData = {
+                usid: $('#usid').val(),
+                upass: $('#upass').val(),
+                upass_re: $('#upass_re').val(),
+                uname: $('#uname').val(),
+                unick: $('#unick').val(),
+                utelecom: $('#utelecom').val(),
+                uphone: phoneNumber,
+                email: $('#email').val(),
+                umailAddress: $('#umailAddress').val(),
+                uaddress: $('#uaddress').val(),
+                udetailAddress: $('#udetailAddress').val(),
+                mktAgree: mktAgreeValue
+            };
+
+            // AJAX 요청을 보내서 서버로 데이터를 전송
+            $.ajax({
+                type: 'POST',
+                url: '/catshap/register',
+                data: $.param(formData), // 데이터 URL 인코딩
+                contentType: 'application/x-www-form-urlencoded; charset=utf-8', // 요청 데이터 형식 설정
+                success: function (response) {
+                    alert('등록이 완료되었습니다!');
+                    window.location.href = '/catshap/user_login.jsp';
+                },
+                error: function (xhr, status, error) {
+                    alert('등록 중 오류가 발생했습니다. 다시 시도해 주세요.');
+                    console.error('Error:', error);
+                }
+            });
+        } else {
+            alert('폼을 올바르게 작성해 주세요.');
+        }
+    });
 
     const setupCheckButton = (buttonId, fieldId, checkType) => {
         $(buttonId).click(function (event) {
@@ -321,13 +322,13 @@ $(function () {
     $('#toMainBtn').on('click', () => {
         window.location.href = 'mainProc.jsp';
     });
-    
+
     // 회원정보수정의 비밀번호 변경 버튼 클릭 시
     $('#changePw').on('click', () => {
-       window.location.href = 'user_mypage_change_pw.jsp';
-   	});
-   	
-   	// 회원정보수정 비밀번호 변경의 비밀번호 변경 버튼 클릭한 경우
+        window.location.href = 'user_mypage_change_pw.jsp';
+    });
+
+    // 회원정보수정 비밀번호 변경의 비밀번호 변경 버튼 클릭한 경우
     $('#userMypageChangePwBtn').on('click', (e) => {
         e.preventDefault();
 
@@ -383,10 +384,10 @@ $(function () {
                 console.error('Error:', xhr, status, error);
             }
         });
-        
+
     });
-    
-     // 회원 탈퇴 동의 버튼을 클릭한 경우
+
+    // 회원 탈퇴 동의 버튼을 클릭한 경우
     $('#accountExitBtn').on('click', (e) => {
         e.preventDefault();
         const upass = $('#upass').val().trim();
@@ -568,5 +569,13 @@ const validateInput = () => {
     $('#termsOfUseAgree').on('change', () => validateAgreement('#termsOfUseAgree', '#termsOfUseAgree_error', '이용약관에 동의해야 합니다.'));
     $('#privacyAgree').on('change', () => validateAgreement('#privacyAgree', '#privacyAgree_error', '개인정보 수집 및 이용에 동의해야 합니다.'));
     $('#mktAgree').on('change', () => validateAgreement('#mktAgree', '', ''));
+}
+
+const enterprevent = () => {
+       $('input').on('keypress', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Enter 키 기본 동작 방지
+        }
+    });
 }
 
