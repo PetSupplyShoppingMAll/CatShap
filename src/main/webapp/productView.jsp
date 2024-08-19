@@ -328,7 +328,7 @@
         <textarea id="revText" name="revText"></textarea><br>
         
         <label for="revScore">평점:</label><br>
-        <input type="number" id="revScore" name="revScore" min="1" max="5"><br>
+		<input type="number" id="revScore" name="revScore" min="1" max="5" onkeydown="return false;"><br>
         
         <button id="submitReview">등록</button>
         <p id="message"></p> <!-- 메시지 출력 -->

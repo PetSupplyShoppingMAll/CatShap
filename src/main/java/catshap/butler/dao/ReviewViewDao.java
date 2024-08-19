@@ -51,25 +51,5 @@ public class ReviewViewDao implements ReviewViewInterface {
         }
     }
     
-    @Override
-    public List<ReviewView> userReviewPage(int userNo, int page, int pageSize) throws Exception {
-        try (SqlSession session = ssf.openSession()) {
-            int offset = (page - 1) * pageSize;
-            // 전달할 파라미터를 Map으로 구성
-            Map<String, Object> params = new HashMap<>();
-            params.put("userNo", userNo);
-            params.put("offset", offset);
-            params.put("pageSize", pageSize);
-            
-            return session.selectList("reviewview.userReviewPage", params);
-        }
-    }
-
-    @Override
-    public int countUserReviews(int userNo) throws Exception {
-        try (SqlSession session = ssf.openSession()) {
-            return session.selectOne("reviewview.countUserReviews", userNo);
-        }
-    }
 
 }

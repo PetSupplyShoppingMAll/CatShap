@@ -21,7 +21,7 @@ import catshap.butler.interfaces.UserQnAInterFace;
 
 @WebServlet("/getQnAs")
 public class UserGetQnAServlet extends HttpServlet {
-
+    
     private static final long serialVersionUID = 11564632032545L;
     private UserQnAInterFace qi;
 
@@ -32,24 +32,24 @@ public class UserGetQnAServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {    
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
         int userNo = user.getUserNo();
+        System.out.println("UserNo from session: " + userNo);
 
         try {
             // Get the list of QnA
             List<UserQnA> qna = qi.selectUserQnAList(userNo);
-
+            
             // Create a JsonObject to hold the response
             JsonObject jsonResponse = new JsonObject();
             jsonResponse.add("qna", new Gson().toJsonTree(qna));
-
+            
             // Set the response type to JSON
             response.setContentType("application/json");
             PrintWriter out = response.getWriter();
-
+            
             // Write the JsonObject as the response
             Gson gson = new Gson();
             out.print(gson.toJson(jsonResponse));

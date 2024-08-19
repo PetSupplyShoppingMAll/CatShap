@@ -19,29 +19,6 @@
     	#{prodNo}, #{revTitle}, #{revText}, sysdate, NULL ,#{revScore})
     </insert>
     
-	<select id="userReviewPage" parameterType="map" resultType="ReviewView">
-	    SELECT * FROM (
-	        SELECT
-	            R.REVIEWNO, R.REVTITLE,R.REVTEXT,R.REVREGDATE, R.REVSCORE,
-	            P.PRODNO, P.PRODTITLENAME,
-	            U.USERNO, U.UNICK,
-	            I.PRODIMGPATH,
-	            ROW_NUMBER() OVER (ORDER BY R.REVIEWNO DESC) AS rnum
-	        FROM
-	            REVIEW R
-	            JOIN PRODUCT P ON P.PRODNO = R.PRODNO
-	            JOIN USERS U ON U.USERNO = R.USERNO
-	            JOIN PRODIMAGE I ON I.PRODNO = P.PRODNO
-	        WHERE
-	            U.USERNO = #{userNo}
-	    ) WHERE rnum BETWEEN #{offset} AND #{pageSize}
-	</select>
-
-	<select id="countUserReviews" parameterType="int" resultType="int">
-	    SELECT COUNT(*) FROM review
-	    WHERE userno = #{userNo}
-	</select>
-    
     <select id="selectUserReviewList" parameterType="int" resultType="ReviewView">
     	SELECT
             P.PRODNO,P.PRODTITLENAME,
@@ -56,5 +33,5 @@
         WHERE
         	U.USERNO = #{userNo}
     </select>
-    
+
 </mapper>

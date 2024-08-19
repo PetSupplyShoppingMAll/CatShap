@@ -43,13 +43,14 @@ public class UserLoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
 
             if (user != null) {
+                // 사용자 정보를 세션에 저장
                 session.setAttribute("user", user);
 
                 // 사용자 등급 정보를 조회하고 세션에 저장
                 Grade grade = userDao.getUserGrade(user.getUserNo());
-                String gradeName = (grade != null) ? grade.getGname() : "Unknown"; // grade.getGname() 메서드로 등급 이름 가져오기
+                String gradeName = (grade != null) ? grade.getGname() : "Unknown";  // grade.getGname() 메서드로 등급 이름 가져오기
                 session.setAttribute("userGrade", gradeName);
-                
+
                 jsonResponse.addProperty("success", true);
                 jsonResponse.addProperty("uname", user.getUname());
                 jsonResponse.addProperty("unick", user.getUnick());

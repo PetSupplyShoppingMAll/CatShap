@@ -32,8 +32,7 @@ public class UserGetReviewServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
 
@@ -47,7 +46,7 @@ public class UserGetReviewServlet extends HttpServlet {
 
             response.setContentType("application/json");
             PrintWriter out = response.getWriter();
-            out.print(jsonResponse.toString()); // 응답 객체를 JSON으로 변환하여 출력
+            out.print(jsonResponse.toString());  // 응답 객체를 JSON으로 변환하여 출력
             out.flush();
         } catch (Exception e) {
             e.printStackTrace();
