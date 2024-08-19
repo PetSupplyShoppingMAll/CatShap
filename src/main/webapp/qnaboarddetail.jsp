@@ -90,12 +90,6 @@
                 </div>
               </div>
             </div>
-            <div class="support-links-parent">
-                <div class="wrapper">
-                    <div class="div8">  고객지원센터</div>
-                </div>
-                <div class="q-a">  Q & A</div>
-            </div>
           </div>
           <div class="reference-wrapper-wrapper">
           <c:if test="${qnaProduct ne null}">
@@ -188,7 +182,7 @@
                             />
                           </div>
                           <div class="div15">
-                       <a href="${pageContext.request.contextPath}/qnaboardmainProc.jsp">목록으로</a>
+                       <a href="./qnaboardmainProc.jsp">목록으로</a>
                     </div>
                         </div>
                       </div>

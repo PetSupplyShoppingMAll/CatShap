@@ -34,9 +34,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             row.appendChild(categoryCell);
 
-            const titleCell = document.createElement('td');
-            titleCell.textContent = qna.qnatitle;
-            row.appendChild(titleCell);
+         const titleCell = document.createElement('td');
+         const imgElement = document.createElement('img');
+         
+         if (qna.prodImgPath === " ") {
+             titleCell.textContent = qna.qnatitle;
+         } else {
+             imgElement.src = `/catshap/image/${qna.prodImgPath}`;
+             imgElement.width = 50; 
+             imgElement.height = 50;
+             titleCell.appendChild(imgElement);
+             titleCell.appendChild(document.createTextNode(qna.qnatitle)); 
+         }
+         
+         row.appendChild(titleCell); 
 
             const authorCell = document.createElement('td');
             authorCell.textContent = qna.uname;

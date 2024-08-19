@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="./css/global.css" />
     <link rel="stylesheet" href="./css/header.css" />
-     <script src="./js/header.js" defer></script> 
+     <script src="./js/header.js"></script> 
 </head>
 <body>
     <header class="header2">
@@ -21,7 +21,7 @@
             <div class="backgroundhorizontalbordersh35">
                 <!-- 기존 헤더의 button30 추가 -->
                 <div class="button-wrapper8">
-                    <div class="button30" onclick="openNav()">
+                    <div class="button30">
                         <div class="background101"></div>
                         <div class="background102"></div>
                     </div>
@@ -50,14 +50,6 @@
                     </div>
                     <div class="strong-q-a-wrapper3">
                         <b class="strong-q18" id="strongQ"><a href="qnaboardmainProc.jsp">Q & A</a></b>
-                    </div>
-                    <div class="review-container-container">
-                        <div class="review-container3">
-                            <div class="reviews-wrapper9">
-                                <div class="reviews17"><a href="review.jsp">REVIEWS</a></div>
-                            </div>
-                            <div class="emphasis16"></div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -90,12 +82,12 @@
             <div class="div422">  고객 지원센터</div>
             <a class="strong-0109230444918">01012345678</a>
             <img class="icon214" alt="" src="./image/icon2.png" />
-			
-			<c:if test="${empty user}">
-            	<div class="link93" id="link">로그인</div>
+         
+         <c:if test="${empty user}">
+               <div class="link93" id="link">로그인</div>
             </c:if>
-			<c:if test="${!empty user}">
-            	<div class="link95" id="link" >로그아웃</div>
+         <c:if test="${!empty user}">
+               <div class="link95" id="link" >로그아웃</div>
             </c:if>
 
             <img class="icon215" alt="" src="./image/icon3.png" />
@@ -103,7 +95,7 @@
                 <a class="a66" href="user_join.jsp">회원가입</a>
             </div>
             <img class="icon216" alt="" src="./image/catSvg4.svg" />
-            <a class="a67" id="text3" href="userOrdersPageProc.jsp">주문정보</a>
+            <a class="a67" id="text3" href="user_orders_page.jsp">주문정보</a>
         </div>
         <div class="div423">
             <div class="child11"></div>
@@ -119,16 +111,16 @@
         </div>
 
         <!-- 사이드바 HTML 추가 -->
-		<div id="mySidebar" class="sidebar">
-		    <a id="closeSidebar" class="closebtn">×</a>
-		    <a id="qna" href="qnaboardmainProc.jsp">Q & A</a>
-		    <a id="mypage" href="user_mypage.jsp">마이페이지</a>
-		    <a id="order-history" href="userOrdersPageProc.jsp">주문내역</a>
-		    <a id="modify-info" href="user_modify.jsp">회원정보변경</a>
-		    <a id="my-reviews" href="user_myReview.jsp">내 리뷰 보기</a>
-		    <a id="my-qna" href="user_myQnA.jsp">내 QnA 보기</a>
-		    <a id="basket" href="basket.jsp">장바구니</a>
-		</div>
+      <div id="mySidebar" class="sidebar">
+          <a href="javascript:void(0)" id="closeSidebar" class="closebtn">×</a>
+          <a id="qna" href="qnaboardmainProc.jsp">Q & A</a>
+          <a id="mypage" href="user_mypage.jsp">마이페이지</a>
+          <a id="order-history" href="user_orders_page.jsp">주문내역</a>
+          <a id="modify-info" href="user_modify.jsp">회원정보변경</a>
+          <a id="my-reviews" href="user_myReview.jsp">내 리뷰 보기</a>
+          <a id="my-qna" href="user_myQnA.jsp">내 QnA 보기</a>
+          <a id="basket" href="basket.jsp">장바구니</a>
+      </div>
 
 
     </header>

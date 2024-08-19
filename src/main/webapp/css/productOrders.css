@@ -128,7 +128,7 @@ section{
 .slidebtn{
   transform: rotate(-90deg);
   opacity:0.6;
-  
+  width:50px;
 }
 
 p {

@@ -1,11 +1,8 @@
 package catshap.butler.bean;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class QnaBoard implements Serializable {
-
-	public static final long serialVersionUID = 2398478293479L;
+public class QnaBoard  {
 
 	private int qnano; // QnA 번호
 	private int userno; // 사용자 번호_참조
@@ -15,10 +12,25 @@ public class QnaBoard implements Serializable {
 	private String qnatext; // 내용
 	private Timestamp qnaregdate; // 등록날짜
 	private Timestamp qnaupdate; // 수정날짜
-
+	private String prodImgPath;
 	private String uname;
 
 	public QnaBoard() {
+	}
+
+	public QnaBoard(int qnano, int userno, int prodno, int qnacatno, String qnatitle, String qnatext,
+			Timestamp qnaregdate, Timestamp qnaupdate, String prodImgPath, String uname) {
+		super();
+		this.qnano = qnano;
+		this.userno = userno;
+		this.prodno = prodno;
+		this.qnacatno = qnacatno;
+		this.qnatitle = qnatitle;
+		this.qnatext = qnatext;
+		this.qnaregdate = qnaregdate;
+		this.qnaupdate = qnaupdate;
+		this.prodImgPath = prodImgPath;
+		this.uname = uname;
 	}
 
 	public int getQnano() {
@@ -85,6 +97,14 @@ public class QnaBoard implements Serializable {
 		this.qnaupdate = qnaupdate;
 	}
 
+	public String getProdImgPath() {
+		return prodImgPath;
+	}
+
+	public void setProdImgPath(String prodImgPath) {
+		this.prodImgPath = prodImgPath;
+	}
+
 	public String getUname() {
 		return uname;
 	}
@@ -97,6 +117,7 @@ public class QnaBoard implements Serializable {
 	public String toString() {
 		return "QnaBoard [qnano=" + qnano + ", userno=" + userno + ", prodno=" + prodno + ", qnacatno=" + qnacatno
 				+ ", qnatitle=" + qnatitle + ", qnatext=" + qnatext + ", qnaregdate=" + qnaregdate + ", qnaupdate="
-				+ qnaupdate + ", uname=" + uname + "]";
+				+ qnaupdate + ", prodImgPath=" + prodImgPath + ", uname=" + uname + "]";
 	}
+
 }

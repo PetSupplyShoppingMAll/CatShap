@@ -1,0 +1,109 @@
+    ul {
+        list-style-type: none;
+        padding: 30px;
+        width: 100%;
+        margin-right: 300px;
+    }
+
+    ul li {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    ul li.header {
+        background-color: var(--color-mediumaquamarine);
+        color: white;
+        font-weight: bold;
+        gap: 100px;
+    }
+
+    ul li.header div {
+        flex: 1;
+        text-align: center;
+    }
+
+    ul li div {
+        flex: 1;
+        text-align: center;
+    }
+
+    ul li:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    ul li:hover {
+        background-color: #f1f1f1;
+    }
+
+    .input1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .decrease-btn, .increase-btn {
+        padding: 5px 10px;
+        border: none;
+        background-color: var(--color-mediumaquamarine);
+        color: white;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+    .decrease-btn:hover, .increase-btn:hover {
+        background-color: #45a049;
+    }
+
+    .number-display {
+        width: 50px;
+        text-align: center;
+        border: 1px solid #ddd;
+        margin: 0 5px;
+    }
+
+    .quantity-display {
+        font-weight: bold;
+    }
+
+    #submitSelectedOrder, #submitAllOrder {
+        padding: 10px 20px;
+        background-color: var(--color-mediumaquamarine);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+    }
+
+    #submitSelectedOrder:hover, #submitAllOrder:hover {
+        background-color: #45a049;
+    }
+
+    a {
+        color: #FF5722;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .product-price, .total-price {
+        font-weight: bold;
+    }
+
+    #allcheckbox {
+        cursor: pointer;
+    }
+
+    .product-checkbox {
+        cursor: pointer;
+    }
+    .c-01-inner{
+    	margin:30px auto 0px;
+    }
+    .cart-info-background-parent{
+    	margin:0 auto;
+    }

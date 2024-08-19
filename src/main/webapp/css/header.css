@@ -507,8 +507,8 @@
 }
 
 .link94 a {
-	text-decoration: none;
-	color: var(--color-mediumaquamarine);
+   text-decoration: none;
+   color: var(--color-mediumaquamarine);
 }
 
 .a66 {
@@ -697,7 +697,7 @@
 /* 사이드바 기본 스타일 */
 .sidebar {
     height: 100%; /* 전체 높이 설정 */
-    width: 250px; /* 사이드바 너비 설정 */
+    width: 0; /* 사이드바 너비 설정 */
     position: fixed; /* 화면에 고정 */
     z-index: 1000; /* 다른 요소들보다 위에 표시 */
     top: 0;

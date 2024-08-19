@@ -12,14 +12,15 @@
     <script src="./js/qna.js"></script>
 </head>
 <body>
-	 <script type="text/javascript">
+    <script type="text/javascript">
       var qnaBoardJson = '<%= request.getAttribute("qnaBoardJson") %>';
       var qnaBoardList = JSON.parse(qnaBoardJson);
       
-      //window.qnaBoardList = qnaBoardList;
+      window.qnaBoardList = qnaBoardList;
+      console.log(qnaBoardList);
     </script>
 
-	<jsp:include page="header.jsp"></jsp:include>
+   <jsp:include page="header.jsp"></jsp:include>
     <div class="div">
       <main class="container">
         <div class="frame-container">
@@ -33,6 +34,10 @@
               </div>
             </div>
           </div>
+          <div class="parent">
+            <div class="div8"> 고객지원센터</div>
+            <div class="q-a"> Q & A</div>
+          </div>
         </div>
         <section class="inquiry-row-wrapper">
           <div class="inquiry-row">
@@ -40,40 +45,40 @@
               <div class="options">              
               </div>
              <form method="get" action="qnaboardmainProc.jsp">
-             	<select name="qnacatno">
-					<option value="" <c:if test="${qnacatno==null || qnacatno==''}" >selected</c:if>>--전체--</option>
-					<option value="1" <c:if test="${qnacatno=='1'}" >selected</c:if>>상품문의</option>
-					<option value="2" <c:if test="${qnacatno=='2'}" >selected</c:if>>배송문의</option>
-					<option value="3" <c:if test="${qnacatno=='3'}" >selected</c:if>>기타문의</option>
-				</select>&nbsp;		
-				<select name="searchKeyword">
-					<option value="" <c:if test="${searchKeyword==null || searchKeyword==''}" >selected</c:if>>--전체--</option>
-					<option value="qnatitle" <c:if test="${searchKeyword=='qnatitle'}" >selected</c:if>>제목</option>
-					<option value="qnatext" <c:if test="${searchKeyword=='qnatext'}" >selected</c:if>>내용</option>
-				</select>&nbsp;
-				
-				<input type="text" name="searchValue" value="${searchValue}" />
-				<input type="submit" value="검색" />
-		    </form>
+                <select name="qnacatno">
+               <option value="" <c:if test="${qnacatno==null || qnacatno==''}" >selected</c:if>>--전체--</option>
+               <option value="1" <c:if test="${qnacatno=='1'}" >selected</c:if>>상품문의</option>
+               <option value="2" <c:if test="${qnacatno=='2'}" >selected</c:if>>배송문의</option>
+               <option value="3" <c:if test="${qnacatno=='3'}" >selected</c:if>>기타문의</option>
+            </select>&nbsp;      
+            <select name="searchKeyword">
+               <option value="" <c:if test="${searchKeyword==null || searchKeyword==''}" >selected</c:if>>--전체--</option>
+               <option value="qnatitle" <c:if test="${searchKeyword=='qnatitle'}" >selected</c:if>>제목</option>
+               <option value="qnatext" <c:if test="${searchKeyword=='qnatext'}" >selected</c:if>>내용</option>
+            </select>&nbsp;
+            
+            <input type="text" name="searchValue" value="${searchValue}" />
+            <input type="submit" value="검색" />
+          </form>
             </div>
-			    <div class="question-list">
-			        <div class="tablecontainer">
-			            <table>
-			                <thead>
-			                    <tr>
-			                        <th>카테고리</th>
-			                        <th>제목</th>
-			                        <th>작성자</th>
-			                        <th>작성일</th>
-			                    </tr>
-			                </thead>
-			                <tbody id="qnaTableBody">
-			                </tbody>
-			                <div id="pagination">
-            				</div>
-			            </table>
-			        </div>
-			    </div>
+             <div class="question-list">
+                 <div class="tablecontainer">
+                     <table>
+                         <thead>
+                             <tr>
+                                 <th>카테고리</th>
+                                 <th>제목</th>
+                                 <th>작성자</th>
+                                 <th>작성일</th>
+                             </tr>
+                         </thead>
+                         <tbody id="qnaTableBody">
+                         </tbody>
+                         <div id="pagination">
+                        </div>
+                     </table>
+                 </div>
+             </div>
             <div class="footer-action">
               <div class="navigation-links">
                 <div class="shopping-link-wrapper">
@@ -106,7 +111,8 @@
           </div>
         </section>
       </main>
+          <jsp:include page="footer.jsp"></jsp:include>
     </div>
-    <jsp:include page="footer.jsp"></jsp:include>
+
   </body>
 </html>

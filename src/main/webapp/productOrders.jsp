@@ -18,7 +18,7 @@
 
 <%
 	Users user = (Users)session.getAttribute("user");
-	int userNo = (user != null) ? user.getUserNo() : 0;
+	int userNo = user.getUserNo();
 %>
 
 <!DOCTYPE html>
@@ -31,7 +31,6 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-    <script src="./js/check_login.js" ></script>
     <script src="./js/user_regex.js"></script>
     <script src="./js/daumAddress.js"></script>
     <script src="./js/productOrders.js"></script>
@@ -44,13 +43,12 @@
         <input type="hidden" name="prodDescript" value="${product.prodDescript}" />
         <input type="hidden" name="prodTotalPrice" value="${prodTotalPrice}" />
         <input type="hidden" name="ordProdAmt" value="${prodCnt}" />
-        <input type="hidden" name="basketProductListJson" value="${fn:escapeXml(basketProductListJson)}" />
             <p class="pay">주문/결제</p>
             <section id="main1">
                 <div id="main1Wrapper">
                     <div class="main1_1 title" id="title1" data-target="content1">
                         <b>배송지</b>
-                        <a href="#"><img class="slidebtn" src="../img/slidebtn.png" /></a>
+                     
                     </div>
                     <div id="content1" class="content">
                         <div class="row36">
@@ -62,7 +60,7 @@
                             </div>
                             <div class="input19">
                                 <input class="container51" id="delReciPient" name="delrecipient"
-                                    value=<%=user != null ? user.getUname() : "공백" %>
+                                    value=<%=user.getUname()%>
                                 readOnly />
                             </div>
                         </div>
@@ -143,6 +141,7 @@
                                     <option value="drq4">부재시 문 앞에 놓아주세요.</option>
                                     <option value="drq5">빠른 배송 부탁드립니다.</option>
                                     <option value="drq6">택배함에 보관해 주세요.</option>
+                                    <option value="drq7">직접 입력</option>
                                 </select>
                             </div>
                         </div>
@@ -152,7 +151,6 @@
             <section id="main2">
                 <div class="main2_1 title" id="title2" data-target="content2">
                     <b>주문상품</b>
-                    <a href="#"><img class="slidebtn" src="../img/slidebtn.png" /></a>
                 </div>
                 <div id="content2" class="content">
                  <c:choose>
@@ -196,7 +194,6 @@
             <section id="main3">
                 <div class="main3_1 title" id="title3" data-target="content3">
                     <b>결제정보</b>
-                    <a href="#"><img class="slidebtn" src="../img/slidebtn.png" /></a>
                 </div>
                 <div id="content3" class="content">
                     <div class="middletext">
@@ -220,7 +217,6 @@
             <section id="main4">
                 <div class="main4_1 title" id="title4" data-target="content4">
                     <b>결제정보</b>
-                    <a href="#"><img class="slidebtn" src="../img/slidebtn.png" /></a>
                 </div>
                 <div id="payCard" class="content">
                     <div class="main4div">
@@ -251,7 +247,6 @@
                 <div class="main5_1 title" id="title5" data-target="content5">
                     <input class="main5check" id="allcheckbox" type="checkbox" />
                     <b>모든 약관 동의</b>
-                    <a href="#"><img class="slidebtn" src="../img/slidebtn.png" /></a>
                 </div>
                 <div id="content5" class="content">
                     <div class="middletext2">

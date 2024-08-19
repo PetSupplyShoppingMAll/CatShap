@@ -15,29 +15,33 @@
         values(seq_qnano.nextval, #{userno}, #{prodno}, #{qnacatno}, #{qnatitle}, #{qnatext}, sysdate, sysdate)
     </insert>
 
-	<select id="selectQnaBoard" parameterType="catshap.butler.bean.Search" resultType="catshap.butler.bean.QnaBoard">
-	    SELECT q.*, u.uname 
-	    FROM qna q
-	    JOIN users u ON q.userno = u.userno
-	    WHERE 1 = 1
-	    <if test="qnacatno != null and qnacatno != ''">
-	        AND q.qnacatno = #{qnacatno}
-	    </if>
-	    <if test="searchKeyword != null and searchKeyword != ''">
-	        <choose>
-	            <when test="searchKeyword == 'qnatitle'">
-	                AND q.qnatitle LIKE '%' || COALESCE(#{searchValue}, '') || '%'
-	            </when>
-	            <when test="searchKeyword == 'qnatext'">
-	                AND q.qnatext LIKE '%' || COALESCE(#{searchValue}, '') || '%'
-	            </when>
-	            <otherwise>
-	                AND (q.qnatitle LIKE '%' || COALESCE(#{searchValue}, '') || '%' OR q.qnatext LIKE '%' || COALESCE(#{searchValue}, '') || '%')
-	            </otherwise>
-	        </choose>
-	    </if>
-	    ORDER BY q.qnano DESC
-	</select>
+   <select id="selectQnaBoard" parameterType="catshap.butler.bean.Search" resultType="catshap.butler.bean.QnaBoard">
+       SELECT q.*, u.uname , pi.PRODIMGPATH
+       FROM 
+          qna q
+       JOIN users u ON q.userno = u.userno
+       JOIN PRODUCT p on q.prodno = p.prodno
+       JOIN PRODIMAGE pi ON q.PRODNO = pi.PRODNO
+       WHERE 
+          1 = 1
+       <if test="qnacatno != null and qnacatno != ''">
+           AND q.qnacatno = #{qnacatno}
+       </if>
+       <if test="searchKeyword != null and searchKeyword != ''">
+           <choose>
+               <when test="searchKeyword == 'qnatitle'">
+                   AND q.qnatitle LIKE '%' || COALESCE(#{searchValue}, '') || '%'
+               </when>
+               <when test="searchKeyword == 'qnatext'">
+                   AND q.qnatext LIKE '%' || COALESCE(#{searchValue}, '') || '%'
+               </when>
+               <otherwise>
+                   AND (q.qnatitle LIKE '%' || COALESCE(#{searchValue}, '') || '%' OR q.qnatext LIKE '%' || COALESCE(#{searchValue}, '') || '%')
+               </otherwise>
+           </choose>
+       </if>
+       ORDER BY q.qnano DESC
+   </select>
 
     <select id="getQnaBoard" parameterType="int" resultType="catshap.butler.bean.QnaBoard">    
         SELECT * 
@@ -59,11 +63,9 @@
     </delete>
     
      <select id="getUserByUserNo" parameterType="int" resultType="catshap.butler.bean.Users">
-	    SELECT UNAME
-	    FROM users
-	    WHERE userno = #{userno}
-	</select>
-	
-	
-	
+       SELECT UNAME
+       FROM users
+       WHERE userno = #{userno}
+   </select>
+
 </mapper>
