@@ -88,23 +88,23 @@
 
 ## 🎥 Preview
 ### 회원가입 및 로그인
-| ![Signup]() | ![Login]() |
+| ![Signup](https://github.com/user-attachments/assets/f7f2f147-4108-4287-8f85-ca6a4ca7bcde) | ![Login](https://github.com/user-attachments/assets/245d0f4d-5fcb-4a24-a601-ef40bf849746) |
 |----------------------------|----------------------------|
 
 ### 아이디와 비밀번호 찾기
-| ![FindId]() | ![FindPw]() |
+| ![FindId](https://github.com/user-attachments/assets/8118471e-b635-4984-95c1-51b1e569b279) | ![FindPw](https://github.com/user-attachments/assets/88b5d445-e506-4bc6-bb80-22ae2d7ba669) |
 |----------------------------|----------------------------|
 
 ### 메인화면 및 회원 탈퇴
-| ![Main]() | ![ExitUser]() |
+| ![Main](https://github.com/user-attachments/assets/4a5e1a80-0b71-4579-a4eb-35f5a25cd69c) | ![ExitUser](https://github.com/user-attachments/assets/dc78dfd3-16ee-4485-bf62-a83acb4b40ad) |
 |----------------------------|----------------------------|
 
 ### 게시글 작성 및 리뷰 작성
-| ![QnA]() | ![Review]() |
+| ![QnA](https://github.com/user-attachments/assets/e45b28e4-c1d7-47b0-ba25-55ddf4441cae) | ![Review](https://github.com/user-attachments/assets/18fc223a-c950-4de6-836e-2f21faedb875) |
 |----------------------------|----------------------------|
 
 ### 장바구니 담기 및 결제
-| ![Basket]() | ![Pay]() |
+| ![Basket](https://github.com/user-attachments/assets/e0721eee-137e-4876-a595-0822f7c03d31) | ![Pay](https://github.com/user-attachments/assets/de841049-c734-48f8-8a79-03edd471b6c6) |
 |----------------------------|----------------------------|
 
 ## 📁 파일 구조
