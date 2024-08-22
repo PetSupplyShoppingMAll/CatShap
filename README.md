@@ -82,7 +82,7 @@
 - **리뷰 및 게시물 보기**: 자신이 작성한 리뷰와 게시물을 확인하고 관리할 수 있습니다.
 - **회원 등급**: 구매 내역을 바탕으로 회원 등급을 확인할 수 있습니다. 회원 등급의 종류로는 다음과 같습니다.
 
-| 예비 집사 | 집사 | 숙련된 집사 | 마스터 집사 |
+| 예비 집사 | 간택된 집사 | 숙련된 집사 | 마스터 집사 |
 |:-------: | :-------: |:-------: | :-------: | 
 | <img src="https://github.com/user-attachments/assets/cf20d2b3-d359-46da-85a7-301992a2cd94" alt="회원 예비집사 등급"/> | <img src="https://github.com/user-attachments/assets/ca747fe6-eb14-4d90-ba03-077c8629c4dc" alt="회원 예비집사 등급"/> | <img src="https://github.com/user-attachments/assets/4de2c4be-347e-4550-94de-884b1246ed6d" alt="회원 예비집사 등급"/> | <img src="https://github.com/user-attachments/assets/8e2c9b58-863b-41e2-99cc-81e8326feb4b" alt="회원 마스터 집사 등급" /> |
 
